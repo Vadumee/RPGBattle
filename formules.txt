@@ -1,0 +1,128 @@
+>>> Ouvertures de portails <<<
+
+Type du portail		Normal		Rare		Brutal		Legendaire	
+Normal			88%		- %		- %		- %
+Rare			8.5%		92.5%		66%		- %
+Super rare		3.2%		6.6%		30%		70%	
+Legendaire		0.2%		0.6%		2.5%		20%
+Super Legendaire	0.1%		0.3%		1.5%		10%
+
+>>> Formules d'exp <<<
+
+Joueur : 
+	base : 100
+	augmentation par niveau -> + (15 * (level-1))
+
+Serviteur (rarity_id : normal -> 1, rare -> 2, etc...) :
+	base : 150 + (50 * rarity_id)
+	augmentation par niveau -> + (25+((rarity_id*5)*level))
+
+>>> Coups d'évolution <<<
+
+coup en rareté normal : 50.000 or
+normal+ : x3 pour chaque rareté de différence (150k or pour rare, 450k or pour super rare)
+
+>>> Formule d'or roulette <<<
+
+cap : correspond au bonus de tranche de niveau -> 10 niveaux : 1
+
+or gagné : 200 + ( (80*(level-1)) * (1+cap) )
+
+>>> Drop coffre brutal <<<
+
+Roll de la récompense :
+
+Or : 40%
+Breuvage : 30%
+Portail : 18%
+Grimoire : 12%
+
+Par type :
+
+-- Or --
+Faible récompense ( 300 + ((120*level) * (1+cap)) ) : 50% (20% global)
+Recompense correcte ( 600 + ((240*level) * (1+cap)) ) : 30% (12% global)
+Forte récompense ( 1500 + ((600*level) * (1+cap)) ) : 13% (5.2% global)
+Récompense BRUTALE ! ( 4000 + ((1500*level) * (1+cap)) ) : 7% (2.8% global)
+
+-- Breuvage --
+Faible breuvage (10 + (level*1)) : 50% (15% global)
+Breuvage moyen (20 + (level*2)) : 32% (9.6% global)
+Breuvage puissant (50 + (level*5)) : 18% (5.4% global)
+
+-- Portail --
+Commun : 60% (10.8% global)
+Rare : 30% (5.4% global)
+Brutal : 8% (1.44% global)
+Légendaire : 2% (0.36% global)
+
+-- Grimoire --
+Poussiereux : 50% (6% global)
+Qualité : 30% (3.6% global)
+Runique : 10% (1.2% global)
+Mythique : 10% (1.2% global)
+
+>>> Exp joueur <<<
+
+exp gagnée a la roulette : 2 + (level / 2)
+
+>>> Exp decouverte carte <<<
+
+Rare : 50 exp (portails communs uniquement)
+Super rares : 200 exp (tous portails sauf légendaires)
+Légendaire mid-tier : 500 exp (tous portails)
+Légendaire high-tier : 1000 exp ou 20% du level, selon ce qu'il y a de plus haut (tous portails)
+
+			     
+			    TU ES DANS MA LIGNE DE MIRE !
+
+                           :M7. .,irLJFSXX0OMESLi:XJ::XBi                                       
+                            1ki.             ..:iuXvi: :ZN                                      
+                         .,.ju:......     ....     .::,  u@Y       .:                           
+                     ,ijJr,i7,  .,.....:.::.     ... ...  :BS,:v18B@U                           
+                 :vS27L7v7L2:   :. .rUGFr.              .  ,@B7iuZU                             
+                J@BM1Y7vvuF: .,:rLYSZZ7.     ..,.    ..:..  ,,,ME                               
+                   iSN2vruv :rUkZ0ZNL   :rLJSXNq0NNXkXNu:.,.   :F2.                             
+                     iBE1Y :1E0q55ku:7UE8OZZqE0E0Z0GBOr,.,....   7OU                            
+                   .Yr,,Y:i0ZSFJr7U7LYLr;ii:i:iii:Lk7      ...... .FO.                          
+                 iX2: .ivvNkU17:.,::::,:::::,,..,vv:   .   ,......  vO.                         
+               ,qF: :rLjZFUF5:..,,,,::::::::::ivFr  .,:,,.  . ...    kM                         
+              u8i :LJL7Xq7i7;,.::::i::...::..7q2:..:::::,.  ....irir:qM                         
+            .PPi7FqSSuk2r:::::::i:::::,.... .i7rLvr:.        .,:vvvLvZj                         
+           iB@0@BX5N2S0L::::,:::::,:::,.   i1j,..iLSFSj7i:iiirr7;rii:M;                         
+          rB@1r.  7kL5E7:iri:::::::,,,:,.:2OF:::r7juuuSXPPG1uvr;7Luv7M.                         
+                 :E1LZPi,:::::,::::::ri:rOB; ..:,::r7juuvuk2LuJ5Z8GMB@.                         
+                rB5YNOL,::ir;:iir7rii,:LOMY   :vL7LuSFuvvvuuU0GkXX8OBBN                         
+               .BGUGMSiiiiii::,:::::,iJ007  .LEOMMO@B@BMXuLX8Pv7X@@@B@Z                         
+               u@M@BGr:,::iri,:::::.LO@BMX12GMBM@BM8MM@B@B@GX5kO@qEGOB@,                        
+              .@B@B@F7vr...,irii:.,XB@05uX8BMOG0J,  r1SPZM@@0NB@NkEOZOB@                        
+               U@kvuPM@BMv: ..::,:ZBFvu5GOGXPSFr   .L55JqOMBMB@Bj:72NB@B:                       
+              :J,UEMMOM@@OUjLU2SqMMGkZMMGEkk5U,   ,vY22EMMZZG@BM7.  vPq@P                       
+              kv FMXOMO0OM@B@B@B@8EqZ00k1YL7i.  ,711FqMMq2NOMNjJZM2;k20B@                       
+              rL J8S2kFkkqPNPqkS2uLvri:::::r;;rY5PSqEPF22kZ@ZUj2uqqOMOO@O                       
+               7, Yuv7r;riiii:::::::irLuFkENPkXkF2PF7iP8OO@O5j5U2PP0M88Bj                       
+                v..kFuLLvv777vvYJ22SSPPNqPkqSk2uuNS1kO8OM@Mkj2Uj10kGM8Z@1                       
+                 v.iGk121qMOOOOZZqNS5251F152ULL2Z5SEOM@BBP2u2uJ5BOkZB0OB@P                      
+                 .2:iqUvL@MZBO000OOOP2YjYYvvrLPEUqO@B@E1vvY2uY1@BMkOB@B@B@                      
+                   riiUvkM:7G2511Yri2ZFYLvvvFMOPMB@MG:,vjjUjYLMBMEqNMBMM@F                      
+                    ir:U@5 0qk51Yv::iuSNEOGZZMMB8ZqZPr7uJuJYrFB@O0EBBNJ0@i                      
+                     ;@GMrrB8EGq2LLJ55SkZZGNPPNPPPEZquX52JJ7YM@B@@@B8Lj0@:                      
+                      SXFL0@ZGZ88O0ENZNEPNPZZEPNNGZk5qPNXkULX@BMOGX2vjkMB0FXYi.                 
+                       EjLuM80ZNZZ8EGNEPNqNqEP0qZP5USSXSXXNP8ESYLvYukZBBOO@B@B@OZ1r.            
+                       .UL.NMEN0qE0EqNqqq0P0q00GS12S211P0GG0UJJFkGOMM@B@M88MBBMBB@B@OY          
+                         E7r@GZNZ00PNXPXNPNq0ZG1uU1j10BOFvSXqM@B@B@BBOMB@OG8O8MMM8OO@BG.        
+                         iq.kB0ENEqNkXkPX0qN01LUuuJSM@0JLk8OB@MBMMM@MMO@@BqN0EGOEEEBGqBv        
+                         .X LOGq0XPXPSPXNq0qZFuYuuGBM2J58O@B@MMOMMMBB8OM@@MkZ8OGOOONq8@:        
+                          v,,OZPkX5kSXkNq0qEqMOUUMBEu50BB@BBOOEGZ8OBMOO8M@B8GMMMOZXSSBB:        
+                       .:7PP,S@MMOOPSSqq0q0qNkMBMGX5ZM@B@BM8G0ZZO8MBMOOZOM@BBOGXX12FEBM         
+                  iFu7JJvFO@vkB@B@OG0PXNqEN0XZB@Gq0BB@M@BBGGEGZ8GMMBOOE88BBBZ0XUjSN8Z@M0L,      
+               :P8kqXL2PMM8O@7,FO57LM8PX0q0q88OB@M@BBMMMBO8EZZOGOM@OOMMOOP51kGMuPE8ZMB@B@B@u.   
+             .BN:::LkOG8GOO@0 ,MqY7Uk88GEEN8GP5PZBMMMMMBOOZGEOGO8BBMBMXXkFU1uZM00G0OMOOMM@B@BB: 
+             FM:7XMO80GZOOOOP7080J7JXkEZO8O0k1XEMMBMBMMOOG8ZGG8GMB@MqF0@GuPXZBO0G08OGEG0GOMM@B@B
+           5qJ7EMOZGGO8O88GMMBBBMMGGPX5F5XPP5ZM@MMMBBB8OOOGZZOGMB@85X8ZBqk008B0Z0ZMMEOqqqEEOOMM@
+         :@B2PMZZZMOO8O8OZGGBB@MBB@@@MOENXqEM@@BBB@BBOM8OGGEO8M@8SuqM0GMSX0qOOEEOBBPGNkXNPNqEEOO
+         kB:X@XP8MOM8OG8ZOZOM@BBB@BMMMB@B@B@BBM@BBMBMM8O88EG8BBSjJ1MZ08M10q0MMM@B@qSE52XkqXNPN0O
+          NULM@GOOM8OGOGOOMB@MMMBMMOMMBB@B@B@B@MMOBMMOO8O0Z8BMkY5LOMEqMZXNZB@BO::EFXSLuU11XSqXZ8
+         .S@;vBBZO8OG88MM@BBOBMBM@MOOBMBMMMBMMMMOBMBOO8OEE8@MSvPrLBMPZBZN@@Pr:  rZ2P777vvLLjJkNE
+,     .L2j2OMiu@MZO8O8OOBBBMBMMMBBMPZOBMMOOOMOMMBMBMOGOGEO@8SYiF:7@GZMOq@G7.,:i5@88NUuUJuJuYj505
+B@Bui5OU7uFUPE:YMOZOOMM@MMMBMMM@B@ZNqOMM8O888MMBMBOMG8GG8BZuv; Y;2BBOBEu,  @B@BB8OOMM@B@B@B@BBMB
