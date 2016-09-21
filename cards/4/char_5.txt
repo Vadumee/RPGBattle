@@ -1,0 +1,14 @@
+Leviator
+créature enragée
+'If you don't splash, you don't improve ~ MagikarpInShape'
+4
+7
+590
+0.219
+0.219
+0.140
+0.199
+0.111
+0.112
+35
+4

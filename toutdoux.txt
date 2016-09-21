@@ -1,0 +1,43 @@
+- [OK] Possibilité de choisir automatiquement la même carte
+- [OK] Quand on utilise un objet, s'il reste un stack, celui-ci reste séléctionné
+- [OK] possibilité de revendre des objets
+- [OK] mettre le cap de roulettes a 10
+- [OK] modifier les breuvages (20%,50%,100%)
+- [OK] up des récompenses de coffre en or
+- [OK] supprimer les breuvages du shop
+- [OK] nerf l'exp obtenues en rare
+- [OK] Faire des méthodes propres pour certaines fonctionnalités du controleur (tri par rareté, dez de masse)
+- [TODO LATER]Voir pour remettre les images de la roulette
+- [OK] utiliser les long pour toutes les valeurs potentiellement longues (gold, exp)
+- [OK] Régler les problèmes de l'ascension
+
+-> Système de runes
+ - [OK] Construire l'objet
+ - Créer divers sprites pour chaque type de rune
+ - [OK] Gerer les différentes raretés
+ - [OK] Gerer l'inventaire de runes pour les créatures
+ - [OK] Compter les stats des runes dans l'affichage des stats
+ - [OK] Ajouter runes au magasin
+ - Rajouter le système de loot de rune sur l'event
+-> Système d'event
+ - Ajouter le système de combat
+ - Ajouter le système de récompense avec le score
+ - Gérer les timer d'event et la transition a rien, ou a un autre event
+ --> Si rien, il est toujours possible de combattre, mais pas de gagner du score ou des récompenses
+ --> Sinon, le score et lvl max rénitialisé et changement de récompenses, etc...
+ - Faire les différentes cartes exclusives d'event, dont une obtenable seulement avec la conquête de l'event
+-> Système d'achievement ?
+ - Ajouter divers achievement pour les gold, level, cartes totales, différentes raretés, etc...
+// -> Système de sauvegarde propres
+
+Gemmes :
+
+4 types : Stat simple, Stat double, Stat triple, Enorme stat + malus stat
+
+Valeurs :
+
+Petite Rune (lvl 50-60) : Aucune restriction - 35 à 44 stat
+Rune moyenne (lvl 70-80) : SR minimum - 56 à 75 stat
+Grande Rune (lvl 90-100) : HR+ minimum - 94 à 121 stat
+Rune Légendaire (lvl 110) : SL minimum - 133 à 153 stat
+Rune Mythique (lvl 130 -> drop event) : SM requis - 225 à 255 stat

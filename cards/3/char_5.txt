@@ -1,0 +1,14 @@
+Venom
+symbiote coloré
+'Sa faiblesse : le bruit et le feu, bref, le dieu du METAAAAAL !'
+3
+5
+560
+0.200
+0.200
+0.100
+0.150
+0.150
+0.200
+28
+2
