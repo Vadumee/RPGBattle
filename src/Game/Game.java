@@ -185,6 +185,7 @@ public class Game extends Observable implements Serializable {
 		
 		//on vérifie que la saison n'est pas terminée
 		long time_s = System.currentTimeMillis()/1000;
+		//System.out.println("time season : "+this.endseason+"\nactual time : "+time_s);
 		if(time_s > this.endseason) {
 			this.endSeason();
 		}
@@ -199,7 +200,7 @@ public class Game extends Observable implements Serializable {
 		long time_s = System.currentTimeMillis()/1000;
 		if(time_s > this.endseason) {
 			this.endSeason();
-			}
+		}
 		//
 	}
 	
@@ -704,12 +705,13 @@ public class Game extends Observable implements Serializable {
 			this.season_score += (int)((double)boss.pv_max/100);
 		}
 		else {
-			this.season_score += (int)((double)boss.pv_max/100);
+			this.season_score += (int)((double)boss.pv_max/2000);
 		}
 		boss = null;
 		if(this.current_season != -1) {
 			this.season_rewards.checkRewards(this);
 		}
+		this.round_count = 0;
 		this.eraseCard();
 	}
 	
@@ -811,42 +813,46 @@ public class Game extends Observable implements Serializable {
 	}
 	
 	public void beginSeason() {
-		this.current_season = 1;
-		this.season_score = 0;
-		this.season_rewards = new SeasonRewards(this.current_season);
-		//on gère le temps
 		long l = System.currentTimeMillis()/1000;
-		//this.endseason = 1483097561;
-		this.endseason = 1474664761;
-		
+		if(l < 1483097561) {
+			this.current_season = 1;
+			this.season_score = 0;
+			this.season_rewards = new SeasonRewards(this.current_season);
+			//on gère le temps
+			this.endseason = 1483097561;
+		}
 	}
 	
 	public void endSeason() {
-		this.current_season = -1;
-		JOptionPane jop1;
-		jop1 = new JOptionPane();
-		//on vérifie si on a bien la conquête de saison
-		boolean conquest = true;
-		if(this.max_battle_level < 21) {
-			conquest = false;
-		}
-		if(this.season_score < 200000) {
-			conquest = false;
-		}
-		//on boucle pour voir si un des légendaires de saison est en SM
-		boolean found = false;
-		for(int i=0;i<this.joueur.collection.size();i++) {
-			if((this.joueur.collection.get(i).id == 41 || this.joueur.collection.get(i).id == 42 || this.joueur.collection.get(i).id == 43) && this.joueur.collection.get(i).rarity_id == 9) {
-				found = true;
+		if(this.current_season != -1) {
+			this.current_season = -1;
+			JOptionPane jop1;
+			jop1 = new JOptionPane();
+			//on vérifie si on a bien la conquête de saison
+			boolean conquest = true;
+			if(this.max_battle_level < 21) {
+				conquest = false;
 			}
-		}
-		if(conquest == true) {
-			EventTicket et = new EventTicket(20, 1000000, "Contient en exemplaire unique un serviteur de saison", "Coffret de conquérant de l'académie Honnoji", this,4);
-			this.ajouterObjet(et);
-			jop1.showMessageDialog(null, "La saison est terminée, vous ne pouvez plus obtenir de récompenses saisonnière, mais vous pouvez continuer les combats ! Votre acharnement vous a permi d'obtenir la conquête de saison, vous donnant ainsi un serviteur Mythique exclusif !", "Fin de saison", JOptionPane.INFORMATION_MESSAGE);
-		}
-		else {
-			jop1.showMessageDialog(null, "La saison est terminée, vous ne pouvez plus obtenir de récompenses saisonnière, mais vous pouvez continuer les combats !", "Fin de saison", JOptionPane.INFORMATION_MESSAGE);
+			if(this.season_score < 200000) {
+				conquest = false;
+			}
+			//on boucle pour voir si un des légendaires de saison est en SM
+			boolean found = false;
+			for(int i=0;i<this.joueur.collection.size();i++) {
+				if((this.joueur.collection.get(i).id == 41 || this.joueur.collection.get(i).id == 42 || this.joueur.collection.get(i).id == 43) && this.joueur.collection.get(i).rarity_id == 9) {
+					found = true;
+				}
+			}
+			if(conquest == true) {
+				EventTicket et = new EventTicket(20, 1000000, "Contient en exemplaire unique un serviteur de saison", "Coffret de conquérant de l'académie Honnoji", this,4);
+				this.ajouterObjet(et);
+				jop1.showMessageDialog(null, "La saison est terminée, vous ne pouvez plus obtenir de récompenses saisonnière, mais vous pouvez continuer les combats ! Votre acharnement vous a permi d'obtenir la conquête de saison, vous donnant ainsi un serviteur Mythique exclusif !", "Fin de saison", JOptionPane.INFORMATION_MESSAGE);
+			}
+			else {
+				jop1.showMessageDialog(null, "La saison est terminée, vous ne pouvez plus obtenir de récompenses saisonnière, mais vous pouvez continuer les combats !", "Fin de saison", JOptionPane.INFORMATION_MESSAGE);
+			}
+			this.setChanged();
+			this.notifyObservers();
 		}
 	}
 	

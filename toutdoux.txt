@@ -13,22 +13,23 @@
 
 -> Système de runes
  - [OK] Construire l'objet
- - Créer divers sprites pour chaque type de rune
+ - [WIP] Créer divers sprites pour chaque type de rune
  - [OK] Gerer les différentes raretés
  - [OK] Gerer l'inventaire de runes pour les créatures
  - [OK] Compter les stats des runes dans l'affichage des stats
  - [OK] Ajouter runes au magasin
- - Rajouter le système de loot de rune sur l'event
+ - [OK] Rajouter le système de loot de rune sur l'event
 -> Système d'event
- - Ajouter le système de combat
- - Ajouter le système de récompense avec le score
- - Gérer les timer d'event et la transition a rien, ou a un autre event
- --> Si rien, il est toujours possible de combattre, mais pas de gagner du score ou des récompenses
- --> Sinon, le score et lvl max rénitialisé et changement de récompenses, etc...
- - Faire les différentes cartes exclusives d'event, dont une obtenable seulement avec la conquête de l'event
+ - [OK] Ajouter le système de combat
+ - [OK] Ajouter le système de récompense avec le score
+ - [OK] Gérer les timer d'event et la transition a rien, ou a un autre event
+ - [OK] Faire les différentes cartes exclusives d'event, dont une obtenable seulement avec la conquête de l'event
 -> Système d'achievement ?
  - Ajouter divers achievement pour les gold, level, cartes totales, différentes raretés, etc...
-// -> Système de sauvegarde propres
+-> Divers
+ - Changer les sprites de boros
+ - [WIP] Faire une refonte graphique du tuto
+ - [OK] Créer le tuto combat et saison.
 
 Gemmes :
 

@@ -234,6 +234,9 @@ public class Mob implements Serializable {
 		}
 		else if(this.id == 5) {
 			change += (0.02*((double)g.round_count));
+			if(change > 2) {
+				change = 2;
+			}
 			int damage_to_player = (int) (this.atk * ((double)this.atk / ((double)g.joueur.collection.get(g.indice_fighters[target]).def_fight + (double)this.atk)));
 			damage_to_player = (int) (damage_to_player * change);
 			if(target == tank_id) {

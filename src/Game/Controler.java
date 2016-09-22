@@ -27,6 +27,7 @@ import Boutons.ButtonCardTranscend;
 import Boutons.ButtonChooseFighter;
 import Boutons.ButtonEquipRune;
 import Boutons.ButtonFightBoss;
+import Boutons.ButtonFightTutorial;
 import Boutons.ButtonItemUse;
 import Boutons.ButtonLoad;
 import Boutons.ButtonLockFigther;
@@ -43,6 +44,7 @@ import Boutons.ButtonTutorial;
 import Boutons.ButtonUnequipRune;
 import Game.Game;
 import Vues.BossFrame;
+import Vues.TutoSeasonFrame;
 import Vues.TutorialFrame;
 
 public class Controler implements ActionListener{
@@ -499,6 +501,7 @@ public class Controler implements ActionListener{
 		else if(e.getSource() instanceof ButtonResetBoss) {
 			if(game.boss != null) {
 				game.boss = null;
+				game.round_count = 0;
 			}
 			game.updateVisuals();
 		}
@@ -508,6 +511,9 @@ public class Controler implements ActionListener{
 				game.indice_fighters[id] = -1;
 				game.updateVisuals();
 			}
+		}
+		else if(e.getSource() instanceof ButtonFightTutorial) {
+			TutoSeasonFrame tsf = new TutoSeasonFrame();
 		}
 		else if(e.getSource() instanceof ButtonChooseFighter) {
 			if(game.indice_battle != -1 && game.boss == null) {

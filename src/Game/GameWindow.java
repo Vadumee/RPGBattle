@@ -33,6 +33,7 @@ import Boutons.ButtonCardTranscend;
 import Boutons.ButtonChooseFighter;
 import Boutons.ButtonEquipRune;
 import Boutons.ButtonFightBoss;
+import Boutons.ButtonFightTutorial;
 import Boutons.ButtonItemUse;
 import Boutons.ButtonLoad;
 import Boutons.ButtonLockFigther;
@@ -810,9 +811,11 @@ public class GameWindow {
 		checkAutoCard.setBounds(8, 621, 176, 25);
 		panel_option.add(checkAutoCard);
 
-		JButton btnNewButton = new JButton("Informations Saison");
-		btnNewButton.setBounds(320, 260, 390, 44);
-		panel_option.add(btnNewButton);
+		ButtonFightTutorial btnFightTuto = new ButtonFightTutorial("Informations Saison");
+		btnFightTuto.setBounds(320, 260, 390, 44);
+		panel_option.add(btnFightTuto);
+		btnFightTuto.addActionListener(control);
+		
 
 		frmRpgCardCollector.setBounds(100, 100, 1080, 720);
 		frmRpgCardCollector.setVisible(true);
