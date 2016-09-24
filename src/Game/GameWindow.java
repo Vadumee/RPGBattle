@@ -58,6 +58,8 @@ import Vues.PanelFavorite;
 import Vues.PanelRoulette;
 import Vues.PanelRune;
 import Vues.RuneList;
+import Vues.SuccessList;
+import Vues.SuccessVue;
 import Vues.VueBossPreview;
 import Vues.VueCarteBossPreview;
 import Vues.VueCarteRune;
@@ -774,9 +776,38 @@ public class GameWindow {
 		panel_event.add(lblSeasonScore);
 		g.addObserver(lblSeasonScore);
 		
-		JPanel panel_3 = new JPanel();
-		panel_3.setBackground(new Color(0, 153, 204));
-		tabbedPane.addTab("Hauts-Faits", null, panel_3, null);
+		JPanel panel_hf = new JPanel();
+		panel_hf.setBackground(new Color(0, 153, 204));
+		tabbedPane.addTab("Hauts-Faits", null, panel_hf, null);
+		panel_hf.setLayout(null);
+		
+		SuccessList listHF = new SuccessList(g, new DefaultListModel());
+		listHF.setBounds(12, 144, 369, 498);
+		//panel_hf.add(listHF);
+		g.addObserver(listHF);
+		
+		JScrollPane scrollPaneHF = new JScrollPane();
+		scrollPaneHF.setBounds(12, 144, 369, 498);
+		scrollPaneHF.setViewportView(listHF);
+		panel_hf.add(scrollPaneHF);
+		
+		SuccessVue lblHfProgress = new SuccessVue("Progr\u00E8s des hauts-faits : -",g,3);
+		lblHfProgress.setFont(new Font("Tahoma", Font.BOLD, 13));
+		lblHfProgress.setBounds(12, 13, 475, 32);
+		panel_hf.add(lblHfProgress);
+		g.addObserver(lblHfProgress);
+		
+		SuccessVue lblHfTitle = new SuccessVue("-",g,1);
+		lblHfTitle.setBounds(413, 145, 644, 32);
+		panel_hf.add(lblHfTitle);
+		g.addObserver(lblHfTitle);
+		
+		SuccessVue lblHfDescr = new SuccessVue("",g,2);
+		lblHfDescr.setVerticalAlignment(SwingConstants.TOP);
+		lblHfDescr.setHorizontalAlignment(SwingConstants.CENTER);
+		lblHfDescr.setBounds(413, 202, 628, 440);
+		panel_hf.add(lblHfDescr);
+		g.addObserver(lblHfDescr);
 		
 		
 		//--------- PANEL OPTION ----------------

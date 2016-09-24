@@ -220,7 +220,7 @@ public class Carte implements Serializable {
 			BufferedReader reader;
 			try {
 				reader = new BufferedReader(new FileReader(file));
-				for(int lp = 0;lp < 5;lp++) {
+				for(int lp = 0;lp < 4;lp++) {
 					 max_r = reader.readLine();
 				}
 				this.rarity_id = Integer.parseInt(max_r);

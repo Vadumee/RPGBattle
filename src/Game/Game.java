@@ -30,9 +30,12 @@ public class Game extends Observable implements Serializable {
 	public int current_favorite_id = -1;
 	public int current_rune_selected = -1;
 	public int current_card_runed = -1;
+	public int current_success = -1;
 	
 	public long time_last_save = 0;
 	public boolean quit; 
+	
+	public ArrayList<HautFait> succes;
 	
 	//à mettre dans event après
 	public int indice_battle = -1;
@@ -44,6 +47,10 @@ public class Game extends Observable implements Serializable {
 	public int current_season;
 	public SeasonRewards season_rewards;
 	public long endseason;
+	//
+	
+	//stats event
+	public ArrayList<Long> values;
 	//
 
 	public Game() {
@@ -94,6 +101,90 @@ public class Game extends Observable implements Serializable {
 		this.magasin.add(new RuneGenerator(11, 10000000, "Un objet créant une rune aléatoire de qualité supérieure.","Rune fabuleuse non identifiée", this,3));
 		this.magasin.add(new RuneGenerator(12, 25000000, "Un objet créant une rune aléatoire de qualité légendaire.","Rune légendaire non identifiée", this,4));
 		//
+		
+		//on créer les hauts-faits
+		this.values = new ArrayList<Long>();
+		for(int v=0;v<5;v++) {
+			this.values.add(0L);
+		}
+		this.succes = new ArrayList<HautFait>();
+		this.succes.add(new HautFait("La menue monnaie","Obtenir au total 100.000 pièces d'or de n'importe quelle source.",100000));
+		this.succes.add(new HautFait("Millionaire !","Obtenir au total 1.000.000 pièces d'or de n'importe quelle source.",1000000));
+		this.succes.add(new HautFait("La richesse n'attend pas","Obtenir au total 10.000.000 pièces d'or de n'importe quelle source.",10000000));
+		this.succes.add(new HautFait("Une montagne d'or","Obtenir au total 100.000.000 pièces d'or de n'importe quelle source.",100000000));
+		this.succes.add(new HautFait("Piscou en personne","Obtenir au total 1.000.000.000 pièces d'or de n'importe quelle source.",1000000000));
+		this.succes.add(new HautFait("Commerçant universel","Obtenir au total 100.000.000.000 pièces d'or de n'importe quelle source.",100000000L*100L));
+			this.succes.add(new HautFait("Apprenti Invocateur","Atteindre le niveau 10.",10));
+			this.succes.add(new HautFait("Compagnon","Atteindre le niveau 30.",30));
+			this.succes.add(new HautFait("Chef de troupes","Atteindre le niveau 50.",50));
+			this.succes.add(new HautFait("Archimage","Atteindre le niveau 70.",70));
+			this.succes.add(new HautFait("Grand Leader","Atteindre le niveau 100.",100));
+			this.succes.add(new HautFait("La PUISSAAAAAAAAAANCE !","Atteindre le niveau 200.",200));
+		this.succes.add(new HautFait("Admettons !","Obtenir un portail de serviteur légendaire dans un coffre à butin de brutasse.",1));
+		this.succes.add(new HautFait("Sacré pactole","Récuperer un trésor de 10.000.000 or dans un coffre à butin de brutasse.",10000000));
+		this.succes.add(new HautFait("Et si vous échouez ? - Impossible.","Atteindre la conquête d'une saison.",1));
+			this.succes.add(new HautFait("Ascension","Faire transcender un serviteur.",1));
+			this.succes.add(new HautFait("Quel gâchis.","Récuperer 25 cartes communes.",25));
+			this.succes.add(new HautFait("Tellement banal","Récuperer 100 cartes communes.",100));
+			this.succes.add(new HautFait("Bon ça suffit","Récuperer 250 cartes communes.",250));
+			this.succes.add(new HautFait("Ah j'ai encore raté ce légendaire !","Récuperer 1000 cartes communes.",1000));
+			this.succes.add(new HautFait("La rareté fait du prix à la chose","Récuperer 10 cartes rares.",10));
+			this.succes.add(new HautFait("Chance négligeable","Récuperer 25 cartes rares.",25));
+			this.succes.add(new HautFait("Beaucoup de gris","Récuperer 100 cartes rares.",100));
+			this.succes.add(new HautFait("Toutes ces cartes en argent","Récuperer 250 cartes rares.",250));
+			this.succes.add(new HautFait("Plutôt cool","Récuperer 5 cartes super rares.",5));
+			this.succes.add(new HautFait("Ce rêve bleu","Récuperer 15 cartes super rares.",15));
+			this.succes.add(new HautFait("Super chance","Récuperer 50 cartes super rares.",50));
+			this.succes.add(new HautFait("Super sayant","Récuperer 150 cartes super rares.",150));
+			this.succes.add(new HautFait("WOAH ! LEGENDAIRRRRRRRE !","Récuperer 1 carte légendaire.",1));
+			this.succes.add(new HautFait("Paré pour les raids !","Récuperer 5 cartes légendaires.",5));
+			this.succes.add(new HautFait("Fabuleux","Récuperer 15 cartes légendaires.",15));
+			this.succes.add(new HautFait("Légende vivante","Récuperer 50 cartes légendaires.",50));
+			this.succes.add(new HautFait("Massacre","Infliger 20.000 dégats à un boss en un seul coup.",20000));
+			this.succes.add(new HautFait("Mon précieux !","Trouver une gemme de raid.",1));
+			this.succes.add(new HautFait("Vainqueur","Battre un boss de niveau 5.",5));
+			this.succes.add(new HautFait("Porte-paix","Battre un boss de niveau 10.",10));
+			this.succes.add(new HautFait("Je suis une machine de guerre !","Battre un boss de niveau 20.",20));
+			this.succes.add(new HautFait("WHO THE HELL DO YOU THINK I AM ???","Battre un boss de niveau 40.",40));
+			this.succes.add(new HautFait("C'est pas très halal","Détruire un sanglier :'(.",1));
+			this.succes.add(new HautFait("Aucun règne n'est éternel, mon fils.","Détruire un serviteur Super Mythique.",1));
+			this.succes.add(new HautFait("Petite collection","Avoir 10 serviteurs différents.",10));
+			this.succes.add(new HautFait("Equipe de choc","Avoir 20 serviteurs différents.",20));
+			this.succes.add(new HautFait("Chef de guilde","Avoir 30 serviteurs différents.",30));
+			this.succes.add(new HautFait("Voyageur interdimentionnel","Avoir 40 serviteurs différents.",40));
+		//
+		
+		EventTicket et = new EventTicket(20, 1000000, "Contient en exemplaire unique un serviteur de saison", "Coffret de conquérant de l'académie Honnoji", this,4);
+		this.ajouterObjet(et);
+		
+	}
+	
+	public void checkGoldSuccess() {
+		String msg = "";
+		boolean show = false;
+		for(int i=0;i<6;i++) {
+			if(this.succes.get(i).completed == false && (this.values.get(0) >= this.succes.get(i).montant)) {
+				this.succes.get(i).completed = true;
+				msg = "["+this.succes.get(i).nom+"]";
+				show = true;
+			}
+		}
+		if(show == true) {
+			JOptionPane jop1;
+			jop1 = new JOptionPane();
+			jop1.showMessageDialog(null, "Vous avez obtenu le haut-fait "+msg+".", "Haut Fait Débloqué !", JOptionPane.INFORMATION_MESSAGE);
+		
+		}
+	}
+	
+	public int getSuccessCount() {
+		int p = 0;
+		for(int i=0;i<this.succes.size();i++) {
+			if(this.succes.get(i).completed == true) {
+				p++;
+			}
+		}
+		return p;
 	}
 	
 	public void loadData(Game gam) {
@@ -111,6 +202,7 @@ public class Game extends Observable implements Serializable {
 			this.round_count = gam.round_count;
 			this.season_score = gam.season_score;
 			this.season_rewards = gam.season_rewards;
+			this.succes = gam.succes;
 			//il faudra gérer le temps
 			this.current_season = 1;
 			//
@@ -126,6 +218,7 @@ public class Game extends Observable implements Serializable {
 			this.getCaptured();
 			this.current_item_magasin = -1;
 			this.current_item_selected = -1;
+			this.current_success = -1;
 			this.time_last_save = gam.time_last_save;
 			this.quit = false;
 			int nb = (int)(diff/90);
@@ -339,18 +432,22 @@ public class Game extends Observable implements Serializable {
 		}
 		else if((this.roul1 == "Gx20") && (this.roul2 == "Gx20") && (this.roul3 == "Gx20")) {
 			this.joueur.gold += (gd * 20L);
+			this.values.set(0, this.values.get(0) + (gd * 20L));
 			this.joueur.giveExp(xp);
 		}
 		else if((this.roul1 == "Gx10") && (this.roul2 == "Gx10") && (this.roul3 == "Gx10")) {
 			this.joueur.gold += (gd * 10L);
+			this.values.set(0, this.values.get(0) + (gd * 10L));
 			this.joueur.giveExp(xp);
 		}
 		else if((this.roul1 == "Gx5") && (this.roul2 == "Gx5") && (this.roul3 == "Gx5")) {
 			this.joueur.gold += (gd * 5L);
+			this.values.set(0, this.values.get(0) + (gd * 5L));
 			this.joueur.giveExp(xp);
 		}
 		else if((this.roul1 == "Gx3") && (this.roul2 == "Gx3") && (this.roul3 == "Gx3")) {
 			this.joueur.gold += (gd * 3L);
+			this.values.set(0, this.values.get(0) + (gd * 3L));
 			this.joueur.giveExp(xp);
 		}
 		else if((this.roul1 == "Expx3") && (this.roul2 == "Expx3") && (this.roul3 == "Expx3")) {
@@ -362,9 +459,10 @@ public class Game extends Observable implements Serializable {
 		}
 		else {
 			this.joueur.gold += (gd);
+			this.values.set(0, this.values.get(0) + (gd));
 			this.joueur.giveExp(xp);
 		}
-		
+		this.checkGoldSuccess();
 		this.setChanged();
 		this.notifyObservers(2);
 	}
@@ -691,7 +789,10 @@ public class Game extends Observable implements Serializable {
 	
 	public void finishTheFight() {
 		this.joueur.giveExp(300L+(150L*(boss.lvl-1)));
-		this.joueur.gold += 1L*(500000+(300000L*(boss.lvl-1)));
+		long mtn =  1L*(500000+(300000L*(boss.lvl-1)));
+		this.joueur.gold += mtn;
+		this.values.set(0, this.values.get(0) + (mtn));
+		this.checkGoldSuccess();
 		for(int i=0;i<4;i++) {
 			double alea = Math.random()*4;
 			int alea1 = 1+(int)(alea - (alea%1));
@@ -755,6 +856,10 @@ public class Game extends Observable implements Serializable {
 		}
 		//
 		
+		if(this.indice_fighters[indice] == this.current_favorite_id) {
+			dmg_player = (int)((double)dmg_player * 1.1);
+		}
+		
 		//System.out.println("fighter "+indice+" : "+dmg_player);
 		//
 		dmg_player = (int) (dmg_player * change);
@@ -791,6 +896,10 @@ public class Game extends Observable implements Serializable {
 			heal_total = (int) ((double)heal_total * 0.5);
 		}
 		//
+		
+		if(this.indice_fighters[2] == this.current_favorite_id) {
+			heal_total = (int)((double)heal_total * 1.1);
+		}
 		
 		//on heal chaque combattant à tour de rôle
 		for(int i=0;i<this.indice_fighters.length;i++) {
@@ -844,9 +953,14 @@ public class Game extends Observable implements Serializable {
 				}
 			}
 			if(conquest == true) {
+				String s ="";
+				if(this.succes.get(14).completed == false) {
+					this.succes.get(14).completed = true;
+					s = " Vous débloquez de plus le haut-fait ["+this.succes.get(14).nom+"]";
+				}
 				EventTicket et = new EventTicket(20, 1000000, "Contient en exemplaire unique un serviteur de saison", "Coffret de conquérant de l'académie Honnoji", this,4);
 				this.ajouterObjet(et);
-				jop1.showMessageDialog(null, "La saison est terminée, vous ne pouvez plus obtenir de récompenses saisonnière, mais vous pouvez continuer les combats ! Votre acharnement vous a permi d'obtenir la conquête de saison, vous donnant ainsi un serviteur Mythique exclusif !", "Fin de saison", JOptionPane.INFORMATION_MESSAGE);
+				jop1.showMessageDialog(null, "La saison est terminée, vous ne pouvez plus obtenir de récompenses saisonnière, mais vous pouvez continuer les combats ! Votre acharnement vous a permi d'obtenir la conquête de saison, vous donnant ainsi un serviteur Mythique exclusif !"+s, "Fin de saison", JOptionPane.INFORMATION_MESSAGE);
 			}
 			else {
 				jop1.showMessageDialog(null, "La saison est terminée, vous ne pouvez plus obtenir de récompenses saisonnière, mais vous pouvez continuer les combats !", "Fin de saison", JOptionPane.INFORMATION_MESSAGE);

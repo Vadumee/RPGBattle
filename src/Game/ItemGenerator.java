@@ -33,6 +33,16 @@ public class ItemGenerator extends Item{
 			else {
 				mnt = 13500 + ((4500L*lvl)*cap);
 			}
+			if(mnt > game.succes.get(13).montant) {
+				if(game.succes.get(13).completed == false) {
+					game.succes.get(13).completed = true;
+					JOptionPane jop1;
+					jop1 = new JOptionPane();
+					jop1.showMessageDialog(null, "Vous avez obtenu le haut-fait ["+game.succes.get(13).nom+"].", "Haut Fait Débloqué !", JOptionPane.INFORMATION_MESSAGE);
+				}
+			}
+			game.values.set(0, game.values.get(0) + (mnt));
+			game.checkGoldSuccess();
 			game.joueur.gold += mnt;
 		}
 		else if(rnd > 40 && rnd <= 70) {
@@ -65,6 +75,12 @@ public class ItemGenerator extends Item{
 			}
 			else {
 				item = new Ticket(4,10000000,"Un portail ayant de grandes chances d'octroyer un serviteur légendaire.","Portail dimentionnel de brutasse légendaire",game);
+				if(game.succes.get(12).completed == false) {
+					game.succes.get(12).completed = true;
+					JOptionPane jop1;
+					jop1 = new JOptionPane();
+					jop1.showMessageDialog(null, "Vous avez obtenu le haut-fait ["+game.succes.get(12).nom+"].", "Haut Fait Débloqué !", JOptionPane.INFORMATION_MESSAGE);
+				}
 			}
 		}
 		else {

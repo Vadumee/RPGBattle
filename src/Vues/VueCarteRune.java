@@ -19,7 +19,7 @@ public class VueCarteRune extends JLabel implements Observer {
 	@Override
 	public void update(Observable arg0, Object arg1) {
 		if(game.current_card_runed != -1) {
-			this.setText(game.joueur.collection.get(game.current_card_runed).getStats());
+			this.setText("<html>"+game.joueur.collection.get(game.current_card_runed).name+"<br>"+game.joueur.collection.get(game.current_card_runed).getStats()+"</html>");
 		}
 		else {
 			this.setText("-");

@@ -392,6 +392,8 @@ public class Controler implements ActionListener{
 					int option = jop1.showConfirmDialog(null, "La revente vous redonnera "+cost_sell+" or, mais détruira les objets pour toujours (et dans d'horribles souffrances :( ), voulez-vous continuer ?", "Confirmation", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);		
 					if(option == JOptionPane.OK_OPTION){
 						game.joueur.gold += cost_sell;
+						game.values.set(0, game.values.get(0) + (cost_sell));
+						game.checkGoldSuccess();
 						game.inventaire.get(game.current_item_selected).quantity -= nbsell;
 						if(game.inventaire.get(game.current_item_selected).quantity == 0) {
 							game.current_item_selected = -1;
@@ -422,6 +424,8 @@ public class Controler implements ActionListener{
 			if(game.current_rune_selected != -1) {
 				long refund = game.inventaire_runes.get(game.current_rune_selected).cost / 2L;
 				game.joueur.gold += refund;
+				game.values.set(0, game.values.get(0) + (refund));
+				game.checkGoldSuccess();
 				game.inventaire_runes.remove(game.current_rune_selected);
 				game.current_rune_selected = -1;
 			}

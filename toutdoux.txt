@@ -30,6 +30,7 @@
  - Changer les sprites de boros
  - [WIP] Faire une refonte graphique du tuto
  - [OK] Créer le tuto combat et saison.
+ - [WIP] Changer le son lors de la découverte de Renge.
 
 Gemmes :
 

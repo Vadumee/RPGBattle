@@ -49,7 +49,12 @@ public class CardList extends JList implements Observer {
 			for(int j=0;j<r;j++) {
 				star += "*";
 			}
-			s+=game.joueur.collection.get(i).name+star+"(Lvl "+game.joueur.collection.get(i).level+")";
+			if(game.joueur.collection.get(i).prestige > 0) {
+				s+=game.joueur.collection.get(i).name+star+"(Lvl "+game.joueur.collection.get(i).level+" - P"+game.joueur.collection.get(i).prestige+")";
+			}
+			else {
+				s+=game.joueur.collection.get(i).name+star+"(Lvl "+game.joueur.collection.get(i).level+")";
+			}
 			this.model.add(i,s);
 		}
 		

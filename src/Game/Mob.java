@@ -156,7 +156,12 @@ public class Mob implements Serializable {
 		}
 		// on fait différentes choses selon le passif du boss
 		if(this.id == 1 || this.id == 2) {
-			int damage_to_player = (int) (this.atk * ((double)this.atk / ((double)g.joueur.collection.get(g.indice_fighters[target]).def_fight + (double)this.atk)));
+			double def_change = 1.0;
+			if(g.indice_fighters[target] == g.current_favorite_id) {
+				def_change = 1.1;
+			}
+			
+			int damage_to_player = (int) (this.atk * ((double)this.atk / (((double)g.joueur.collection.get(g.indice_fighters[target]).def_fight*def_change) + (double)this.atk)));
 			damage_to_player = (int) (damage_to_player * change);
 			double chance_dodge = ((double)g.joueur.collection.get(g.indice_fighters[target]).vit_fight / ((double)g.joueur.collection.get(g.indice_fighters[target]).vit_fight + 1500));
 			boolean dodge = false;
@@ -175,7 +180,12 @@ public class Mob implements Serializable {
 			}
 		}
 		else if(this.id == 3) {
-			int damage_to_player = (int) (this.atk * ((double)this.atk / ((double)g.joueur.collection.get(g.indice_fighters[target]).def_fight + (double)this.atk)));
+			double def_change = 1.0;
+			if(g.indice_fighters[target] == g.current_favorite_id) {
+				def_change = 1.1;
+			}
+			
+			int damage_to_player = (int) (this.atk * ((double)this.atk / (((double)g.joueur.collection.get(g.indice_fighters[target]).def_fight*def_change) + (double)this.atk)));
 			damage_to_player = (int) (damage_to_player * change);
 			double chance_dodge = ((double)g.joueur.collection.get(g.indice_fighters[target]).vit_fight / ((double)g.joueur.collection.get(g.indice_fighters[target]).vit_fight + 1500));
 			boolean dodge = false;
@@ -199,7 +209,12 @@ public class Mob implements Serializable {
 			}
 		}
 		else if(this.id == 4) {
-			int damage_to_player = (int) (this.atk * ((double)this.atk / ((double)g.joueur.collection.get(g.indice_fighters[target]).def_fight + (double)this.atk)));
+			double def_change = 1.0;
+			if(g.indice_fighters[target] == g.current_favorite_id) {
+				def_change = 1.1;
+			}
+			
+			int damage_to_player = (int) (this.atk * ((double)this.atk / (((double)g.joueur.collection.get(g.indice_fighters[target]).def_fight*def_change) + (double)this.atk)));
 			damage_to_player = (int) (damage_to_player * change);
 			double chance_dodge = ((double)g.joueur.collection.get(g.indice_fighters[target]).vit_fight / ((double)g.joueur.collection.get(g.indice_fighters[target]).vit_fight + 1500));
 			boolean dodge = false;
@@ -237,7 +252,13 @@ public class Mob implements Serializable {
 			if(change > 2) {
 				change = 2;
 			}
-			int damage_to_player = (int) (this.atk * ((double)this.atk / ((double)g.joueur.collection.get(g.indice_fighters[target]).def_fight + (double)this.atk)));
+			
+			double def_change = 1.0;
+			if(g.indice_fighters[target] == g.current_favorite_id) {
+				def_change = 1.1;
+			}
+			
+			int damage_to_player = (int) (this.atk * ((double)this.atk / (((double)g.joueur.collection.get(g.indice_fighters[target]).def_fight*def_change) + (double)this.atk)));
 			damage_to_player = (int) (damage_to_player * change);
 			if(target == tank_id) {
 				damage_to_player = (int)(damage_to_player * 1.5);

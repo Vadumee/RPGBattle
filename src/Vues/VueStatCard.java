@@ -42,7 +42,12 @@ public class VueStatCard extends JLabel implements Observer{
 				this.setText("Niveau de carte : -");
 			}
 			else {
-				this.setText("Niveau de carte : "+game.joueur.collection.get(game.current_card_id).level+" / "+game.joueur.collection.get(game.current_card_id).max_level);
+				if(game.joueur.collection.get(game.current_card_id).prestige > 0) {
+					this.setText("Niveau de carte : "+game.joueur.collection.get(game.current_card_id).level+" / "+game.joueur.collection.get(game.current_card_id).max_level+" (Prestige "+game.joueur.collection.get(game.current_card_id).prestige+")");
+				}
+				else {
+					this.setText("Niveau de carte : "+game.joueur.collection.get(game.current_card_id).level+" / "+game.joueur.collection.get(game.current_card_id).max_level);
+				}
 			}
 		}
 		else if(indice_stat == 4) {
