@@ -30,6 +30,9 @@ public class EventTicket extends Item {
 		//on génère le son des cartes ouais
 		String sound_name = "Sounds/L-"+c.id+".wav";
 		game.joueur.giveExp(1000+(game.joueur.level*70L));
+		//on vérifie si le haut-fait est gagné
+		game.checkMobsSucess(c.rarity_id);
+		//
 		this.game.joueur.collection.add(c);
 		this.game.captured.set(c.id-1, 1);
 		this.game.getCaptured();

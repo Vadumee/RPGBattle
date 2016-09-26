@@ -1,6 +1,8 @@
 package Game;
 
-public class HautFait {
+import java.io.Serializable;
+
+public class HautFait implements Serializable {
 	
 	public String nom;
 	public String descr;

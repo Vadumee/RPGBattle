@@ -22,6 +22,7 @@ import javax.swing.JButton;
 public class TutoSeasonFrame extends JFrame {
 
 	private JPanel contentPane;
+	public int current;
 
 	/**
 	 * Launch the application.
@@ -46,6 +47,7 @@ public class TutoSeasonFrame extends JFrame {
 		//on créer les tableaux de texte et d'images
 		ArrayList<String> descriptions = new ArrayList<String>();
 		ArrayList<String> images = new ArrayList<String>();
+		this.current = 0;
 		//on ajoute le contenu
 		descriptions.add("<html>Avec la version 1.0 du jeu, un système de combat à été implanté, enraciné autour du système de saison, les combats sont au coeur du gameplay. Vous pourrez y affronter des boss qui changeront au fur et à mesure du temps, et remporter des récompenses tout aussi brutales que seront vos adversaires !</html>");
 		descriptions.add("<html>Voila à quoi ressemble la fenêtre de combat, on peut y trouver de nombreux boutons, les deux principaux sont Combattre et Abandonner :<br>- la première fonction créer un boss s'il n'y en a pas, ou lance la fenêtre de combat (quasiment identique à celle-ci).<br>- La seconde met fin au combat, ne donnant AUCUNE récompenses, mais peut avoir son utilité.</html>");
@@ -73,7 +75,9 @@ public class TutoSeasonFrame extends JFrame {
 		}).start();
 		//
 		
-		setVisible(true);
+
+		this.setVisible(true);
+		this.setResizable(false);
 		setTitle("Combat et Saison");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1080, 720);

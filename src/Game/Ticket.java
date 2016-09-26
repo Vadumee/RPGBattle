@@ -94,6 +94,9 @@ public class Ticket extends Item {
 			else if(this.id <= 4 && cartes.get(0).max_rarity_id == 9) {
 				game.joueur.giveExp(1000+(game.joueur.level*70L));
 			}
+			//on vérifie si le haut-fait est gagné
+			game.checkMobsSucess(cartes.get(0).rarity_id);
+			//
 			this.game.joueur.collection.add(cartes.get(0));
 			this.game.captured.set(cartes.get(0).id-1, 1);
 			this.game.getCaptured();

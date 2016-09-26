@@ -114,49 +114,134 @@ public class Game extends Observable implements Serializable {
 		this.succes.add(new HautFait("Une montagne d'or","Obtenir au total 100.000.000 pièces d'or de n'importe quelle source.",100000000));
 		this.succes.add(new HautFait("Piscou en personne","Obtenir au total 1.000.000.000 pièces d'or de n'importe quelle source.",1000000000));
 		this.succes.add(new HautFait("Commerçant universel","Obtenir au total 100.000.000.000 pièces d'or de n'importe quelle source.",100000000L*100L));
-			this.succes.add(new HautFait("Apprenti Invocateur","Atteindre le niveau 10.",10));
-			this.succes.add(new HautFait("Compagnon","Atteindre le niveau 30.",30));
-			this.succes.add(new HautFait("Chef de troupes","Atteindre le niveau 50.",50));
-			this.succes.add(new HautFait("Archimage","Atteindre le niveau 70.",70));
-			this.succes.add(new HautFait("Grand Leader","Atteindre le niveau 100.",100));
-			this.succes.add(new HautFait("La PUISSAAAAAAAAAANCE !","Atteindre le niveau 200.",200));
+		this.succes.add(new HautFait("Apprenti Invocateur","Atteindre le niveau 10.",10));
+		this.succes.add(new HautFait("Compagnon","Atteindre le niveau 30.",30));
+		this.succes.add(new HautFait("Chef de troupes","Atteindre le niveau 50.",50));
+		this.succes.add(new HautFait("Archimage","Atteindre le niveau 70.",70));
+		this.succes.add(new HautFait("Grand Leader","Atteindre le niveau 100.",100));
+		this.succes.add(new HautFait("La PUISSAAAAAAAAAANCE !","Atteindre le niveau 200.",200));
 		this.succes.add(new HautFait("Admettons !","Obtenir un portail de serviteur légendaire dans un coffre à butin de brutasse.",1));
 		this.succes.add(new HautFait("Sacré pactole","Récuperer un trésor de 10.000.000 or dans un coffre à butin de brutasse.",10000000));
 		this.succes.add(new HautFait("Et si vous échouez ? - Impossible.","Atteindre la conquête d'une saison.",1));
-			this.succes.add(new HautFait("Ascension","Faire transcender un serviteur.",1));
-			this.succes.add(new HautFait("Quel gâchis.","Récuperer 25 cartes communes.",25));
-			this.succes.add(new HautFait("Tellement banal","Récuperer 100 cartes communes.",100));
-			this.succes.add(new HautFait("Bon ça suffit","Récuperer 250 cartes communes.",250));
-			this.succes.add(new HautFait("Ah j'ai encore raté ce légendaire !","Récuperer 1000 cartes communes.",1000));
-			this.succes.add(new HautFait("La rareté fait du prix à la chose","Récuperer 10 cartes rares.",10));
-			this.succes.add(new HautFait("Chance négligeable","Récuperer 25 cartes rares.",25));
-			this.succes.add(new HautFait("Beaucoup de gris","Récuperer 100 cartes rares.",100));
-			this.succes.add(new HautFait("Toutes ces cartes en argent","Récuperer 250 cartes rares.",250));
-			this.succes.add(new HautFait("Plutôt cool","Récuperer 5 cartes super rares.",5));
-			this.succes.add(new HautFait("Ce rêve bleu","Récuperer 15 cartes super rares.",15));
-			this.succes.add(new HautFait("Super chance","Récuperer 50 cartes super rares.",50));
-			this.succes.add(new HautFait("Super sayant","Récuperer 150 cartes super rares.",150));
-			this.succes.add(new HautFait("WOAH ! LEGENDAIRRRRRRRE !","Récuperer 1 carte légendaire.",1));
-			this.succes.add(new HautFait("Paré pour les raids !","Récuperer 5 cartes légendaires.",5));
-			this.succes.add(new HautFait("Fabuleux","Récuperer 15 cartes légendaires.",15));
-			this.succes.add(new HautFait("Légende vivante","Récuperer 50 cartes légendaires.",50));
-			this.succes.add(new HautFait("Massacre","Infliger 20.000 dégats à un boss en un seul coup.",20000));
-			this.succes.add(new HautFait("Mon précieux !","Trouver une gemme de raid.",1));
-			this.succes.add(new HautFait("Vainqueur","Battre un boss de niveau 5.",5));
-			this.succes.add(new HautFait("Porte-paix","Battre un boss de niveau 10.",10));
-			this.succes.add(new HautFait("Je suis une machine de guerre !","Battre un boss de niveau 20.",20));
-			this.succes.add(new HautFait("WHO THE HELL DO YOU THINK I AM ???","Battre un boss de niveau 40.",40));
-			this.succes.add(new HautFait("C'est pas très halal","Détruire un sanglier :'(.",1));
-			this.succes.add(new HautFait("Aucun règne n'est éternel, mon fils.","Détruire un serviteur Super Mythique.",1));
-			this.succes.add(new HautFait("Petite collection","Avoir 10 serviteurs différents.",10));
-			this.succes.add(new HautFait("Equipe de choc","Avoir 20 serviteurs différents.",20));
-			this.succes.add(new HautFait("Chef de guilde","Avoir 30 serviteurs différents.",30));
-			this.succes.add(new HautFait("Voyageur interdimentionnel","Avoir 40 serviteurs différents.",40));
+		this.succes.add(new HautFait("Ascension","Faire transcender un serviteur.",1));
+		this.succes.add(new HautFait("Quel gâchis.","Récuperer 25 cartes communes.",25));
+		this.succes.add(new HautFait("Tellement banal","Récuperer 100 cartes communes.",100));
+		this.succes.add(new HautFait("Bon ça suffit","Récuperer 250 cartes communes.",250));
+		this.succes.add(new HautFait("Ah j'ai encore raté ce légendaire !","Récuperer 1000 cartes communes.",1000));
+		this.succes.add(new HautFait("La rareté fait du prix à la chose","Récuperer 10 cartes rares.",10));
+		this.succes.add(new HautFait("Chance négligeable","Récuperer 25 cartes rares.",25));
+		this.succes.add(new HautFait("Beaucoup de gris","Récuperer 100 cartes rares.",100));
+		this.succes.add(new HautFait("Toutes ces cartes en argent","Récuperer 250 cartes rares.",250));
+		this.succes.add(new HautFait("Plutôt cool","Récuperer 5 cartes super rares.",5));
+		this.succes.add(new HautFait("Ce rêve bleu","Récuperer 15 cartes super rares.",15));
+		this.succes.add(new HautFait("Super chance","Récuperer 50 cartes super rares.",50));
+		this.succes.add(new HautFait("Super sayant","Récuperer 150 cartes super rares.",150));
+		this.succes.add(new HautFait("WOAH ! LEGENDAIRRRRRRRE !","Récuperer 1 carte légendaire.",1));
+		this.succes.add(new HautFait("Paré pour les raids !","Récuperer 5 cartes légendaires.",5));
+		this.succes.add(new HautFait("Fabuleux","Récuperer 15 cartes légendaires.",15));
+		this.succes.add(new HautFait("Légende vivante","Récuperer 50 cartes légendaires.",50));
+		this.succes.add(new HautFait("Massacre","Infliger 20.000 dégats à un boss en un seul coup.",20000));
+		this.succes.add(new HautFait("Mon précieux !","Trouver une gemme de raid.",1));
+		this.succes.add(new HautFait("Vainqueur","Battre un boss de niveau 5.",5));
+		this.succes.add(new HautFait("Porte-paix","Battre un boss de niveau 10.",10));
+		this.succes.add(new HautFait("Je suis une machine de guerre !","Battre un boss de niveau 20.",20));
+		this.succes.add(new HautFait("WHO THE HELL DO YOU THINK I AM ???","Battre un boss de niveau 40.",40));
+		this.succes.add(new HautFait("C'est pas très halal","Détruire spécifiquement (pas de masse) un sanglier :'(.",1));
+		this.succes.add(new HautFait("Aucun règne n'est éternel, mon fils.","Détruire spécifiquement un serviteur Super Mythique.",1));
+		this.succes.add(new HautFait("Petite collection","Avoir 10 serviteurs différents.",10));
+		this.succes.add(new HautFait("Equipe de choc","Avoir 20 serviteurs différents.",20));
+		this.succes.add(new HautFait("Chef de guilde","Avoir 30 serviteurs différents.",30));
+		this.succes.add(new HautFait("Voyageur interdimentionnel","Avoir 40 serviteurs différents.",40));
 		//
 		
-		EventTicket et = new EventTicket(20, 1000000, "Contient en exemplaire unique un serviteur de saison", "Coffret de conquérant de l'académie Honnoji", this,4);
+		/*EventTicket et = new EventTicket(20, 1000000, "Contient en exemplaire unique un serviteur de saison", "Coffret de conquérant de l'académie Honnoji", this,4);
 		this.ajouterObjet(et);
+		this.joueur.fire_dust = 20000;*/
 		
+	}
+	
+	public void checkBossSucess() {
+		for(int i=34;i<38;i++) {
+			if(this.succes.get(i).completed == false && (this.max_battle_level-1) >= this.succes.get(i).montant) {
+				this.succes.get(i).completed = true;
+				JOptionPane jop1;
+				jop1 = new JOptionPane();
+				jop1.showMessageDialog(null, "Vous avez obtenu le haut-fait ["+this.succes.get(i).nom+"].", "Haut Fait Débloqué !", JOptionPane.INFORMATION_MESSAGE);
+			}
+		}
+	}
+	
+	public void checkMobsSucess(int id) {
+		//on check d'abords le nombre de cartes différentes
+		String msg = "";
+		boolean show = false;
+		for(int i=40;i<44;i++) {
+			if(this.succes.get(i).completed == false && ((this.mobs_captured+1) >= this.succes.get(i).montant)) {
+				show = true;
+				this.succes.get(i).completed = true;
+				msg = "["+this.succes.get(i).nom+"]";
+			}
+		}
+		if(show == true) {
+			JOptionPane jop1;
+			jop1 = new JOptionPane();
+			jop1.showMessageDialog(null, "Vous avez obtenu le haut-fait "+msg+".", "Haut Fait Débloqué !", JOptionPane.INFORMATION_MESSAGE);
+		}
+		
+		//on s'occupe maintenant du nombre de chaque type
+		msg = "";
+		show = false;
+		int ind = 16;
+		int search = 1;
+		if(id == 1) {
+			this.values.set(1, this.values.get(1)+1);
+		}
+		else if(id == 2) {
+			this.values.set(2, this.values.get(2)+1);
+			ind+=4;
+			search = 2;
+		}
+		else if(id == 3) {
+			this.values.set(3, this.values.get(3)+1);
+			ind+=8;
+			search = 3;
+		}
+		else {
+			this.values.set(4, this.values.get(4)+1);
+			ind += 12;
+			search = 4;
+		}
+		//on peut maintenant vérifier les achievements
+		for(int i=ind;i<ind+4;i++) {
+			if(this.succes.get(i).completed == false && this.values.get(search) >= this.succes.get(i).montant) {
+				show = true;
+				this.succes.get(i).completed = true;
+				msg = "["+this.succes.get(i).nom+"]";
+			}
+		}
+		if(show == true) {
+			JOptionPane jop1;
+			jop1 = new JOptionPane();
+			jop1.showMessageDialog(null, "Vous avez obtenu le haut-fait "+msg+".", "Haut Fait Débloqué !", JOptionPane.INFORMATION_MESSAGE);
+		}
+	}
+	
+	public void checkLevelSuccess() {
+		String msg = "";
+		boolean show = false;
+		for(int i=6;i<12;i++) {
+			if(this.succes.get(i).completed == false && (this.joueur.level >= this.succes.get(i).montant)) {
+				this.succes.get(i).completed = true;
+				msg = "["+this.succes.get(i).nom+"]";
+				show = true;
+			}
+		}
+		if(show == true) {
+			JOptionPane jop1;
+			jop1 = new JOptionPane();
+			jop1.showMessageDialog(null, "Vous avez obtenu le haut-fait "+msg+".", "Haut Fait Débloqué !", JOptionPane.INFORMATION_MESSAGE);
+		
+		}
 	}
 	
 	public void checkGoldSuccess() {
@@ -203,6 +288,7 @@ public class Game extends Observable implements Serializable {
 			this.season_score = gam.season_score;
 			this.season_rewards = gam.season_rewards;
 			this.succes = gam.succes;
+			this.values = gam.values;
 			//il faudra gérer le temps
 			this.current_season = 1;
 			//
@@ -462,6 +548,9 @@ public class Game extends Observable implements Serializable {
 			this.values.set(0, this.values.get(0) + (gd));
 			this.joueur.giveExp(xp);
 		}
+		//on regarde si on a le hf de niveau
+		this.checkLevelSuccess();
+		//
 		this.checkGoldSuccess();
 		this.setChanged();
 		this.notifyObservers(2);
@@ -793,16 +882,23 @@ public class Game extends Observable implements Serializable {
 		this.joueur.gold += mtn;
 		this.values.set(0, this.values.get(0) + (mtn));
 		this.checkGoldSuccess();
+		this.checkLevelSuccess();
 		for(int i=0;i<4;i++) {
 			double alea = Math.random()*4;
 			int alea1 = 1+(int)(alea - (alea%1));
 			Rune g = new Rune(5,alea1,boss.lvl-1,boss.id,(1000000)+(400000*boss.lvl));
 			this.inventaire_runes.add(g);
-			
+			if(this.succes.get(33).completed == false) {
+				this.succes.get(33).completed = true;
+				JOptionPane jop1;
+				jop1 = new JOptionPane();
+				jop1.showMessageDialog(null, "Vous avez obtenu le haut-fait ["+this.succes.get(33).nom+"].", "Haut Fait Débloqué !", JOptionPane.INFORMATION_MESSAGE);
+			}
 		}
 		
 		if(boss.lvl == this.max_battle_level) {
 			this.max_battle_level++;
+			this.checkBossSucess();
 			this.season_score += (int)((double)boss.pv_max/100);
 		}
 		else {
@@ -863,6 +959,16 @@ public class Game extends Observable implements Serializable {
 		//System.out.println("fighter "+indice+" : "+dmg_player);
 		//
 		dmg_player = (int) (dmg_player * change);
+		
+		if(dmg_player >= 20000) {
+			if(this.succes.get(32).completed == false) {
+				this.succes.get(32).completed = true;
+				JOptionPane jop1;
+				jop1 = new JOptionPane();
+				jop1.showMessageDialog(null, "Vous avez obtenu le haut-fait ["+this.succes.get(32).nom+"].", "Haut Fait Débloqué !", JOptionPane.INFORMATION_MESSAGE);
+			}
+		}
+		
 		if(this.boss.pv - dmg_player <= 0) {
 			this.boss.pv = 0;
 		}

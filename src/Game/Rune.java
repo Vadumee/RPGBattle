@@ -40,7 +40,7 @@ public class Rune implements Serializable {
 			variation = 20;
 		}
 		else {
-			double modif = (0.02*prestige);
+			double modif = (0.04*prestige);
 			minstat = (int)(225 * (1+modif));
 			variation = (int)(30 * (1+modif));
 		}

@@ -83,6 +83,25 @@ public class Controler implements ActionListener{
 				if(option == JOptionPane.OK_OPTION){
 					//game.joueur.gold += ((300*game.joueur.collection.get(game.current_card_id).rarity_id)*mult);
 					game.sacrificeMob();
+					//on vérifie si le mob sacrifié est un sanglier et/ou un mob super mythique
+					String msg ="";
+					boolean show = false;
+					if(game.joueur.collection.get(game.current_card_id).id == 9 && game.succes.get(38).completed == false) {
+						show = true;
+						game.succes.get(38).completed = true;
+						msg = "["+game.succes.get(38).nom+"]";
+					}
+					if(game.joueur.collection.get(game.current_card_id).rarity_id == 9 && game.succes.get(39).completed == false) {
+						show = true;
+						game.succes.get(39).completed = true;
+						msg = "["+game.succes.get(39).nom+"]";
+					}
+					if(show == true) {
+						JOptionPane jop2;
+						jop2 = new JOptionPane();
+						jop2.showMessageDialog(null, "Vous avez obtenu le haut-fait "+msg+".", "Haut Fait Débloqué !", JOptionPane.INFORMATION_MESSAGE);
+					}
+					//
 					game.joueur.collection.remove(game.current_card_id);
 					for(int i=0;i<game.indice_fighters.length;i++) {
 						if(game.indice_fighters[i] == game.current_card_id) {
@@ -239,6 +258,12 @@ public class Controler implements ActionListener{
 						int option = jop1.showConfirmDialog(null, "La créature va revenir au niveau de rareté minimale, voulez-vous continuer ?", "Confirmation", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);		
 						if(option == JOptionPane.OK_OPTION){
 							game.joueur.collection.get(game.current_card_id).prestige();
+							if(game.succes.get(15).completed == false) {
+								game.succes.get(15).completed = true;
+								JOptionPane jop2;
+								jop2 = new JOptionPane();
+								jop2.showMessageDialog(null, "Vous avez obtenu le haut-fait ["+game.succes.get(15).nom+"].", "Haut Fait Débloqué !", JOptionPane.INFORMATION_MESSAGE);
+							}
 							game.deleteDust(game.joueur.collection.get(game.current_card_id).type_id, cost);
 						}
 					}
@@ -267,10 +292,11 @@ public class Controler implements ActionListener{
 			game.eraseCard();
 		}
 		else if(e.getSource() instanceof ButtonItemUse) {
+			int taille_before = game.inventaire.size();
 			if(game.current_item_selected != -1) {
 				game.inventaire.get(game.current_item_selected).utiliser();
 			}
-			if((game.inventaire.size() == 0)) {
+			if((game.inventaire.size() == 0) || (game.inventaire.size() < taille_before)) {
 				game.current_item_selected = -1;
 			}
 			game.eraseCard();
@@ -364,7 +390,6 @@ public class Controler implements ActionListener{
 					FileInputStream fin = new FileInputStream(file);
 					ObjectInputStream ois = new ObjectInputStream(fin);
 					game.loadData((Game) ois.readObject()); 
-					System.out.println(game.joueur.collection.get(0).level);
 				} catch (IOException e1) {
 					System.out.println("ioexception");
 					e1.printStackTrace();

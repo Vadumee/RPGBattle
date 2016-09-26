@@ -7,13 +7,12 @@
 - [OK] supprimer les breuvages du shop
 - [OK] nerf l'exp obtenues en rare
 - [OK] Faire des méthodes propres pour certaines fonctionnalités du controleur (tri par rareté, dez de masse)
-- [TODO LATER]Voir pour remettre les images de la roulette
 - [OK] utiliser les long pour toutes les valeurs potentiellement longues (gold, exp)
 - [OK] Régler les problèmes de l'ascension
 
 -> Système de runes
  - [OK] Construire l'objet
- - [WIP] Créer divers sprites pour chaque type de rune
+ - [WIP] Créer divers sprites pour chaque type de rune -> bordel :'(
  - [OK] Gerer les différentes raretés
  - [OK] Gerer l'inventaire de runes pour les créatures
  - [OK] Compter les stats des runes dans l'affichage des stats
@@ -25,12 +24,12 @@
  - [OK] Gérer les timer d'event et la transition a rien, ou a un autre event
  - [OK] Faire les différentes cartes exclusives d'event, dont une obtenable seulement avec la conquête de l'event
 -> Système d'achievement ?
- - Ajouter divers achievement pour les gold, level, cartes totales, différentes raretés, etc...
+ - [OK] Ajouter divers achievement pour les gold, level, cartes totales, différentes raretés, etc...
 -> Divers
- - Changer les sprites de boros
- - [WIP] Faire une refonte graphique du tuto
+ - [OK] Changer les sprites de Boros
+ - [OK] Faire une refonte graphique du tuto
  - [OK] Créer le tuto combat et saison.
- - [WIP] Changer le son lors de la découverte de Renge.
+ - [OK] Changer le son lors de la découverte de Renge.
 
 Gemmes :
 

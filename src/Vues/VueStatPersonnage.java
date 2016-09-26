@@ -30,6 +30,7 @@ public class VueStatPersonnage extends JLabel implements Observer{
 			echantillon += new File("cards/"+3+"/").list().length;
 			echantillon += new File("cards/"+4+"/").list().length;
 			echantillon += new File("cards/"+5+"/").list().length;
+			echantillon += new File("cards/"+6+"/").list().length;
 			this.game.getCaptured();
 			this.setText(this.game.mobs_captured+" / "+echantillon);
 		}
