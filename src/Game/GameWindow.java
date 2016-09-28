@@ -842,6 +842,7 @@ public class GameWindow {
 		checkAutoCard.addActionListener(new BoxAutoSelect(g));
 		checkAutoCard.setBounds(8, 621, 176, 25);
 		panel_option.add(checkAutoCard);
+		checkAutoCard.addActionListener(control);
 
 		ButtonFightTutorial btnFightTuto = new ButtonFightTutorial("Informations Saison");
 		btnFightTuto.setBounds(320, 260, 390, 44);

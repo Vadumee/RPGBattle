@@ -13,6 +13,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
+import javax.swing.JCheckBox;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -294,6 +295,7 @@ public class Controler implements ActionListener{
 		else if(e.getSource() instanceof ButtonItemUse) {
 			int taille_before = game.inventaire.size();
 			if(game.current_item_selected != -1) {
+				game.inventaire.get(game.current_item_selected).game.auto_select = game.auto_select;
 				game.inventaire.get(game.current_item_selected).utiliser();
 			}
 			if((game.inventaire.size() == 0) || (game.inventaire.size() < taille_before)) {
@@ -543,6 +545,14 @@ public class Controler implements ActionListener{
 		}
 		else if(e.getSource() instanceof ButtonFightTutorial) {
 			TutoSeasonFrame tsf = new TutoSeasonFrame();
+		}
+		else if(e.getSource() instanceof JCheckBox) {
+			if(((JCheckBox)e.getSource()).isSelected() == true) {
+				game.auto_select = true;
+			}
+			else {
+				game.auto_select = false;
+			}
 		}
 		else if(e.getSource() instanceof ButtonChooseFighter) {
 			if(game.indice_battle != -1 && game.boss == null) {

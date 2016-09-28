@@ -80,7 +80,7 @@ public class Rune implements Serializable {
 		String n1 = "";
 		String n2 = "";
 		if(idrar == 5) {
-			this.image_link = "images/gem_blank.jpg";
+			this.image_link = "images/gem5.jpg";
 			if(idb == 1) {
 				name = "Gantelet blindé métallique ";
 			}
@@ -195,7 +195,7 @@ public class Rune implements Serializable {
 		String n1 = "";
 		String n2 = "";
 		if(idrar == 5) {
-			this.image_link = "images/gem_blank.jpg";
+			this.image_link = "images/gem5.jpg";
 			if(idb == 1) {
 				name = "Espauliers de discipline ";
 			}
@@ -233,6 +233,7 @@ public class Rune implements Serializable {
 			this.nom = name;
 		}
 		else {
+			this.image_link = "images/gem2_"+idrar+"_"+(choice+1)+".jpg";
 			n1 = "Mot de ";
 			if(idrar == 1) {
 				n2 = "renforcement :";
@@ -353,6 +354,7 @@ public class Rune implements Serializable {
 		String n1 = "";
 		String n2 = "";
 		if(idrar == 5) {
+			this.image_link = "images/gem5.jpg";
 			if(idb == 1) {
 				name = "Uniforme Goku de Gammagori";
 			}
@@ -371,6 +373,7 @@ public class Rune implements Serializable {
 			this.nom = name;
 		}
 		else {
+			this.image_link = "images/gem3_"+idrar+"_"+(choice+1)+".jpg";
 			n1 = "Rune chromatique ";
 			if(idrar == 1) {
 				n2 = "fissurée";
@@ -445,7 +448,7 @@ public class Rune implements Serializable {
 		String n1 = "";
 		String n2 = "";
 		if(idrar == 5) {
-			this.image_link = "images/gem_blank.jpg";
+			this.image_link = "images/gem5.jpg";
 			if(idb == 1) {
 				name = "Fouet à épines ";
 			}
