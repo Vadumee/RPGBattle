@@ -233,7 +233,8 @@ public class Rune implements Serializable {
 			this.nom = name;
 		}
 		else {
-			this.image_link = "images/gem2_"+idrar+"_"+(choice+1)+".jpg";
+			
+			int indice = 0;
 			n1 = "Mot de ";
 			if(idrar == 1) {
 				n2 = "renforcement :";
@@ -250,49 +251,65 @@ public class Rune implements Serializable {
 			String n3 = "";
 			if((choice == 0 && deux_choice == 1) || (choice == 1 && deux_choice == 0)) {
 				n3 = " Infatigable soldat";
+				indice = 1;
 			}
 			else if((choice == 0 && deux_choice == 2) || (choice == 2 && deux_choice == 0)) {
 				n3 = " Colosse";
+				indice = 2;
 			}
 			else if((choice == 0 && deux_choice == 3) || (choice == 3 && deux_choice == 0)) {
 				n3 = " Mastodonte";
+				indice = 3;
 			}
 			else if((choice == 0 && deux_choice == 4) || (choice == 4 && deux_choice == 0)) {
 				n3 = " Chasseur";
+				indice = 4;
 			}
 			else if((choice == 0 && deux_choice == 5) || (choice == 5 && deux_choice == 0)) {
 				n3 = " Zéphir";
+				indice = 5;
 			}
 			else if((choice == 1 && deux_choice == 2) || (choice == 2 && deux_choice == 1)) {
 				n3 = " Templier";
+				indice = 6;
 			}
 			else if((choice == 1 && deux_choice == 3) || (choice == 3 && deux_choice == 1)) {
 				n3 = " Barbare";
+				indice = 7;
 			}
 			else if((choice == 1 && deux_choice == 4) || (choice == 4 && deux_choice == 1)) {
 				n3 = " Traqueur";
+				indice = 8;
 			}
 			else if((choice == 1 && deux_choice == 5) || (choice == 5 && deux_choice == 1)) {
 				n3 = " Berzerker";
+				indice = 9;
 			}
 			else if((choice == 2 && deux_choice == 3) || (choice == 3 && deux_choice == 2)) {
 				n3 = " Protecteur";
+				indice = 10;
 			}
 			else if((choice == 2 && deux_choice == 4) || (choice == 4 && deux_choice == 2)) {
 				n3 = " Dueliste";
+				indice = 11;
 			}
 			else if((choice == 2 && deux_choice == 5) || (choice == 5 && deux_choice == 2)) {
 				n3 = " Tacticien";
+				indice = 12;
 			}
 			else if((choice == 3 && deux_choice == 4) || (choice == 4 && deux_choice == 3)) {
 				n3 = " Crapule";
+				indice = 13;
 			}
 			else if((choice == 3 && deux_choice == 5) || (choice == 5 && deux_choice == 3)) {
 				n3 = " Harceleur";
+				indice = 14;
 			}
 			else if((choice == 4 && deux_choice == 5) || (choice == 5 && deux_choice == 4)) {
 				n3 = " Assassin";
+				indice = 15;
 			}
+			this.image_link = "images/gem2_"+idrar+"_"+indice+".jpg";
 			this.nom = n1+n2+n3;
 		}
 

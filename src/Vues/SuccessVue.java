@@ -37,9 +37,7 @@ public class SuccessVue extends JLabel implements Observer {
 			}
 		}
 		else if(indice_stat == 3) {
-			if(game.current_success != -1) {
-				this.setText("Progrès des hauts-faits : "+game.getSuccessCount()+" / "+game.succes.size());
-			}
+			this.setText("Progrès des hauts-faits : "+game.getSuccessCount()+" / "+game.succes.size());
 		}
 		
 	}

@@ -120,8 +120,8 @@ public class GameWindow {
 		Game g = new Game();
 		Controler control = new Controler(g);
 		//test
-		//g.joueur.gold = 999999999999L;
-		//g.joueur.giveExp(199999999999L);
+		g.joueur.gold = 999999999999L;
+		g.joueur.giveExp(199999999999L);
 		
 		//
 		
@@ -144,7 +144,7 @@ public class GameWindow {
 		//
 		
 		frmRpgCardCollector = new JFrame();
-		frmRpgCardCollector.setTitle("RPG Sbire Battle v.1.0 : The Awakening");
+		frmRpgCardCollector.setTitle("RPG Sbire Battle v.1.0.1 : The Awakening");
 	//frmRpgCardCollector.getContentPane().add(pane);
 		
 		//-----------PLAYER----------------
@@ -792,7 +792,7 @@ public class GameWindow {
 		scrollPaneHF.setViewportView(listHF);
 		panel_hf.add(scrollPaneHF);
 		
-		SuccessVue lblHfProgress = new SuccessVue("Progr\u00E8s des hauts-faits : -",g,3);
+		SuccessVue lblHfProgress = new SuccessVue("Progrès des hauts-faits : "+g.getSuccessCount()+" / "+g.succes.size(),g,3);
 		lblHfProgress.setFont(new Font("Tahoma", Font.BOLD, 13));
 		lblHfProgress.setBounds(12, 13, 475, 32);
 		panel_hf.add(lblHfProgress);

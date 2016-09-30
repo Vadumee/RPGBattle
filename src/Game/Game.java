@@ -154,10 +154,6 @@ public class Game extends Observable implements Serializable {
 		this.succes.add(new HautFait("Voyageur interdimentionnel","Avoir 40 serviteurs différents.",40));
 		//
 		
-		/*EventTicket et = new EventTicket(20, 1000000, "Contient en exemplaire unique un serviteur de saison", "Coffret de conquérant de l'académie Honnoji", this,4);
-		this.ajouterObjet(et);
-		this.joueur.fire_dust = 20000;*/
-		
 	}
 	
 	public void checkBossSucess() {
@@ -277,6 +273,7 @@ public class Game extends Observable implements Serializable {
 		long diff = time_load - gam.time_last_save;
 		if(diff > 0) {
 			this.joueur = gam.joueur;
+			this.endseason = 1483138800;
 			this.inventaire = gam.inventaire;
 			this.magasin = gam.magasin;
 			this.inventaire_runes = gam.inventaire_runes;
@@ -287,6 +284,7 @@ public class Game extends Observable implements Serializable {
 			this.round_count = gam.round_count;
 			this.season_score = gam.season_score;
 			this.season_rewards = gam.season_rewards;
+			this.max_battle_level = gam.max_battle_level;
 			this.succes = gam.succes;
 			this.values = gam.values;
 			//il faudra gérer le temps
@@ -333,6 +331,7 @@ public class Game extends Observable implements Serializable {
 					this.captured.add(0);
 				}
 			}
+			
 			this.verifyEndSeason();
 		}
 	}
@@ -1029,12 +1028,12 @@ public class Game extends Observable implements Serializable {
 	
 	public void beginSeason() {
 		long l = System.currentTimeMillis()/1000;
-		if(l < 1483097561) {
+		if(l < 1483138800) {
 			this.current_season = 1;
 			this.season_score = 0;
 			this.season_rewards = new SeasonRewards(this.current_season);
 			//on gère le temps
-			this.endseason = 1483097561;
+			this.endseason = 1483138800;
 		}
 	}
 	
@@ -1064,7 +1063,7 @@ public class Game extends Observable implements Serializable {
 					this.succes.get(14).completed = true;
 					s = " Vous débloquez de plus le haut-fait ["+this.succes.get(14).nom+"]";
 				}
-				EventTicket et = new EventTicket(20, 1000000, "Contient en exemplaire unique un serviteur de saison", "Coffret de conquérant de l'académie Honnoji", this,4);
+				EventTicket et = new EventTicket(20, 1000000, "Contient en exemplaire unique un serviteur de saison", "Coffret de conquérant ultime de l'académie Honnoji", this,4);
 				this.ajouterObjet(et);
 				jop1.showMessageDialog(null, "La saison est terminée, vous ne pouvez plus obtenir de récompenses saisonnière, mais vous pouvez continuer les combats ! Votre acharnement vous a permi d'obtenir la conquête de saison, vous donnant ainsi un serviteur Mythique exclusif !"+s, "Fin de saison", JOptionPane.INFORMATION_MESSAGE);
 			}
