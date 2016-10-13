@@ -1,44 +1,8 @@
-- [OK] Possibilité de choisir automatiquement la même carte
-- [OK] Quand on utilise un objet, s'il reste un stack, celui-ci reste séléctionné
-- [OK] possibilité de revendre des objets
-- [OK] mettre le cap de roulettes a 10
-- [OK] modifier les breuvages (20%,50%,100%)
-- [OK] up des récompenses de coffre en or
-- [OK] supprimer les breuvages du shop
-- [OK] nerf l'exp obtenues en rare
-- [OK] Faire des méthodes propres pour certaines fonctionnalités du controleur (tri par rareté, dez de masse)
-- [OK] utiliser les long pour toutes les valeurs potentiellement longues (gold, exp)
-- [OK] Régler les problèmes de l'ascension
-
--> Système de runes
- - [OK] Construire l'objet
- - [WIP] Créer divers sprites pour chaque type de rune -> bordel :'(
- - [OK] Gerer les différentes raretés
- - [OK] Gerer l'inventaire de runes pour les créatures
- - [OK] Compter les stats des runes dans l'affichage des stats
- - [OK] Ajouter runes au magasin
- - [OK] Rajouter le système de loot de rune sur l'event
--> Système d'event
- - [OK] Ajouter le système de combat
- - [OK] Ajouter le système de récompense avec le score
- - [OK] Gérer les timer d'event et la transition a rien, ou a un autre event
- - [OK] Faire les différentes cartes exclusives d'event, dont une obtenable seulement avec la conquête de l'event
--> Système d'achievement ?
- - [OK] Ajouter divers achievement pour les gold, level, cartes totales, différentes raretés, etc...
--> Divers
- - [OK] Changer les sprites de Boros
- - [OK] Faire une refonte graphique du tuto
- - [OK] Créer le tuto combat et saison.
- - [OK] Changer le son lors de la découverte de Renge.
-
-Gemmes :
-
-4 types : Stat simple, Stat double, Stat triple, Enorme stat + malus stat
-
-Valeurs :
-
-Petite Rune (lvl 50-60) : Aucune restriction - 35 à 44 stat
-Rune moyenne (lvl 70-80) : SR minimum - 56 à 75 stat
-Grande Rune (lvl 90-100) : HR+ minimum - 94 à 121 stat
-Rune Légendaire (lvl 110) : SL minimum - 133 à 153 stat
-Rune Mythique (lvl 130 -> drop event) : SM requis - 225 à 255 stat
+- [OK] Résoudre le bug de regen hors game.
+- [OK] Résoudre le bug de l'achievement collecter X serviteurs différents.
+- [OK] Ajouter un scaling pallier 10 pour les gold des boss.
+- [OK] Diminuer vente de runes des boss, mais augmenter gold boss.
+- [OK] Fonctionnalité : pouvoir séléctionner un serviteur/item avec touche entrée et flèches.
+- Mettre l'affichage d'énergie sur l'aperçu de combat.
+- Ajouter quelques serviteurs.
+- Suivi de haut-fait [TO-DO MAYBE]

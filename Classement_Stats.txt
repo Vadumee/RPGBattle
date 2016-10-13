@@ -1,0 +1,91 @@
+--- Classement des serviteurs par meilleures et pires stats ---
+
+Note : Ce classement met simplement en valeur une stat particulière, cela ne prouve en aucun
+cas que le serviteur en question est pété, c'est simplement un gros point fort de celui-ci,
+les serviteurs ayant une grande stat ont souvant une stat pourrie à côté pour compenser !
+
+Les stats sont celles pour les serviteurs en super mythique lvl 130 SANS ascension, et sont
+assez approximatives (sauf pour la vitesse).
+
+--- TOP 5 par PV Max ---
+1 - Gamagori : 24687 Pv 
+2 - Vladimir Poutin : 23550 Pv
+3 - Leviator : 23231 Pv
+4 - Bear Grills : 22434 Pv
+5 - King Harkinian : 22013 Pv
+
+--- ABYSSE 5 par PV Max ---
+1 - Renge : 10720 Pv 
+2 - Saucisse : 11318 Pv
+3&4 - Isaac et Derp : 12127 Pv
+5 - Arya Stark : 12430 Pv
+
+--- TOP 5 par ATTAQUE ! ---
+1 - Ragnaros : 3354 ATK
+2 - Renge : 3123 ATK
+3 - Malzahar : 3073 ATK
+4 - Alderiate : 3036 ATK
+5 - Dark Focheure : 3006 ATK
+
+--- ABYSSE 5 par ATTAQUE :( ---
+1 - Nicktron : 1251 ATK
+2 - King Harkinian : 1350 ATK
+3 - Dark Emo of Doom : 1617 ATK
+4 - JM Le Pen : 1655 ATK
+5 - Tintin : 1709 ATK
+
+--- TOP 5 par DEFENSE ! ---
+1 - Risitas : 3182 DEF
+2 - Gamagori : 3153 DEF
+3 - Romain : 3016 DEF
+4 - Alderiate : 2944 DEF
+5 - Isaac : 2854 DEF
+
+--- ABYSSE 5 par DEFENSE :( ---
+1 - Viral : 1282 DEF
+2 - Venom : 1311 DEF
+3 - Braségali : 1336 DEF
+4 - Dark Vador : 1350 DEF
+5 - Elite : 1411 DEF
+
+--- TOP 5 par PROVOCATION ! ---
+1 - Saucisse : 3032 PROV
+2 - Nicktron : 2981 PROV
+3 - JM Le Pen : 2842 PROV
+4 - Derp : 2804 PROV
+5 - Vladimir Poutin : 2764 PROV
+
+--- ABYSSE 5 par PROVOCATION :( ---
+1 - Isaac : 1137 PROV
+2 - Dark Vador : 1284 PROV
+3 - Dragon Noir : 1440 PROV
+4 - Braségali : 1441 PROV
+5 - Les Ham-Ham : 1503 PROV
+
+--- TOP 5 par AGILITE ! --- 
+1 - Viral : 2822 AGI
+2 - Dark Vador : 2765 AGI
+3 - Braségali : 2725 AGI
+4 - Mario : 2719 AGI
+5 - Risitas : 2546 AGI
+
+--- ABYSSE 5 par AGILITE :( ---
+1 - Zerator : 1450 AGI
+2 - Leviator : 1472 AGI
+3 - Gamagori : 1489 AGI
+4 - Zidane : 1516 AGI
+5 - Iron Man : 1540 AGI
+
+--- TOP 5 par VITESSE ! ---
+1 - Sanageyama : 540 VIT
+2 - Renge : 534 VIT
+3 - Nonon : 528 VIT
+4 - Braségali : 525 VIT
+5 - Dark Vador : 521 VIT
+
+--- ABYSSE 5 par VITESSE :( ---
+1 - Ragnaros : 357 VIT
+2 - Malzahar : 383 VIT
+3 - Gamagori : 387 VIT
+4 - Vladimir Poutin : 395 VIT
+5 - Risitas : 397 VIT

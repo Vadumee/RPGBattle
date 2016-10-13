@@ -60,6 +60,7 @@ import Vues.PanelRune;
 import Vues.RuneList;
 import Vues.SuccessList;
 import Vues.SuccessVue;
+import Vues.VueBattleEnergy;
 import Vues.VueBossPreview;
 import Vues.VueCarteBossPreview;
 import Vues.VueCarteRune;
@@ -120,9 +121,8 @@ public class GameWindow {
 		Game g = new Game();
 		Controler control = new Controler(g);
 		//test
-		g.joueur.gold = 999999999999L;
-		g.joueur.giveExp(199999999999L);
-		
+		//g.joueur.gold = 999999999999L;
+		//g.joueur.giveExp(199999999999L);
 		//
 		
 		//On détecte s'il y a l'autoload ou non
@@ -144,7 +144,7 @@ public class GameWindow {
 		//
 		
 		frmRpgCardCollector = new JFrame();
-		frmRpgCardCollector.setTitle("RPG Sbire Battle v.1.0.1 : The Awakening");
+		frmRpgCardCollector.setTitle("RPG Sbire Battle v.1.0.2 : The Awakening");
 	//frmRpgCardCollector.getContentPane().add(pane);
 		
 		//-----------PLAYER----------------
@@ -768,7 +768,7 @@ public class GameWindow {
 		btnVerrouiller3.addActionListener(control);
 		
 		VueBossPreview lblBossMaxLvl = new VueBossPreview("",g,5,panel_event);
-		lblBossMaxLvl.setBounds(319, 10, 167, 19);
+		lblBossMaxLvl.setBounds(319, 10, 133, 19);
 		panel_event.add(lblBossMaxLvl);
 		g.addObserver(lblBossMaxLvl);
 		
@@ -776,6 +776,11 @@ public class GameWindow {
 		lblSeasonScore.setBounds(469, 615, 566, 27);
 		panel_event.add(lblSeasonScore);
 		g.addObserver(lblSeasonScore);
+		
+		VueBattleEnergy lblBossEnergy = new VueBattleEnergy("Energie : -",g);
+		lblBossEnergy.setBounds(462, 10, 242, 19);
+		panel_event.add(lblBossEnergy);
+		g.addObserver(lblBossEnergy);
 		
 		JPanel panel_hf = new JPanel();
 		panel_hf.setBackground(new Color(0, 153, 204));

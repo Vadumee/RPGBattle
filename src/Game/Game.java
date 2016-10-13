@@ -172,7 +172,7 @@ public class Game extends Observable implements Serializable {
 		String msg = "";
 		boolean show = false;
 		for(int i=40;i<44;i++) {
-			if(this.succes.get(i).completed == false && ((this.mobs_captured+1) >= this.succes.get(i).montant)) {
+			if(this.succes.get(i).completed == false && ((this.mobs_captured) >= this.succes.get(i).montant)) {
 				show = true;
 				this.succes.get(i).completed = true;
 				msg = "["+this.succes.get(i).nom+"]";
@@ -306,6 +306,13 @@ public class Game extends Observable implements Serializable {
 			this.time_last_save = gam.time_last_save;
 			this.quit = false;
 			int nb = (int)(diff/90);
+			for(int reg=0;reg<nb;reg++) {
+				for(int in=0;in<this.indice_fighters.length;in++) {
+					if(this.indice_fighters[in] != -1) {
+						this.joueur.collection.get(this.indice_fighters[in]).regenerate();
+					}
+				}
+			}
 			if(nb >= 20) {
 				this.joueur.energy = this.joueur.max_energy;
 			}
@@ -876,8 +883,9 @@ public class Game extends Observable implements Serializable {
 	}
 	
 	public void finishTheFight() {
-		this.joueur.giveExp(300L+(150L*(boss.lvl-1)));
-		long mtn =  1L*(500000+(300000L*(boss.lvl-1)));
+		double mult = 1.0 + (((joueur.level - (joueur.level%10)) / 10)*0.25);
+		this.joueur.giveExp((long)((600L+(300L*(boss.lvl-1)))*mult));
+		long mtn =  1L*((long)((3800000+(1200000L*(boss.lvl-1)))*mult));
 		this.joueur.gold += mtn;
 		this.values.set(0, this.values.get(0) + (mtn));
 		this.checkGoldSuccess();
@@ -885,7 +893,7 @@ public class Game extends Observable implements Serializable {
 		for(int i=0;i<4;i++) {
 			double alea = Math.random()*4;
 			int alea1 = 1+(int)(alea - (alea%1));
-			Rune g = new Rune(5,alea1,boss.lvl-1,boss.id,(1000000)+(400000*boss.lvl));
+			Rune g = new Rune(5,alea1,boss.lvl-1,boss.id,(200000)+(50000*boss.lvl));
 			this.inventaire_runes.add(g);
 			if(this.succes.get(33).completed == false) {
 				this.succes.get(33).completed = true;
