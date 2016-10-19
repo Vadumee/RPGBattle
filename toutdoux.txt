@@ -1,8 +1,22 @@
-- [OK] Résoudre le bug de regen hors game.
-- [OK] Résoudre le bug de l'achievement collecter X serviteurs différents.
-- [OK] Ajouter un scaling pallier 10 pour les gold des boss.
-- [OK] Diminuer vente de runes des boss, mais augmenter gold boss.
-- [OK] Fonctionnalité : pouvoir séléctionner un serviteur/item avec touche entrée et flèches.
-- Mettre l'affichage d'énergie sur l'aperçu de combat.
-- Ajouter quelques serviteurs.
+- [LATER] Serviteur légendaire : RNGesus : Stats aléatoires
 - Suivi de haut-fait [TO-DO MAYBE]
+- Contrôle des serviteurs avec la touche entrée
+- [OK] La destruction d'un serviteur renvoie les runes dans l'inventaire
+- Diminuer le nombre de grimoires.
+- Pouvoir choisir la carte qui est choisie avec l'option selection auto
+- Nerf un peu l'exp donné par les boss
+- Succès la prophétie : Avoir 5 fois le même serviteur dans un paquet.
+- Ajouter quelques serviteurs :
+	-> Bombe
+	-> Toxée
+	-> Jean-Pierre Coffe
+	-> Dango
+	-> Simon
+	-> Moïse ?
+	-> Tai-Lung ?
+	-> Luffy ?
+	-> Arbiter
+	-> Animal trop mignon ?
+	-> MLG Cat
+	-> [LATER] John Cena
+	-> Murloc

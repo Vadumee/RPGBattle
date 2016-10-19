@@ -638,6 +638,7 @@ public class Game extends Observable implements Serializable {
 		else {
 			this.joueur.water_dust += dust;
 		}
+		this.current_card_runed = -1;
 		this.setChanged();
 		this.notifyObservers();
 	}
@@ -1091,7 +1092,7 @@ public class Game extends Observable implements Serializable {
 		}
 		xpay = xpay / 100;
 		this.joueur.collection.get(this.current_card_id).giveExp((long)(1L*xpay * this.joueur.collection.get(this.current_card_id).max_exp));
-	
+		
 		//dust
 		int dust = 0;
 		if((this.joueur.collection.get(i).rarity_id == 9) && (this.joueur.collection.get(i).level == this.joueur.collection.get(i).max_level)) {

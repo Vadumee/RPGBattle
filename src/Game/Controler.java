@@ -84,6 +84,14 @@ public class Controler implements ActionListener{
 				if(option == JOptionPane.OK_OPTION){
 					//game.joueur.gold += ((300*game.joueur.collection.get(game.current_card_id).rarity_id)*mult);
 					game.sacrificeMob();
+					//s'il est équipé de runes, celles-ci sont renvoyées dans l'inventaire
+					for(int j=0;j<game.joueur.collection.get(game.current_card_id).runes.length;j++) {
+						if(game.joueur.collection.get(game.current_card_id).runes[j] != null) {
+							game.inventaire_runes.add(game.joueur.collection.get(game.current_card_id).runes[j]);
+							
+						}
+					}
+					//
 					//on vérifie si le mob sacrifié est un sanglier et/ou un mob super mythique
 					String msg ="";
 					boolean show = false;
@@ -133,7 +141,15 @@ public class Controler implements ActionListener{
 					while(i<game.joueur.collection.size()) {
 						if((i != game.current_card_id) && (game.joueur.collection.get(game.current_card_id).id == game.joueur.collection.get(i).id)) {
 							game.dezDeMasse(i);
+							//s'il est équipé de runes, celles-ci sont renvoyées dans l'inventaire
+							for(int j=0;j<game.joueur.collection.get(i).runes.length;j++) {
+								if(game.joueur.collection.get(i).runes[j] != null) {
+									game.inventaire_runes.add(game.joueur.collection.get(i).runes[j]);
+								}
+							}
+							//
 							game.joueur.collection.remove(i);
+							game.current_card_runed = -1;
 							for(int j=0;j<game.indice_fighters.length;j++) {
 								if(game.indice_fighters[j] == i) {
 									game.indice_fighters[j] = -1;
