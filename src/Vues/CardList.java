@@ -1,5 +1,7 @@
 package Vues;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -7,9 +9,12 @@ import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
+import javax.swing.AbstractAction;
+import javax.swing.Action;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.KeyStroke;
 
 import Game.Game;
 
@@ -58,6 +63,37 @@ public class CardList extends JList implements Observer {
 			this.model.add(i,s);
 		}
 		
+		this.addKeyListener(new java.awt.event.KeyListener() {
+            public void keyPressed(java.awt.event.KeyEvent evt) { 
+            	 if(evt.getKeyCode() == evt.VK_UP) {
+ 	            	System.out.print("up");
+ 	            	if((game.current_card_id != -1) && (game.current_card_id > 0)) {
+ 				 		game.current_card_id--;
+ 				 		game.updateVisuals();
+ 				 	}
+ 	            }
+ 	            else if(evt.getKeyCode() == evt.VK_DOWN) {
+ 	            	System.out.print("up");
+ 	            	if((game.current_card_id != -1) && (game.current_card_id < game.joueur.collection.size()-1)) {
+ 				 		game.current_card_id++;
+ 				 		game.updateVisuals();
+ 				 	}
+ 	            }
+            }
+
+			@Override
+			public void keyReleased(KeyEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void keyTyped(KeyEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		
 		MouseListener mouseListener = new MouseAdapter() {
 		      public void mouseClicked(MouseEvent mouseEvent) {
 		        JList theList = (JList) mouseEvent.getSource();
@@ -71,6 +107,16 @@ public class CardList extends JList implements Observer {
 		      }
 		 };
 		 this.addMouseListener(mouseListener);
+		 
+		 /*Action doNothing = new AbstractAction() {
+		 public void actionPerformed(ActionEvent e) {
+			 	if(game.current_card_id != -1) {
+			 		game.current_card_id++;
+			 	}
+		  	}
+		 };
+		 this.getInputMap().put(KeyStroke.getKeyStroke("F2"),
+			                            "doNothing");*/
 	}
 
 	@Override

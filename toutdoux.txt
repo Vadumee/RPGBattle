@@ -1,6 +1,6 @@
 - [LATER] Serviteur légendaire : RNGesus : Stats aléatoires
 - Suivi de haut-fait [TO-DO MAYBE]
-- Contrôle des serviteurs avec la touche entrée
+- [OK] Contrôle des serviteurs avec la touche entrée
 - [OK] La destruction d'un serviteur renvoie les runes dans l'inventaire
 - [OK] Diminuer le nombre de grimoires.
 - Pouvoir choisir la carte qui est choisie avec l'option selection auto

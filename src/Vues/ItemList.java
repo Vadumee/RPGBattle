@@ -1,5 +1,6 @@
 package Vues;
 
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -26,6 +27,37 @@ public class ItemList extends JList implements Observer {
 			s+=game.inventaire.get(i).nom+" (x"+game.inventaire.get(i).quantity+")";
 			this.model.add(i,s);
 		}
+		
+		this.addKeyListener(new java.awt.event.KeyListener() {
+            public void keyPressed(java.awt.event.KeyEvent evt) { 
+            	 if(evt.getKeyCode() == evt.VK_UP) {
+ 	            	System.out.print("up");
+ 	            	if((game.current_item_selected != -1) && (game.current_item_selected > 0)) {
+ 	            		game.current_item_selected--;
+ 				 		game.updateVisuals();
+ 				 	}
+ 	            }
+ 	            else if(evt.getKeyCode() == evt.VK_DOWN) {
+ 	            	System.out.print("up");
+ 	            	if((game.current_item_selected != -1) && (game.current_item_selected < game.inventaire.size()-1)) {
+ 	            		game.current_item_selected++;
+ 				 		game.updateVisuals();
+ 				 	}
+ 	            }
+            }
+
+			@Override
+			public void keyReleased(KeyEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void keyTyped(KeyEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
 		
 		MouseListener mouseListener = new MouseAdapter() {
 		      public void mouseClicked(MouseEvent mouseEvent) {
