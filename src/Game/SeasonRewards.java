@@ -145,21 +145,21 @@ public class SeasonRewards implements Serializable {
 			}
 			else if(this.id_recompense.get(this.indice_recompense) == 3) {
 				if(this.indice_recompense < 20) {
-					for(int i=0;i<20;i++) {
+					for(int i=0;i<8;i++) {
 						GrimoireGenerator gr = new GrimoireGenerator(5, 250000, "Un objet créant un grimoire pour un serviteur commun.", "Collection de grimoires poussiereux", g, 1);
 						g.ajouterObjet(gr);
-						if(i%2 == 0) {
+						if(i%4 == 0) {
 							GrimoireGenerator gr2 = new GrimoireGenerator(6, 1000000, "Un objet créant un grimoire pour un serviteur rare.", "Collection de grimoires de qualité", g, 2);
 							g.ajouterObjet(gr2);
 						}
-						if(i%10 == 0) {
+						if(i%8 == 0) {
 							GrimoireGenerator gr3 = new GrimoireGenerator(7, 4000000, "Un objet créant un grimoire pour un serviteur super rare et hyper rare.", "Collection de grimoires runiques", g, 3);
 							g.ajouterObjet(gr3);
 						}
 					}
 				}
 				else if(this.indice_recompense < 30) {
-					for(int i=0;i<50;i++) {
+					for(int i=0;i<10;i++) {
 						GrimoireGenerator gr = new GrimoireGenerator(5, 250000, "Un objet créant un grimoire pour un serviteur commun.", "Collection de grimoires poussiereux", g, 1);
 						g.ajouterObjet(gr);
 						if(i%2 == 0) {
@@ -173,18 +173,18 @@ public class SeasonRewards implements Serializable {
 					}
 				}
 				else if(this.indice_recompense < 40) {
-					for(int i=0;i<100;i++) {
+					for(int i=0;i<16;i++) {
 						GrimoireGenerator gr = new GrimoireGenerator(5, 250000, "Un objet créant un grimoire pour un serviteur commun.", "Collection de grimoires poussiereux", g, 1);
 						g.ajouterObjet(gr);
 						if(i%2 == 0) {
 							GrimoireGenerator gr2 = new GrimoireGenerator(6, 1000000, "Un objet créant un grimoire pour un serviteur rare.", "Collection de grimoires de qualité", g, 2);
 							g.ajouterObjet(gr2);
 						}
-						if(i%5 == 0) {
+						if(i%4 == 0) {
 							GrimoireGenerator gr3 = new GrimoireGenerator(7, 4000000, "Un objet créant un grimoire pour un serviteur super rare et hyper rare.", "Collection de grimoires runiques", g, 3);
 							g.ajouterObjet(gr3);
 						}
-						if(i%20 == 0) {
+						if(i%16 == 0) {
 							GrimoireGenerator gr4 = new GrimoireGenerator(8, 15000000, "Un objet créant un grimoire pour un serviteur légendaire.", "Collection de grimoires mythiques", g, 4);
 							g.ajouterObjet(gr4);
 						}

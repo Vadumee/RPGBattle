@@ -885,8 +885,8 @@ public class Game extends Observable implements Serializable {
 	
 	public void finishTheFight() {
 		double mult = 1.0 + (((joueur.level - (joueur.level%10)) / 10)*0.25);
-		this.joueur.giveExp((long)((600L+(300L*(boss.lvl-1)))*mult));
-		long mtn =  1L*((long)((3800000+(1200000L*(boss.lvl-1)))*mult));
+		this.joueur.giveExp((long)((300L+(450L*(boss.lvl-1)))));
+		long mtn =  1L*((long)((2000000+(1800000L*(boss.lvl-1)))*mult));
 		this.joueur.gold += mtn;
 		this.values.set(0, this.values.get(0) + (mtn));
 		this.checkGoldSuccess();
