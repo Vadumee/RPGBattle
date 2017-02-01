@@ -40,7 +40,15 @@ public class Rune implements Serializable {
 			variation = 20;
 		}
 		else {
-			double modif = (0.04*prestige);
+			double modif = 0.0;
+			if(p <= 20) {
+				modif = (0.04*prestige);
+			}
+			else {
+				int reste = prestige -20;
+				int add = 1+(int)(reste - (reste%5))/5;
+				modif = 0.8 + (reste * (0.04+(0.012*add)));
+			}
 			minstat = (int)(225 * (1+modif));
 			variation = (int)(30 * (1+modif));
 		}
@@ -82,19 +90,19 @@ public class Rune implements Serializable {
 		if(idrar == 5) {
 			this.image_link = "images/gem5.jpg";
 			if(idb == 1) {
-				name = "Gantelet blindé métallique ";
+				name = "Griffe répugnante ";
 			}
 			else if(idb == 2) {
-				name = "Saxophone sismique ";
+				name = "Anneau du cavalier ";
 			}
 			else if(idb == 3) {
-				name = "Ceinture d'empalement ";
+				name = "Voile fantômatique ";
 			}
 			else if(idb == 4) {
-				name = "Tasse de thé antique ";
+				name = "Terreur en bouteille ";
 			}
 			else if(idb == 5) {
-				name = "Cape de vagabond ";
+				name = "Linceuil noir ";
 			}
 			//on gere maintenant le suffixe
 			if(choice == 0) {
@@ -197,19 +205,19 @@ public class Rune implements Serializable {
 		if(idrar == 5) {
 			this.image_link = "images/gem5.jpg";
 			if(idb == 1) {
-				name = "Espauliers de discipline ";
+				name = "Spore virulante ";
 			}
 			else if(idb == 2) {
-				name = "Amplificateur sonore ";
+				name = "Souvenirs de la croisade ";
 			}
 			else if(idb == 3) {
-				name = "Bandeau de volonté ";
+				name = "Bulle d'oure-monde ";
 			}
 			else if(idb == 4) {
-				name = "Talons assourdissants ";
+				name = "Crocs de sha ";
 			}
 			else if(idb == 5) {
-				name = "Lames mouvantes corporelles ";
+				name = "Essance de mauvais rêve ";
 			}
 			//on gere maintenant le suffixe
 			if(choice == 0) {
@@ -373,19 +381,19 @@ public class Rune implements Serializable {
 		if(idrar == 5) {
 			this.image_link = "images/gem5.jpg";
 			if(idb == 1) {
-				name = "Uniforme Goku de Gammagori";
+				name = "Plaque de soldat détériorée";
 			}
 			else if(idb == 2) {
-				name = "Uniforme Goku de Nonon";
+				name = "Epée maudite du cavalier sans tête";
 			}
 			else if(idb == 3) {
-				name = "Uniforme Goku de Sanageyama";
+				name = "Coeur de trou noir";
 			}
 			else if(idb == 4) {
-				name = "Kamui Junketsu";
+				name = "Epée de l'orgeuil déchu";
 			}
 			else if(idb == 5) {
-				name = "Kamui Senketsu";
+				name = "Lames du crépuscule";
 			}
 			this.nom = name;
 		}
@@ -467,19 +475,19 @@ public class Rune implements Serializable {
 		if(idrar == 5) {
 			this.image_link = "images/gem5.jpg";
 			if(idb == 1) {
-				name = "Fouet à épines ";
+				name = "Neurotoxines instables ";
 			}
 			else if(idb == 2) {
-				name = "Baguette de chef d'orchestre fou ";
+				name = "Coeur gangréné ";
 			}
 			else if(idb == 3) {
-				name = "Shinai d'omniscience ";
+				name = "Tome de sortilèges cauchemardesques ";
 			}
 			else if(idb == 4) {
-				name = "Katana de domination ";
+				name = "Don d'Y'Shaarj ";
 			}
 			else if(idb == 5) {
-				name = "Lame-ciseau ";
+				name = "Cuirasse de paranoïa ";
 			}
 			//on gere maintenant le suffixe
 			if(choice == 0) {

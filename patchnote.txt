@@ -1,0 +1,141 @@
+--- Version 1.0.3.1 : Noraj du Nerfaj ---
+- Ajout d'un système de diminution des récompenses en fonction de la facilité du boss tué, si le boss
+nécessite moins de 4x l'énergie max du joueur à tuer, les récompenses seront réduites de manière exponen-
+tielles (hihihi).
+- La saison à été prolongée jusqu'au 31 janvier.
+- Du au fait que c'est la première saison, la conquête de saison nécessite maintenant un boss de niveau 
+20 -> 15, et 200.000 -> 150.000 points de saison.
+- Remaniement du calcul de l'armure et des dégats, maintenant, si le boss est plus ou moins fort par 
+rapport au joueur (calculé par rapport à son niveau), il peut gagner de l'éfficacité d'armure et d'attaque
+et inversement s'il est moins haut level.
+- Les palliers d'amélioration du soin sont passé de 100% (additionnels) à 50%, mais sont maintenant présants
+par pallier de 100 de vitesse au lieu de 200.
+- Le scaling de l'or se fait maintenant en fonction des pv max du boss affronté, plutôt qu'un montant fixe
+par niveau.
+- Un serviteur attaquant gagne un bonus de défense égal à 20% de sa provocation s'il possède l'équivalant de 45%
+ou plus de la provocation de l'équipe.
+- Les serviteurs de combat peuvent maintenant se régénerer hors combat même s'ils ne sont pas morts.
+- Les gemmes ont maintenant un requis de rareté diminué mais un requis de niveau de joueurs :
+	Normales : N -> N et niveau j. 1
+	Rares : SR -> R et niveau j. 10
+	Fabuleuses : HR+ -> SR et niveau j. 25
+	Légendaires : SL -> HR+ et niveau j. 40
+	Boss : SM -> L et niveau j. 60
+- Corrections mineures sur le tutoriel.
+
+--- Version 1.0.3 : PLUIE DE LEGENDAIRES ! ---
+- Ajout des suivis de haut-faits.
+- Ajout de 9 nouveaux haut-faits.
+- Possibilité de scroller sur les serviteurs avec les flèches lorsqu'il y en a un de séléctionné.
+- La destruction d'un serviteur renvoie maintenant les eventuelles runes qu'il possède dans l'inven-
+taire.
+- Ajout d'un indicateur visuel permettant de savoir si un serviteur possède au moins une rune.
+- Les palliers de saison donnent beaucoup moins de grimoires à présent.
+- Modification du scaling de l'or et de l'exp donnés par les boss.
+- Les succès "passer level X" prennent mainetant en compte tous les moyens de passer un niveau.
+- Correction d'un lourd bug qui faisait que les haut-faits partaient en sucette lorsque l'on
+basculait d'un autoload actif à inactif.
+- Ajout de nouvelles voix toutes mignonnes pour la découvertes de cartes *w*
+- Changement du passif du 5ème boss : Augmentation des dégats de 1% par tour au lieu de 2%, mais
+dégats augmentés de 75% au lieu de 50% contre l'ennemi ayant le plus de provocation.
+- Ajout d'un nuancage de couleurs pour les raretés partageant une couleur commune (donc HR-HR+, 
+L-SL et M-SM), afin de les différencier.
+- Tuer un boss de niveau supérieur ou égal à 15 donne à présent des poussières d'ascension, le type
+dépendant du type du boss.
+- Le texte d'ambiance de l'élite à été modifié.
+-> Ajout de 10 nouveaux serviteurs, dont 5 légendaires !
+- C'est tout, pour le moment... 
+
+--- Version 1.0.2 ---
+- Correction du bug du succès d'obtention de serviteurs différents, qui faisait qu'il était 
+possible d'obtenir le succès en ayant un serviteur de moins que nécessaire.
+- Les serviteurs de combat morts se régènèrent de nouveau normalement lorsque le jeu est
+fermé.
+- Ajout d'un affichage d'énergie sur la fenêtre de preview du boss.
+- Ajout d'un multiplicateur d'or et d'exp sur les boss, à hauteur de 25% par tranche de 10
+niveaux de joueur.
+- Les gemmes données par les boss se vendent beaucoup moins cher, mais en compensation, le
+boss donne beaucoup plus d'or (ce sera du coup moins pénalisant en terme d'or lorsque les
+joueurs pourront les utiliser).
+
+--- Version 1.0.1 ---
+- Correction d'un bug majeur qui faisait qu'en chargeant la partie le niveau maximum de boss
+invocable n'était pas chargé (donc la progression de boss disparaissait).
+- Correction des sprites pour les runes à double stats : chaque sprite ne correspondait pas à 
+la rune en question.
+
+--- Version 1.0 !!! ---
+- Reset des sauvegardes (noraj).
+-> Ajouts majeurs
+- Ajout d'un système de combat.
+- Ajout d'un système de saison.
+  - Durée limitée.
+  - Récompenses de combat exclusives.
+  - Thème différent à chaque saison.
+- Ajout d'un système de runes.
+- Ajout d'un système de hauts-faits.
+- 4 serviteurs spécifiques à la saison ont été ajoutés !
+
+-> Ajouts mineurs / modifications
+- Ajout d'une option permettant de choisir automatiquement la première carte d'un portail.
+- Possbilité de revendre des objets.
+- Lorsque l'on utilise un objet, la séléction reste sur cet objet tant qu'il y en a, au lieu
+de réinitialiser la séléction à chaque fois.
+- La consommation d'énergie de la roulette est capée à 10% de l'énergie max, au lieu de 12.5%.
+- Les breuvages donnent respectivement 20%,50% et 100% de l'énergie max, selon la rareté.
+- Les breuvages ne peuvent plus être achetés au magasin.
+- Les récompenses d'or obtenues dans les coffres de brutasses ont été grandement augmentées.
+- L'expérience obtenue par la découverte et l'amélioration de carte rares à été diminuée, mais
+elle scale plus pour les raretées supérieures.
+- L'ascension fonctionne désormais normalement.
+- Le jeu gère désormais correctement les valeurs supérieures à 2^32.
+- Les sprites de Boros ont été modifiés (le premier sprite étant trop stylé pour être la plus
+faible rareté !)
+- Le tutoriel à été refait.
+- Ajout d'un tutoriel pour le système de combat et la saison.
+- Suite à divers viols auditifs, il a été nécessaire de modifier le son pour la découverte de
+Renge, il y a maintenant un son moins aggressif. Bande de pd.
+- Voila. 
+
+--- Version Pre-Alpha 0.5 ---
+- Augmentation du taux de drop de super rare dans les portails de brutasses.
+- Augmentation du taux de drop de légendaire dans les portails légendaires.
+- Diminution du taux de drop de légendaire dans les portails de brutasses.
+- Ajout de la possibilité de détruire tous les serviteurs d'un type pour améliorer un.
+- Ajout de 10 nouveaux serviteurs !
+
+--- Version Pre-Alpha 0.4 ---
+- Faire évoluer une carte procure maintenant un gain d'exp du joueur.
+- Ajout d'un son lors de l'achat d'un objet.
+- Changement du son lors de la découverte de cartes normales, celui-ci ne correspondait plus du fait qu'il n'est plus possible de 
+gagner de l'or en détruisant des serviteurs.
+- Des sons spécifiques aux cartes légendaire (mid et high tier) ont été ajoutés lors de leur découverte.
+- Les sons anciennement utilisés pour les serviteurs légendaires ont été déplacées en conséquence pour les serviteurs rares et 
+super rares.
+- Ajout du tri des serviteurs par rareté.
+- Activer le système de chargement automatique active aussi un système de sauvegarde automatique (lorsque vous quittez)
+- Ajout de 9 nouveaux serviteurs !
+
+--- Version Pre-Alpha 0.31 ---
+- Modification du scaling de l'or avec l'utilisation de la roulette ainsi que pour les coffres brutaux, maintenant, vous obtenez 
+un bonus d'or permanent à chaque tranche de 10 niveaux passées.
+- Modification du sacrifice des cartes, sacrifier une carte donne maintenant un montant d'exp à la première carte de même id, selon
+la différence de rareté (100% du niveau de la crature si identique, puis divisé par 2 pour chaque pallier de différence)
+- Ajout d'un bonus d'exp lors de la découverte d'une carte peu commune dans les divers paquets. 
+
+--- Version Pre-Alpha 0.3 ---
+- Ajouts de deux affichages pour l'or afin d'en avoir la lisibilité dans le magasin et la gestion de serviteurs.
+- Ajout d'un système de chargement automatique de sauvegarde, à configurer soi-même.
+- Diminution de l'énergie redonnée par les breuvages d'âme trouvés dans les coffres, afin de caler en concordance avec 
+la progression de niveaux.
+- Ajout de 6 nouveaux serviteurs !
+
+--- Version Pre-Alpha 0.2 ---
+- Vu que la roulette est actuellement le seul gameplay du jeu, la régénération d'énergie à été grandemement améliorée,
+passant de 5% toutes les 6 minutes à 2.5 minutes.
+- Ajouts de diverses fenêtres de confirmation pour diverses actions (achat d'objets, donner de l'exp, raréfier, etc...)
+- Désormais, lors de l'ouverture de portails d'invocation, le faux Valek se foutra un peu moins de votre gueule quand vous ratez un 
+serviteur plus rare que celui obtenu.
+
+--- Version Pre-Alpha 0.1 ---
+- Ajout du jeu (woaw)

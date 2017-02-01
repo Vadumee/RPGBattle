@@ -35,6 +35,7 @@ public class EventTicket extends Item {
 		this.game.getCaptured();
 		//on vérifie si le haut-fait est gagné
 		game.checkMobsSucess(c.rarity_id);
+		game.checkLevelSuccess();
 		//
 		try {
 			EventTicketFrame fr = new EventTicketFrame(c,sound_name);

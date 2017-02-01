@@ -26,14 +26,23 @@ public class CardGemList extends JList implements Observer {
 		for(int i=0;i<game.joueur.collection.size();i++) {
 			String s = "";
 			int r = game.joueur.collection.get(i).rarity_id;
-			if(r >= 8) {
-				s += "<html><font color=\"red\">";
+			if(r >= 9) {
+				s += "<html><font color=\"#BC1818\">";
+			}
+			else if(r >= 8) {
+				s += "<html><font color=\"#FF0000\">";
+			}
+			else if(r >= 7) {
+				s += "<html><font color=\"#FF8B00\">";
 			}
 			else if(r >= 6) {
-				s += "<html><font color=\"orange\">";
+				s += "<html><font color=\"#FFC300\">";
+			}
+			else if(r >= 5) {
+				s += "<html><font color=\"#74238E\">";
 			}
 			else if(r >= 4) {
-				s += "<html><font color=\"purple\">";
+				s += "<html><font color=\"#AD42CF\">";
 			}
 			else if(r >= 3) {
 				s += "<html><font color=\"blue\">";
@@ -86,14 +95,23 @@ public class CardGemList extends JList implements Observer {
 			for(int i=0;i<game.joueur.collection.size();i++) {
 				String s = "";
 				int r = game.joueur.collection.get(i).rarity_id;
-				if(r >= 8) {
-					s += "<html><font color=\"red\">";
+				if(r >= 9) {
+					s += "<html><font color=\"#BC1818\">";
+				}
+				else if(r >= 8) {
+					s += "<html><font color=\"#FF0000\">";
+				}
+				else if(r >= 7) {
+					s += "<html><font color=\"#FF8B00\">";
 				}
 				else if(r >= 6) {
-					s += "<html><font color=\"orange\">";
+					s += "<html><font color=\"#FFC300\">";
+				}
+				else if(r >= 5) {
+					s += "<html><font color=\"#74238E\">";
 				}
 				else if(r >= 4) {
-					s += "<html><font color=\"purple\">";
+					s += "<html><font color=\"#AD42CF\">";
 				}
 				else if(r >= 3) {
 					s += "<html><font color=\"blue\">";

@@ -152,8 +152,22 @@ public class Game extends Observable implements Serializable {
 		this.succes.add(new HautFait("Equipe de choc","Avoir 20 serviteurs différents.",20));
 		this.succes.add(new HautFait("Chef de guilde","Avoir 30 serviteurs différents.",30));
 		this.succes.add(new HautFait("Voyageur interdimentionnel","Avoir 40 serviteurs différents.",40));
+		//ajouts 1.0.3
+		this.succes.add(new HautFait("Armée de combat","Avoir 50 serviteurs différents.",50));
+		this.succes.add(new HautFait("Imperator","Avoir 60 serviteurs différents.",60));
+		this.succes.add(new HautFait("Professeur Chen","Avoir 70 serviteurs différents.",70));
+		this.succes.add(new HautFait("Seigneur de bataille","Avoir 80 serviteurs différents.",80));
+		this.succes.add(new HautFait("Grand seigneur","Avoir 90 serviteurs différents.",90));
+		this.succes.add(new HautFait("Overlord","Avoir 100 serviteurs différents.",100));
+		this.succes.add(new HautFait("La prophétie","Ouvrir un portail contenant 5 fois le même serviteur.",1));
+		this.succes.add(new HautFait("Rite Initiatique","Améliorer un serviteur normal au niveau max.",1));
+		this.succes.add(new HautFait("Consécration","Améliorer un serviteur non-légendaire à son niveau ultime.",1));
 		//
 		
+		
+		//test
+		
+		//
 	}
 	
 	public void checkBossSucess() {
@@ -171,7 +185,7 @@ public class Game extends Observable implements Serializable {
 		//on check d'abords le nombre de cartes différentes
 		String msg = "";
 		boolean show = false;
-		for(int i=40;i<44;i++) {
+		for(int i=40;i<50;i++) {
 			if(this.succes.get(i).completed == false && ((this.mobs_captured) >= this.succes.get(i).montant)) {
 				show = true;
 				this.succes.get(i).completed = true;
@@ -273,7 +287,7 @@ public class Game extends Observable implements Serializable {
 		long diff = time_load - gam.time_last_save;
 		if(diff > 0) {
 			this.joueur = gam.joueur;
-			this.endseason = 1483138800;
+			this.endseason = 1485817200; 
 			this.inventaire = gam.inventaire;
 			this.magasin = gam.magasin;
 			this.inventaire_runes = gam.inventaire_runes;
@@ -285,7 +299,18 @@ public class Game extends Observable implements Serializable {
 			this.season_score = gam.season_score;
 			this.season_rewards = gam.season_rewards;
 			this.max_battle_level = gam.max_battle_level;
+			
+			ArrayList<HautFait> base_s = this.succes;
 			this.succes = gam.succes;
+			
+			//on charge les haufs-faits manquants
+			int diffhf = base_s.size() - this.succes.size();
+			if(diffhf > 0) {
+				for(int hf=base_s.size()-diffhf;hf<base_s.size();hf++) {
+					this.succes.add(base_s.get(hf));
+				}
+			}
+			
 			this.values = gam.values;
 			//il faudra gérer le temps
 			this.current_season = 1;
@@ -306,10 +331,12 @@ public class Game extends Observable implements Serializable {
 			this.time_last_save = gam.time_last_save;
 			this.quit = false;
 			int nb = (int)(diff/90);
-			for(int reg=0;reg<nb;reg++) {
-				for(int in=0;in<this.indice_fighters.length;in++) {
-					if(this.indice_fighters[in] != -1) {
-						this.joueur.collection.get(this.indice_fighters[in]).regenerate();
+			for(int reg=0;reg<this.indice_fighters.length;reg++) {
+				if(this.indice_fighters[reg] != -1) {
+					for(int regtp=0;regtp<nb;regtp++) {
+						if((this.joueur.collection.get(this.indice_fighters[reg]).dead == true) || (this.boss == null)) {
+							this.joueur.collection.get(this.indice_fighters[reg]).regenerate();
+						}
 					}
 				}
 			}
@@ -339,6 +366,22 @@ public class Game extends Observable implements Serializable {
 				}
 			}
 			
+			this.magasin = new ArrayList<Item>();
+			//on créer le magasin
+			this.magasin.add(new Ticket(1,10000,"Un portail basique de la roue de la RNG, donnant des serviteurs communs ou supérieurs.","Portail de créature commun",gam));
+			this.magasin.add(new Ticket(2,75000,"Un portail permettant d'obtenir des serviteurs rares ou supérieurs à la roue de la RNG.","Portail de créature rare",gam));
+			this.magasin.add(new Ticket(3,800000,"Un portail de brutasse qui permet d'avoir plus de chance d'obtenir des serviteurs super rares.","Portail dimentionnel de créatures brutales",gam));
+			this.magasin.add(new Ticket(4,10000000,"Un portail ayant de grandes chances d'octroyer un serviteur légendaire.","Portail dimentionnel de brutasse légendaire",gam));
+			this.magasin.add(new GrimoireGenerator(5, 250000, "Un objet créant un grimoire pour un serviteur commun.", "Collection de grimoires poussiereux", gam, 1));
+			this.magasin.add(new GrimoireGenerator(6, 1000000, "Un objet créant un grimoire pour un serviteur rare.", "Collection de grimoires de qualité", gam, 2));
+			this.magasin.add(new GrimoireGenerator(7, 4000000, "Un objet créant un grimoire pour un serviteur super rare et hyper rare.", "Collection de grimoires runiques", gam, 3));
+			this.magasin.add(new GrimoireGenerator(8, 15000000, "Un objet créant un grimoire pour un serviteur légendaire.", "Collection de grimoires mythiques", gam, 4));
+			this.magasin.add(new RuneGenerator(9, 400000, "Un objet créant une rune aléatoire de qualité inférieure.","Rune fissurée non identifiée", gam,1));
+			this.magasin.add(new RuneGenerator(10, 3000000, "Un objet créant une rune aléatoire de qualité normale.","Rune de qualité non identifiée", gam,2));
+			this.magasin.add(new RuneGenerator(11, 10000000, "Un objet créant une rune aléatoire de qualité supérieure.","Rune fabuleuse non identifiée", gam,3));
+			this.magasin.add(new RuneGenerator(12, 25000000, "Un objet créant une rune aléatoire de qualité légendaire.","Rune légendaire non identifiée", gam,4));
+			//
+			
 			this.verifyEndSeason();
 		}
 	}
@@ -364,7 +407,9 @@ public class Game extends Observable implements Serializable {
 		}
 		for(int i=0;i<this.indice_fighters.length;i++) {
 			if(this.indice_fighters[i] != -1) {
-				this.joueur.collection.get(this.indice_fighters[i]).regenerate();
+				if(this.joueur.collection.get(this.indice_fighters[i]).dead == true || this.boss == null) {
+					this.joueur.collection.get(this.indice_fighters[i]).regenerate();
+				}
 			}
 		}
 		
@@ -604,6 +649,20 @@ public class Game extends Observable implements Serializable {
 					}
 					xpay = xpay / 100;
 					this.joueur.collection.get(i).giveExp((long)(1L*xpay * this.joueur.collection.get(i).max_exp));
+					//on vérifie les succès consécration et rite initiatique
+					if(this.succes.get(51).completed == false && (this.joueur.collection.get(i).id_rarity == 1) && (this.joueur.collection.get(i).level == 50)) {
+						this.succes.get(51).completed = true;
+						JOptionPane jop3;
+						jop3 = new JOptionPane();
+						jop3.showMessageDialog(null, "Vous avez obtenu le haut-fait ["+this.succes.get(51).nom+"].", "Haut Fait Débloqué !", JOptionPane.INFORMATION_MESSAGE);
+					}
+					else if(this.succes.get(52).completed == false && (this.joueur.collection.get(i).id_rarity < 4) && (this.joueur.collection.get(i).level == 130)) {
+						this.succes.get(52).completed = true;
+						JOptionPane jop3;
+						jop3 = new JOptionPane();
+						jop3.showMessageDialog(null, "Vous avez obtenu le haut-fait ["+this.succes.get(52).nom+"].", "Haut Fait Débloqué !", JOptionPane.INFORMATION_MESSAGE);
+					}
+					//
 					i = this.joueur.collection.size();
 				}
 			}
@@ -835,22 +894,22 @@ public class Game extends Observable implements Serializable {
 				can = true;
 			}
 			else if(r.rarete == 2) {
-				if(this.joueur.collection.get(this.current_card_runed).rarity_id >= 3) {
+				if((this.joueur.collection.get(this.current_card_runed).rarity_id >= 2) && (this.joueur.level >= 10)) {
 					can = true;
 				}
 			}
 			else if(r.rarete == 3) {
-				if(this.joueur.collection.get(this.current_card_runed).rarity_id >= 5) {
+				if((this.joueur.collection.get(this.current_card_runed).rarity_id >= 4) && (this.joueur.level >= 25)) {
 					can = true;
 				}
 			}
 			else if(r.rarete == 4) {
-				if(this.joueur.collection.get(this.current_card_runed).rarity_id >= 7) {
+				if((this.joueur.collection.get(this.current_card_runed).rarity_id >= 5) && (this.joueur.level >= 40)) {
 					can = true;
 				}
 			}
 			else {
-				if(this.joueur.collection.get(this.current_card_runed).rarity_id == 9) {
+				if((this.joueur.collection.get(this.current_card_runed).rarity_id >= 6) && (this.joueur.level >= 60)) {
 					can = true;
 				}
 			}
@@ -885,8 +944,57 @@ public class Game extends Observable implements Serializable {
 	
 	public void finishTheFight() {
 		double mult = 1.0 + (((joueur.level - (joueur.level%10)) / 10)*0.25);
-		this.joueur.giveExp((long)((300L+(450L*(boss.lvl-1)))));
-		long mtn =  1L*((long)((2000000+(1800000L*(boss.lvl-1)))*mult));
+		double mult_diff = (((boss.lvl-1)*0.45));
+		long xpmtn = (long)( (300L+ (240L* (boss.lvl-1) ) )*(mult) ) ;
+		long mtn =  (long) (1L*( (boss.pv_max * 10) * (mult + mult_diff) ));
+		if(boss.lvl == this.max_battle_level) {
+			mtn = mtn*2;
+			xpmtn = xpmtn*2;
+		}
+		//on gère le gain de poussières
+		long powder = 0;
+		if(boss.lvl >= 15) {
+			long base = 20;
+			powder = 20;
+			for(int p=15;p<boss.lvl;p++) {
+				base += 5;
+				powder += base;
+			}
+			//on donne selon le type
+			if(boss.type_id == 1) {
+				this.joueur.fire_dust += powder;
+			}
+			else if(boss.type_id == 2) {
+				this.joueur.leaf_dust += powder;
+			}
+			else if(boss.type_id == 3) {
+				this.joueur.thunder_dust += powder;
+			}
+			else if(boss.type_id == 4) {
+				this.joueur.water_dust += powder;
+			}
+		}
+		//on gère l'empêchement d'or trop abusif
+		long to_full_reward = this.joueur.max_energy * 4;
+		long energy_used = this.round_count * this.boss.cost_atk;
+		int saison_score = 0;
+		if(boss.lvl == this.max_battle_level) {
+			this.max_battle_level++;
+			this.checkBossSucess();
+			saison_score += (int)((double)boss.pv_max/100);
+		}
+		else {
+			saison_score += (int)((double)boss.pv_max/2000);
+		}
+		
+		if(energy_used < to_full_reward) {
+			double reduced = ((double)energy_used / (double)to_full_reward) * ((double)energy_used / (double)to_full_reward);
+			mtn = (long)(mtn * reduced);
+			xpmtn = (long)(xpmtn * reduced);
+			saison_score = (int)((double)saison_score*reduced);
+		}
+		//
+		this.joueur.giveExp(xpmtn);
 		this.joueur.gold += mtn;
 		this.values.set(0, this.values.get(0) + (mtn));
 		this.checkGoldSuccess();
@@ -904,14 +1012,6 @@ public class Game extends Observable implements Serializable {
 			}
 		}
 		
-		if(boss.lvl == this.max_battle_level) {
-			this.max_battle_level++;
-			this.checkBossSucess();
-			this.season_score += (int)((double)boss.pv_max/100);
-		}
-		else {
-			this.season_score += (int)((double)boss.pv_max/2000);
-		}
 		boss = null;
 		if(this.current_season != -1) {
 			this.season_rewards.checkRewards(this);
@@ -922,7 +1022,16 @@ public class Game extends Observable implements Serializable {
 	
 	public void attackBoss(int indice) {
 		//il faut d'abords initialiser les stats
-		int dmg_player = (int) (this.joueur.collection.get(this.indice_fighters[indice]).atk_fight*((double)this.joueur.collection.get(this.indice_fighters[indice]).atk_fight / ((double)this.joueur.collection.get(this.indice_fighters[indice]).atk_fight + (double)this.boss.defense)));
+		int effective_def = (this.boss.defense/2);
+		long diff_energy = this.joueur.max_energy - (this.boss.cost_atk*10);
+		double effect = 1.0;
+		if(diff_energy > 0) {
+			effect += (diff_energy/10) * 0.1;
+		}
+		else if(diff_energy < 0) {
+			effective_def = (int)((double)effective_def * (double)(1+(0.1*diff_energy)));
+		}
+		int dmg_player = (int) ( ((double)this.joueur.collection.get(this.indice_fighters[indice]).atk_fight * effect)-effective_def);
 		double chance_critical = (double)this.joueur.collection.get(this.indice_fighters[indice]).agi_fight / (double)(this.joueur.collection.get(this.indice_fighters[indice]).agi_fight + 12000);
 		if(Math.random() <= chance_critical) {
 			dmg_player = dmg_player * 2;
@@ -954,11 +1063,6 @@ public class Game extends Observable implements Serializable {
 				change = 2;
 			}
 		}
-		//on gere le passif de jakuzure
-		if(this.boss.id == 2) {
-			dmg_player = (int) ((double)dmg_player * 1.2);
-		}
-		//
 		
 		if(this.indice_fighters[indice] == this.current_favorite_id) {
 			dmg_player = (int)((double)dmg_player * 1.1);
@@ -983,24 +1087,11 @@ public class Game extends Observable implements Serializable {
 		else {
 			this.boss.pv -= dmg_player;
 		}
-		
-		//on gere le passif de gamagori
-		if(this.boss.id == 1) {
-			int retail = (int)(this.boss.defense / 2);
-			if(this.joueur.collection.get(this.indice_fighters[indice]).current_hp_fight - retail <= 0) {
-				this.joueur.collection.get(this.indice_fighters[indice]).current_hp_fight = 0;
-				this.joueur.collection.get(this.indice_fighters[indice]).dead = true;
-			}
-			else {
-				this.joueur.collection.get(this.indice_fighters[indice]).current_hp_fight -= retail;
-			}
-		}
-		//
 	}
 	
 	public void healAllies() {
 		Carte c = this.joueur.collection.get(this.indice_fighters[2]);
-		int multheal = (int)((c.vit_fight-(c.vit_fight/100)))/200;
+		int multheal = 1 + (int)(0.5*(c.vit_fight-(c.vit_fight/100))/100);
 		int heal_value = (int)((c.atk_fight+c.agi_fight)*0.1);
 		int heal_total = heal_value*(1+multheal);
 		double chance_critical = this.joueur.collection.get(this.indice_fighters[2]).agi_fight / (this.joueur.collection.get(this.indice_fighters[2]).agi_fight + 12000);
@@ -1037,12 +1128,12 @@ public class Game extends Observable implements Serializable {
 	
 	public void beginSeason() {
 		long l = System.currentTimeMillis()/1000;
-		if(l < 1483138800) {
+		if(l < 1485817200) {
 			this.current_season = 1;
 			this.season_score = 0;
 			this.season_rewards = new SeasonRewards(this.current_season);
 			//on gère le temps
-			this.endseason = 1483138800;
+			this.endseason = 1485817200;
 		}
 	}
 	
@@ -1053,10 +1144,10 @@ public class Game extends Observable implements Serializable {
 			jop1 = new JOptionPane();
 			//on vérifie si on a bien la conquête de saison
 			boolean conquest = true;
-			if(this.max_battle_level < 21) {
+			if(this.max_battle_level < 16) {
 				conquest = false;
 			}
-			if(this.season_score < 200000) {
+			if(this.season_score < 150000) {
 				conquest = false;
 			}
 			//on boucle pour voir si un des légendaires de saison est en SM

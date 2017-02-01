@@ -1,0 +1,14 @@
+Porteur
+unité armée d'Hyperion
+'Ils sont (presque) tous inhumains.'
+1
+3
+500
+0.190
+0.190
+0.195
+0.125
+0.143
+0.157
+58
+3

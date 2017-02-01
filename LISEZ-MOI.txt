@@ -1,0 +1,7 @@
+En commençant le jeu, avant d'essayer de faire n'importe quoi, allez dans l'onglet option et appuyez sur le bouton tutoriel :)
+Vous pouvez configurer un système de chargement automatique de chargement de sauvegarde, pour cela, allez dans le fichier autoload.txt
+et faites ceci : 
+Remplacez 'Non' par 'Oui'
+Sur la ligne d'en dessous, mettez le chemin ABSOLU de votre fichier, pour cela faites clic droit sur votre fichier de sauvegarde -> propriétés
+Copiez-collez ce qu'il y a écrit dans emplacement (le C:\...) et remplacez tous les '\' par des '/', pui mettez /lenomdevotrefichier.sav
+Exemple pour moi : C:/Users/Utilisateur/Documents/save.sav

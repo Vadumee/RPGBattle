@@ -1,0 +1,14 @@
+Robot de Xana
+plutôt virtuel
+'X.A.N.A est pas très doué en matière de robotique visiblement.'
+1
+3
+500
+0.200
+0.150
+0.150
+0.150
+0.150
+0.200
+59
+3

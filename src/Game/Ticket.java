@@ -97,8 +97,17 @@ public class Ticket extends Item {
 			this.game.joueur.collection.add(cartes.get(0));
 			this.game.captured.set(cartes.get(0).id-1, 1);
 			this.game.getCaptured();
+			
 			//on vérifie si le haut-fait est gagné
+			game.checkLevelSuccess();
 			game.checkMobsSucess(cartes.get(0).rarity_id);
+			
+			if(game.succes.get(50).completed == false && (cartes.get(0).id == cartes.get(1).id) && (cartes.get(0).id == cartes.get(2).id) && (cartes.get(0).id == cartes.get(3).id) && (cartes.get(0).id == cartes.get(4).id)) {
+				game.succes.get(50).completed = true;
+				JOptionPane jop2;
+				jop2 = new JOptionPane();
+				jop2.showMessageDialog(null, "Vous avez obtenu le haut-fait ["+game.succes.get(50).nom+"].", "Haut Fait Débloqué !", JOptionPane.INFORMATION_MESSAGE);
+			}
 			//
 			try {
 				TicketFrame fr = new TicketFrame(cartes,sound_name);
@@ -119,16 +128,34 @@ public class Ticket extends Item {
 		double rektchance = Math.random();
 		for(int i=1;i<cartes.size();i++) {
 			if((cartes.get(i).max_rarity_id) >= (cartes.get(0).max_rarity_id + 2)) {
+				double sound_select = Math.random();
 				if(rektchance < 0.5) {
 					rekt = true;
 				}
-				sound_name = "Sounds/rekt-2.wav";
+				if(sound_select <= 0.35) {
+					sound_name = "Sounds/rekt-2.wav";
+				}
+				else if(sound_select > 0.35 && sound_select <= 0.65) {
+					sound_name = "Sounds/rekt-2-2.wav";
+				}
+				else {
+					sound_name = "Sounds/rekt-2-3.wav";
+				}
 			}
 			else if((cartes.get(i).max_rarity_id) >= (cartes.get(0).max_rarity_id + 1)) { 
+				double sound_select = Math.random();
 				if(rektchance < 0.5) {
 					rekt = true;
 				}
-				sound_name = "Sounds/rekt-1.wav";
+				if(sound_select <= 0.35) {
+					sound_name = "Sounds/rekt-1.wav";
+				}
+				else if(sound_select > 0.35 && sound_select <= 0.65) {
+					sound_name = "Sounds/rekt-1-2.wav";
+				}
+				else {
+					sound_name = "Sounds/rekt-1-3.wav";
+				}
 			}
 		}
 		if(rarete >= 6) {
@@ -140,39 +167,48 @@ public class Ticket extends Item {
 				sound_name = "Sounds/L-"+cartes.get(0).id+".wav";
 			}
 			else if(rarete == 5) {
-				if(sound_select <= 0.25) {
+				if(sound_select <= 0.2) {
 					sound_name = "Sounds/HRP-1.wav";
 				}
-				else if(sound_select > 0.25 && sound_select <= 0.50) {
+				else if(sound_select > 0.2 && sound_select <= 0.4) {
 					sound_name = "Sounds/HRP-2.wav";
 				}
-				else if(sound_select > 0.5 && sound_select <= 0.75) {
+				else if(sound_select > 0.4 && sound_select <= 0.6) {
 					sound_name = "Sounds/HRP-3.wav";
 				}
-				else {
+				else if(sound_select > 0.6 && sound_select <= 0.8) {
 					sound_name = "Sounds/HRP-4.wav";
+				}
+				else {
+					sound_name = "Sounds/HRP-5.wav";
 				}
 			}
 			else if(rarete == 4) {
-				if(sound_select <= 0.25) {
+				if(sound_select <= 0.2) {
 					sound_name = "Sounds/HR-1.wav";
 				}
-				else if(sound_select > 0.25 && sound_select <= 0.50) {
+				else if(sound_select > 0.2 && sound_select <= 0.4) {
 					sound_name = "Sounds/HR-2.wav";
 				}
-				else if(sound_select > 0.50 && sound_select <= 0.75) {
+				else if(sound_select > 0.4 && sound_select <= 0.6) {
 					sound_name = "Sounds/HR-3.wav";
 				}
-				else {
+				else if(sound_select > 0.6 && sound_select <= 0.8) {
 					sound_name = "Sounds/HR-4.wav";
+				}
+				else {
+					sound_name = "Sounds/HR-5.wav";
 				}
 			}
 			else {
-				if(sound_select <= 0.5) {
+				if(sound_select <= 0.35) {
 					sound_name = "Sounds/SR-1.wav";
 				}
-				else {
+				else if(sound_select > 0.35 && sound_select <= 0.65) {
 					sound_name = "Sounds/SR-2.wav";
+				}
+				else {
+					sound_name = "Sounds/SR-3.wav";
 				}
 			}
 		}	

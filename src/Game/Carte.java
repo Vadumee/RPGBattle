@@ -178,6 +178,61 @@ public class Carte implements Serializable {
 		this.percent_vit = Double.parseDouble(list.get(11));
 		
 		this.actual_image = "cards_images/"+this.rarity_id+"/"+this.id+".jpg";
+		
+		//special RNGesus
+		if(this.id == 61) {
+			double[] tab = new double[6];
+			for(int j=0;j<tab.length;j++) {
+				tab[j] = 0.0;
+			}
+			double reste = 0.7;
+			for(int i=0;i<6;i++) {
+				if(i != 5) {
+					double rnd = 0.0;
+					if(reste > 0.35) {
+						rnd = Math.random()*0.35;
+					}
+					else {
+						rnd = Math.random()*reste;
+					}
+					//on essaie de répartir les stats dans un ordre aléatoire, pour pas avoir le pull de hp le plus souvant meilleur !
+					double alea = Math.random()*6;
+					int indice = (int)(alea-(alea%1));
+					while(tab[indice] != 0.0) {
+						alea = Math.random()*6;
+						indice = (int)(alea-(alea%1));
+					}
+					tab[indice] = rnd;
+					reste -= rnd;
+				}
+				else {
+					double rnd = reste;
+					for(int k=0;k<tab.length;k++) {
+						if(tab[k] == 0.0) {
+							tab[k] = rnd;
+						}
+					}
+				}
+			}
+			//on applique les stats
+			this.percent_hp += tab[0];
+			this.percent_atk += tab[1];
+			this.percent_def += tab[2];
+			this.percent_prov += tab[3];
+			this.percent_agi += tab[4];
+			this.percent_vit += tab[5];
+			//on met une image aléatoire parce que kappa
+			int echantillon = new File("cards_images/"+rarity_id+"/").list().length;
+			double alea = Math.random()*echantillon;
+			int nbid = (int)(alea-(alea%1));
+			
+			String filename = "";
+			File folder = new File("cards_images/"+rarity_id+"/");
+			File[] listOfFiles = folder.listFiles();
+			
+			this.actual_image = "cards_images/"+this.rarity_id+"/"+listOfFiles[nbid].getName();
+		}
+		
 		this.calculateStat();
 		this.calculateStatFight();
 	}
@@ -243,7 +298,24 @@ public class Carte implements Serializable {
 		this.total_stat_increase = (int)(this.total_stat*0.04);
 		int rar = this.rarity_id;
 		this.actual_image = "cards_images/"+rar+"/"+this.id+".jpg";
+		if(this.id == 61) {
+			int echantillon = new File("cards_images/"+rarity_id+"/").list().length;
+			double alea = Math.random()*echantillon;
+			int nbid = (int)(alea-(alea%1));
+			
+			String filename = "";
+			File folder = new File("cards_images/"+rarity_id+"/");
+			File[] listOfFiles = folder.listFiles();
+			
+			this.actual_image = "cards_images/"+this.rarity_id+"/"+listOfFiles[nbid].getName();
+		}
 		this.max_exp = (150 + (50L*this.rarity_id)) * (1+this.incremental(this.prestige));
+		//on regarde si c'est toxée
+		if(this.id == 54) {
+			this.name = "Arthur";
+			this.titre = "bon ça suffit maintenant...";
+		}
+		//
 		this.calculateStat();
 		this.calculateStatFight();
 	}
@@ -264,7 +336,6 @@ public class Carte implements Serializable {
 	}
 	
 	public void regenerate() {
-		if(dead == true) {
 			int regen = (int) ((0.04*(double)this.hp_fight)+((double)this.prov_fight*0.3));
 			if(this.current_hp_fight + regen >= this.hp_fight) {
 				this.current_hp_fight = this.hp_fight;
@@ -273,7 +344,6 @@ public class Carte implements Serializable {
 			else {
 				this.current_hp_fight += regen;
 			}
-		}
 	}
 	
 	public void increaseRarity() {
@@ -287,7 +357,24 @@ public class Carte implements Serializable {
 			this.max_level += 10;
 			int rar = this.rarity_id;
 			this.actual_image = "cards_images/"+rar+"/"+this.id+".jpg";
+			if((this.id == 61) && (this.rarity_id < 9)) {
+				int echantillon = new File("cards_images/"+rarity_id+"/").list().length;
+				double alea = Math.random()*echantillon;
+				int nbid = (int)(alea-(alea%1));
+				
+				String filename = "";
+				File folder = new File("cards_images/"+rarity_id+"/");
+				File[] listOfFiles = folder.listFiles();
+				
+				this.actual_image = "cards_images/"+this.rarity_id+"/"+listOfFiles[nbid].getName();
+			}
 			this.max_exp = (int)((150 + (50L*this.rarity_id)) * (1+this.incremental(this.prestige)));
+			//on regarde si c'est toxée
+			if(this.rarity_id >= 6 && this.id == 54) {
+				this.name = "Toxée";
+				this.titre = "le meurtrier";
+			}
+			//
 			this.calculateStat();
 			this.calculateStatFight();
 		}

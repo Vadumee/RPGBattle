@@ -1,0 +1,14 @@
+Tai-Lung
+vrai guerrier dragon
+'Shifu vous à bien entraîné... mais il ne vous à pas tout enseigné !'
+4
+7
+590
+0.160
+0.190
+0.160
+0.135
+0.185
+0.170
+46
+4

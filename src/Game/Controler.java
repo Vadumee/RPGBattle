@@ -74,6 +74,11 @@ public class Controler implements ActionListener{
 		}
 		else if(e.getSource() instanceof ButtonCardFavorite) {
 			game.current_favorite_id = game.current_card_id;
+			if(game.joueur.collection.get(game.current_card_id).id_rarity >= 4) {
+				final WavPlayer wp = new WavPlayer(new File("Sounds/L-"+game.joueur.collection.get(game.current_card_id).id+".wav"));
+				wp.open();
+				wp.play();
+			}
 			game.updateVisuals();
 		}
 		else if(e.getSource() instanceof ButtonCardDestroy) {
@@ -169,6 +174,20 @@ public class Controler implements ActionListener{
 							i++;
 						}
 					}
+					//on vérifie les succès consécration et rite initiatique
+					if(game.succes.get(51).completed == false && (game.joueur.collection.get(game.current_card_id).id_rarity == 1) && (game.joueur.collection.get(game.current_card_id).level == 50)) {
+						game.succes.get(51).completed = true;
+						JOptionPane jop3;
+						jop3 = new JOptionPane();
+						jop3.showMessageDialog(null, "Vous avez obtenu le haut-fait ["+game.succes.get(51).nom+"].", "Haut Fait Débloqué !", JOptionPane.INFORMATION_MESSAGE);
+					}
+					else if(game.succes.get(52).completed == false && (game.joueur.collection.get(game.current_card_id).id_rarity < 4) && (game.joueur.collection.get(game.current_card_id).level == 130)) {
+						game.succes.get(52).completed = true;
+						JOptionPane jop3;
+						jop3 = new JOptionPane();
+						jop3.showMessageDialog(null, "Vous avez obtenu le haut-fait ["+game.succes.get(52).nom+"].", "Haut Fait Débloqué !", JOptionPane.INFORMATION_MESSAGE);
+					}
+					//
 				}
 			}
 			game.eraseCard();
@@ -184,6 +203,20 @@ public class Controler implements ActionListener{
 					if(option == JOptionPane.OK_OPTION){
 						game.joueur.gold -= (montant * mult * 1L);
 						game.joueur.collection.get(game.current_card_id).giveExp(montant);
+						//on vérifie les succès consécration et rite initiatique
+						if(game.succes.get(51).completed == false && (game.joueur.collection.get(game.current_card_id).id_rarity == 1) && (game.joueur.collection.get(game.current_card_id).level == 50)) {
+							game.succes.get(51).completed = true;
+							JOptionPane jop3;
+							jop3 = new JOptionPane();
+							jop3.showMessageDialog(null, "Vous avez obtenu le haut-fait ["+game.succes.get(51).nom+"].", "Haut Fait Débloqué !", JOptionPane.INFORMATION_MESSAGE);
+						}
+						else if(game.succes.get(52).completed == false && (game.joueur.collection.get(game.current_card_id).id_rarity < 4) && (game.joueur.collection.get(game.current_card_id).level == 130)) {
+							game.succes.get(52).completed = true;
+							JOptionPane jop3;
+							jop3 = new JOptionPane();
+							jop3.showMessageDialog(null, "Vous avez obtenu le haut-fait ["+game.succes.get(52).nom+"].", "Haut Fait Débloqué !", JOptionPane.INFORMATION_MESSAGE);
+						}
+						//
 					}
 				}
 				else {
@@ -221,6 +254,7 @@ public class Controler implements ActionListener{
 								game.joueur.giveExp(25);
 							}
 							//
+							game.checkLevelSuccess();
 						}
 					}
 					else {
@@ -521,7 +555,8 @@ public class Controler implements ActionListener{
 				int ind = (int) ((double)(((ButtonFightBoss)e.getSource()).js.getValue())+0);
 				//il faut vérifier que le lvl max possible correspond
 				if(ind <= game.max_battle_level) {
-					game.boss = new Mob(ind);
+					game.boss = new Boss(ind);
+					System.out.println(((Boss)game.boss).status[0]);
 				}
 				else {
 					jop1.showMessageDialog(null, "Vous ne pouvez pas générer un boss si puissant, il vous faut affronter un boss de chaque level inférieur.", "Message triste généré", JOptionPane.INFORMATION_MESSAGE);

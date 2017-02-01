@@ -32,14 +32,23 @@ public class CardList extends JList implements Observer {
 		for(int i=0;i<game.joueur.collection.size();i++) {
 			String s = "";
 			int r = game.joueur.collection.get(i).rarity_id;
-			if(r >= 8) {
-				s += "<html><font color=\"red\">";
+			if(r >= 9) {
+				s += "<html><font color=\"#BC1818\">";
+			}
+			else if(r >= 8) {
+				s += "<html><font color=\"#FF0000\">";
+			}
+			else if(r >= 7) {
+				s += "<html><font color=\"#FF8B00\">";
 			}
 			else if(r >= 6) {
-				s += "<html><font color=\"orange\">";
+				s += "<html><font color=\"#FFC300\">";
+			}
+			else if(r >= 5) {
+				s += "<html><font color=\"#74238E\">";
 			}
 			else if(r >= 4) {
-				s += "<html><font color=\"purple\">";
+				s += "<html><font color=\"#AD42CF\">";
 			}
 			else if(r >= 3) {
 				s += "<html><font color=\"blue\">";
@@ -59,6 +68,19 @@ public class CardList extends JList implements Observer {
 			}
 			else {
 				s+=game.joueur.collection.get(i).name+star+"(Lvl "+game.joueur.collection.get(i).level+")";
+			}
+			boolean rune_equiped = false;
+			int ii=0;
+			while((ii<=2) && rune_equiped == false) {
+				if(game.joueur.collection.get(i).runes[ii] != null) {
+					rune_equiped = true;
+				}
+				else {
+					ii++;
+				}
+			}
+			if(rune_equiped == true) {
+				s+="(R)";
 			}
 			this.model.add(i,s);
 		}
@@ -138,14 +160,23 @@ public class CardList extends JList implements Observer {
 			for(int i=0;i<game.joueur.collection.size();i++) {
 				String s = "";
 				int r = game.joueur.collection.get(i).rarity_id;
-				if(r >= 8) {
-					s += "<html><font color=\"red\">";
+				if(r >= 9) {
+					s += "<html><font color=\"#BC1818\">";
+				}
+				else if(r >= 8) {
+					s += "<html><font color=\"#FF0000\">";
+				}
+				else if(r >= 7) {
+					s += "<html><font color=\"#FF8B00\">";
 				}
 				else if(r >= 6) {
-					s += "<html><font color=\"orange\">";
+					s += "<html><font color=\"#FFC300\">";
+				}
+				else if(r >= 5) {
+					s += "<html><font color=\"#74238E\">";
 				}
 				else if(r >= 4) {
-					s += "<html><font color=\"purple\">";
+					s += "<html><font color=\"#AD42CF\">";
 				}
 				else if(r >= 3) {
 					s += "<html><font color=\"blue\">";
@@ -160,7 +191,25 @@ public class CardList extends JList implements Observer {
 				for(int j=0;j<r;j++) {
 					star += "*";
 				}
-				s+=game.joueur.collection.get(i).name+star+"(Lvl "+game.joueur.collection.get(i).level+")";
+				if(game.joueur.collection.get(i).prestige > 0) {
+					s+=game.joueur.collection.get(i).name+star+"(Lvl "+game.joueur.collection.get(i).level+" - P"+game.joueur.collection.get(i).prestige+")";
+				}
+				else {
+					s+=game.joueur.collection.get(i).name+star+"(Lvl "+game.joueur.collection.get(i).level+")";
+				}
+				boolean rune_equiped = false;
+				int ii=0;
+				while((ii<=2) && rune_equiped == false) {
+					if(game.joueur.collection.get(i).runes[ii] != null) {
+						rune_equiped = true;
+					}
+					else {
+						ii++;
+					}
+				}
+				if(rune_equiped == true) {
+					s+="(R)";
+				}
 				this.model.add(i,s);
 			}
 		}

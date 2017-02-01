@@ -122,7 +122,7 @@ public class GameWindow {
 		Controler control = new Controler(g);
 		//test
 		g.joueur.gold = 999999999999L;
-		g.joueur.giveExp(199999999999L);
+		//g.joueur.giveExp(199999999999L);
 		//
 		
 		//On détecte s'il y a l'autoload ou non
@@ -144,8 +144,8 @@ public class GameWindow {
 		//
 		
 		frmRpgCardCollector = new JFrame();
-		frmRpgCardCollector.setTitle("RPG Sbire Battle v.1.0.2 : The Awakening");
-	//frmRpgCardCollector.getContentPane().add(pane);
+		frmRpgCardCollector.setTitle("RPG Sbire Battle v.1.0.3.2 : The light is fading... can you hear the screams of terror ?");
+	 //frmRpgCardCollector.getContentPane().add(pane);
 		
 		//-----------PLAYER----------------
 		
@@ -781,6 +781,10 @@ public class GameWindow {
 		lblBossEnergy.setBounds(462, 10, 242, 19);
 		panel_event.add(lblBossEnergy);
 		g.addObserver(lblBossEnergy);
+		
+		/////////////////////////////
+		////// PANEL HF /////////////
+		/////////////////////////////
 		
 		JPanel panel_hf = new JPanel();
 		panel_hf.setBackground(new Color(0, 153, 204));
