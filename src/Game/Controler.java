@@ -199,7 +199,7 @@ public class Controler implements ActionListener{
 				int montant = Integer.parseInt(((ButtonCardExp)e.getSource()).field.getText());
 				int mult = game.joueur.collection.get(game.current_card_id).rarity_id*3;
 				if(game.joueur.gold >= (montant * mult * 1L)) {
-					int option = jop1.showConfirmDialog(null, "Donner "+montant+" exp à ce serviteur coûte "+(montant*mult*1L)+" pièces d'or, voulez-vous continuer ?", "Confirmation", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);		
+					int option = jop1.showConfirmDialog(null, "Donner "+Maths.format(montant)+" exp à ce serviteur coûte "+Maths.format((montant*mult*1L))+" pièces d'or, voulez-vous continuer ?", "Confirmation", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);		
 					if(option == JOptionPane.OK_OPTION){
 						game.joueur.gold -= (montant * mult * 1L);
 						game.joueur.collection.get(game.current_card_id).giveExp(montant);
@@ -236,7 +236,7 @@ public class Controler implements ActionListener{
 					}
 					else if(game.joueur.gold >= cost) {
 						JOptionPane jop = new JOptionPane();			
-						int option = jop.showConfirmDialog(null, "L'amélioration de rareté coûte "+cost+" Or, voulez-vous l'effectuer ?", "Confirmation", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);		
+						int option = jop.showConfirmDialog(null, "L'amélioration de rareté coûte "+Maths.format(cost)+" Or, voulez-vous l'effectuer ?", "Confirmation", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);		
 						if(option == JOptionPane.OK_OPTION){
 							game.joueur.gold -= cost;
 							game.joueur.collection.get(game.current_card_id).increaseRarity();
@@ -260,7 +260,7 @@ public class Controler implements ActionListener{
 					else {
 						JOptionPane jop1;
 						jop1 = new JOptionPane();
-						jop1.showMessageDialog(null, "L'amélioration de rareté coûte "+cost+" Or, vous n'avez pas ce montant.", "Echec de l'amélioration", JOptionPane.INFORMATION_MESSAGE);
+						jop1.showMessageDialog(null, "L'amélioration de rareté coûte "+Maths.format(cost)+" Or, vous n'avez pas ce montant.", "Echec de l'amélioration", JOptionPane.INFORMATION_MESSAGE);
 					}
 				}
 				else {
@@ -333,7 +333,7 @@ public class Controler implements ActionListener{
 						else {
 							desc = "abyssales";
 						}
-						jop1.showMessageDialog(null, "Il vous faut "+cost+" poussières "+desc+", vous n'avez pas ce montant.", "Echec de l'amélioration", JOptionPane.INFORMATION_MESSAGE);
+						jop1.showMessageDialog(null, "Il vous faut "+Maths.format(cost)+" poussières "+desc+", vous n'avez pas ce montant.", "Echec de l'amélioration", JOptionPane.INFORMATION_MESSAGE);
 					}
 				}
 				else {
@@ -360,7 +360,7 @@ public class Controler implements ActionListener{
 				int montant = (int) ((double)(((ButtonBuyItem)e.getSource()).spinner.getValue())+0);
 				long cout = 1L*montant*game.magasin.get(game.current_item_magasin).cost;
 				if(cout <= game.joueur.gold) {
-					int option = jop1.showConfirmDialog(null, "L'achat coûte "+cout+" pièces d'or, souhaitez-vous continuer ?", "Confirmation", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);		
+					int option = jop1.showConfirmDialog(null, "L'achat coûte "+Maths.format(cout)+" pièces d'or, souhaitez-vous continuer ?", "Confirmation", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);		
 					if(option == JOptionPane.OK_OPTION){
 						new Thread(new Runnable() {
 							public void run() {
@@ -466,7 +466,7 @@ public class Controler implements ActionListener{
 				int nbsell = (int) ((double)(((ButtonSellItem)e.getSource()).spinner.getValue())+0);
 				long cost_sell = (1L * nbsell * game.inventaire.get(game.current_item_selected).cost) / 2L;
 				if(nbsell <= game.inventaire.get(game.current_item_selected).quantity) {
-					int option = jop1.showConfirmDialog(null, "La revente vous redonnera "+cost_sell+" or, mais détruira les objets pour toujours (et dans d'horribles souffrances :( ), voulez-vous continuer ?", "Confirmation", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);		
+					int option = jop1.showConfirmDialog(null, "La revente vous redonnera "+Maths.format(cost_sell)+" or, mais détruira les objets pour toujours (et dans d'horribles souffrances :( ), voulez-vous continuer ?", "Confirmation", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);		
 					if(option == JOptionPane.OK_OPTION){
 						game.joueur.gold += cost_sell;
 						game.values.set(0, game.values.get(0) + (cost_sell));
@@ -532,16 +532,16 @@ public class Controler implements ActionListener{
 				else {
 					String rar = "";
 					if(game.inventaire_runes.get(game.current_rune_selected).rarete == 2) {
-						rar = "Super Rare";
+						rar = "Rare";
 					}
 					else if(game.inventaire_runes.get(game.current_rune_selected).rarete == 3) {
-						rar = "Hyper Rare+";
+						rar = "Super Rare";
 					}
 					else if(game.inventaire_runes.get(game.current_rune_selected).rarete == 4) {
-						rar = "Super Légendaire";
+						rar = "Hyper Rare";
 					}
 					else if(game.inventaire_runes.get(game.current_rune_selected).rarete == 5) {
-						rar = "Super Mythique";
+						rar = "Super Légendaire";
 					}
 					jop1.showMessageDialog(null, "Seul un serviteur de rareté "+rar+" ou supérieur est capable de porter un artefact d'une telle puissance !", "Message triste généré", JOptionPane.INFORMATION_MESSAGE);
 				}
@@ -554,9 +554,10 @@ public class Controler implements ActionListener{
 			if(game.boss == null) {
 				int ind = (int) ((double)(((ButtonFightBoss)e.getSource()).js.getValue())+0);
 				//il faut vérifier que le lvl max possible correspond
+				//game.boss = new Boss(ind);
 				if(ind <= game.max_battle_level) {
 					game.boss = new Boss(ind);
-					System.out.println(((Boss)game.boss).status[0]);
+					//System.out.println(((Boss)game.boss).status[0]);
 				}
 				else {
 					jop1.showMessageDialog(null, "Vous ne pouvez pas générer un boss si puissant, il vous faut affronter un boss de chaque level inférieur.", "Message triste généré", JOptionPane.INFORMATION_MESSAGE);
@@ -566,11 +567,11 @@ public class Controler implements ActionListener{
 			else {
 				//on ouvre la fenetre de combat ma gueule
 				try {
-					if(!((game.indice_fighters[0] == -1) && (game.indice_fighters[1] == -1) && (game.indice_fighters[2] == -1))) {
+					if(((game.indice_fighters[0] != -1) && (game.indice_fighters[1] != -1) && (game.indice_fighters[2] != -1))) {
 						BossFrame bf = new BossFrame(game);
 					}
 					else {
-						jop1.showMessageDialog(null, "Il faut au moins un serviteur pour pouvoir affronter un boss.", "Message triste généré", JOptionPane.INFORMATION_MESSAGE);
+						jop1.showMessageDialog(null, "Il faut au moins 3 serviteurs pour pouvoir affronter un boss.", "Message triste généré", JOptionPane.INFORMATION_MESSAGE);
 						
 					}
 				} catch (Exception e1) {
@@ -581,6 +582,7 @@ public class Controler implements ActionListener{
 			game.updateVisuals();
 		}
 		else if(e.getSource() instanceof ButtonResetBoss) {
+			//game.finishTheFight();
 			if(game.boss != null) {
 				game.boss = null;
 				game.round_count = 0;

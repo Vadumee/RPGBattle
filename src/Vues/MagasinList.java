@@ -10,6 +10,7 @@ import javax.swing.DefaultListModel;
 import javax.swing.JList;
 
 import Game.Game;
+import Game.Maths;
 
 public class MagasinList extends JList implements Observer {
 
@@ -22,7 +23,7 @@ public class MagasinList extends JList implements Observer {
 		this.model = d;
 		for(int i=0;i<game.magasin.size();i++) {
 			String s = "";
-			s+=game.magasin.get(i).nom+" ("+game.magasin.get(i).cost+" Or/u)";
+			s+=game.magasin.get(i).nom+" ("+Maths.format(game.magasin.get(i).cost)+" Or/u)";
 			this.model.add(i,s);
 		}
 		
@@ -58,7 +59,7 @@ public class MagasinList extends JList implements Observer {
 			int indice = 0;
 			for(int i=0;i<game.magasin.size();i++) {
 				String s = "";
-				s+=game.magasin.get(i).nom+" ("+game.magasin.get(i).cost+" Or/u)";
+				s+=game.magasin.get(i).nom+" ("+Maths.format(game.magasin.get(i).cost)+" Or/u)";
 				this.model.add(i,s);
 			}
 		}

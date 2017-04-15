@@ -7,6 +7,7 @@ import java.util.Observer;
 import javax.swing.JLabel;
 
 import Game.Game;
+import Game.Maths;
 
 public class VueStatCard extends JLabel implements Observer{
 
@@ -43,7 +44,7 @@ public class VueStatCard extends JLabel implements Observer{
 			}
 			else {
 				if(game.joueur.collection.get(game.current_card_id).prestige > 0) {
-					this.setText("Niveau de carte : "+game.joueur.collection.get(game.current_card_id).level+" / "+game.joueur.collection.get(game.current_card_id).max_level+" (Prestige "+game.joueur.collection.get(game.current_card_id).prestige+")");
+					this.setText("Niveau de carte : "+game.joueur.collection.get(game.current_card_id).level+" / "+game.joueur.collection.get(game.current_card_id).max_level+" (Prestige "+Maths.format(game.joueur.collection.get(game.current_card_id).prestige)+")");
 				}
 				else {
 					this.setText("Niveau de carte : "+game.joueur.collection.get(game.current_card_id).level+" / "+game.joueur.collection.get(game.current_card_id).max_level);
@@ -81,7 +82,7 @@ public class VueStatCard extends JLabel implements Observer{
 				this.setText("Exp : -");
 			}
 			else {
-				this.setText("Exp : "+game.joueur.collection.get(game.current_card_id).exp+" / "+game.joueur.collection.get(game.current_card_id).max_exp); 
+				this.setText("Exp : "+Maths.format(game.joueur.collection.get(game.current_card_id).exp)+" / "+Maths.format(game.joueur.collection.get(game.current_card_id).max_exp)); 
 			}
 		}
 		else if(indice_stat == 8) {

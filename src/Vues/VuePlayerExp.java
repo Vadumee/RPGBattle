@@ -7,6 +7,7 @@ import java.util.Observer;
 import javax.swing.JLabel;
 
 import Game.Game;
+import Game.Maths;
 
 public class VuePlayerExp extends JLabel implements Observer{
 
@@ -22,7 +23,7 @@ public class VuePlayerExp extends JLabel implements Observer{
 	@Override
 	public void update(Observable arg0, Object arg1) {
 		if(indice_stat == 1) {
-			this.setText(this.game.joueur.level+" ("+this.game.joueur.exp+" / "+this.game.joueur.exp_max+")");
+			this.setText(Maths.format(this.game.joueur.level)+" ("+Maths.format(this.game.joueur.exp)+" / "+Maths.format(this.game.joueur.exp_max)+")");
 		}
 		
 	}

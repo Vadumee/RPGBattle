@@ -2,13 +2,17 @@ package Game;
 import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Observable;
 
 import javax.swing.JOptionPane;
 
 public class Game extends Observable implements Serializable {
-	
+
 	public Player joueur;
 	public ArrayList<Item> inventaire;
 	public ArrayList<Item> magasin;
@@ -17,13 +21,13 @@ public class Game extends Observable implements Serializable {
 	public int mobs_captured;
 	public int timer = 90;
 	public int time;
-	
+
 	public String roul1 = "X";
 	public String roul2 = "X";
 	public String roul3 = "X";
-	
+
 	public boolean auto_select = false;
-	
+
 	public int current_card_id = -1;
 	public int current_item_selected = -1;
 	public int current_item_magasin = -1;
@@ -31,12 +35,12 @@ public class Game extends Observable implements Serializable {
 	public int current_rune_selected = -1;
 	public int current_card_runed = -1;
 	public int current_success = -1;
-	
+
 	public long time_last_save = 0;
 	public boolean quit; 
-	
+
 	public ArrayList<HautFait> succes;
-	
+
 	//à mettre dans event après
 	public int indice_battle = -1;
 	public Mob boss;
@@ -48,7 +52,7 @@ public class Game extends Observable implements Serializable {
 	public SeasonRewards season_rewards;
 	public long endseason;
 	//
-	
+
 	//stats event
 	public ArrayList<Long> values;
 	//
@@ -86,7 +90,7 @@ public class Game extends Observable implements Serializable {
 		for(int i=0;i<echantillon;i++) {
 			this.captured.add(0);
 		}
-		
+
 		//on créer le magasin
 		this.magasin.add(new Ticket(1,10000,"Un portail basique de la roue de la RNG, donnant des serviteurs communs ou supérieurs.","Portail de créature commun",this));
 		this.magasin.add(new Ticket(2,75000,"Un portail permettant d'obtenir des serviteurs rares ou supérieurs à la roue de la RNG.","Portail de créature rare",this));
@@ -101,7 +105,7 @@ public class Game extends Observable implements Serializable {
 		this.magasin.add(new RuneGenerator(11, 10000000, "Un objet créant une rune aléatoire de qualité supérieure.","Rune fabuleuse non identifiée", this,3));
 		this.magasin.add(new RuneGenerator(12, 25000000, "Un objet créant une rune aléatoire de qualité légendaire.","Rune légendaire non identifiée", this,4));
 		//
-		
+
 		//on créer les hauts-faits
 		this.values = new ArrayList<Long>();
 		for(int v=0;v<5;v++) {
@@ -162,14 +166,14 @@ public class Game extends Observable implements Serializable {
 		this.succes.add(new HautFait("La prophétie","Ouvrir un portail contenant 5 fois le même serviteur.",1));
 		this.succes.add(new HautFait("Rite Initiatique","Améliorer un serviteur normal au niveau max.",1));
 		this.succes.add(new HautFait("Consécration","Améliorer un serviteur non-légendaire à son niveau ultime.",1));
+		this.succes.add(new HautFait("Vainqueur de la nuit","Vaincre la forme véritable de Nocturne.",1));
 		//
-		
-		
+
 		//test
-		
+
 		//
 	}
-	
+
 	public void checkBossSucess() {
 		for(int i=34;i<38;i++) {
 			if(this.succes.get(i).completed == false && (this.max_battle_level-1) >= this.succes.get(i).montant) {
@@ -180,7 +184,7 @@ public class Game extends Observable implements Serializable {
 			}
 		}
 	}
-	
+
 	public void checkMobsSucess(int id) {
 		//on check d'abords le nombre de cartes différentes
 		String msg = "";
@@ -197,7 +201,7 @@ public class Game extends Observable implements Serializable {
 			jop1 = new JOptionPane();
 			jop1.showMessageDialog(null, "Vous avez obtenu le haut-fait "+msg+".", "Haut Fait Débloqué !", JOptionPane.INFORMATION_MESSAGE);
 		}
-		
+
 		//on s'occupe maintenant du nombre de chaque type
 		msg = "";
 		show = false;
@@ -235,7 +239,7 @@ public class Game extends Observable implements Serializable {
 			jop1.showMessageDialog(null, "Vous avez obtenu le haut-fait "+msg+".", "Haut Fait Débloqué !", JOptionPane.INFORMATION_MESSAGE);
 		}
 	}
-	
+
 	public void checkLevelSuccess() {
 		String msg = "";
 		boolean show = false;
@@ -250,10 +254,10 @@ public class Game extends Observable implements Serializable {
 			JOptionPane jop1;
 			jop1 = new JOptionPane();
 			jop1.showMessageDialog(null, "Vous avez obtenu le haut-fait "+msg+".", "Haut Fait Débloqué !", JOptionPane.INFORMATION_MESSAGE);
-		
+
 		}
 	}
-	
+
 	public void checkGoldSuccess() {
 		String msg = "";
 		boolean show = false;
@@ -268,10 +272,10 @@ public class Game extends Observable implements Serializable {
 			JOptionPane jop1;
 			jop1 = new JOptionPane();
 			jop1.showMessageDialog(null, "Vous avez obtenu le haut-fait "+msg+".", "Haut Fait Débloqué !", JOptionPane.INFORMATION_MESSAGE);
-		
+
 		}
 	}
-	
+
 	public int getSuccessCount() {
 		int p = 0;
 		for(int i=0;i<this.succes.size();i++) {
@@ -281,28 +285,29 @@ public class Game extends Observable implements Serializable {
 		}
 		return p;
 	}
-	
+
 	public void loadData(Game gam) {
 		long time_load = System.currentTimeMillis()/1000;
 		long diff = time_load - gam.time_last_save;
 		if(diff > 0) {
 			this.joueur = gam.joueur;
-			this.endseason = 1485817200; 
+			this.endseason = 1500328800; 
 			this.inventaire = gam.inventaire;
 			this.magasin = gam.magasin;
 			this.inventaire_runes = gam.inventaire_runes;
 			//à remplacer après
 			this.boss = gam.boss;
 			this.indice_battle = gam.indice_battle;
+			this.current_season = gam.current_season;
 			this.indice_fighters = gam.indice_fighters;
 			this.round_count = gam.round_count;
 			this.season_score = gam.season_score;
 			this.season_rewards = gam.season_rewards;
 			this.max_battle_level = gam.max_battle_level;
-			
+
 			ArrayList<HautFait> base_s = this.succes;
 			this.succes = gam.succes;
-			
+
 			//on charge les haufs-faits manquants
 			int diffhf = base_s.size() - this.succes.size();
 			if(diffhf > 0) {
@@ -310,10 +315,8 @@ public class Game extends Observable implements Serializable {
 					this.succes.add(base_s.get(hf));
 				}
 			}
-			
+
 			this.values = gam.values;
-			//il faudra gérer le temps
-			this.current_season = 1;
 			//
 			this.timer = 90;
 			this.time = 0;
@@ -365,7 +368,7 @@ public class Game extends Observable implements Serializable {
 					this.captured.add(0);
 				}
 			}
-			
+
 			this.magasin = new ArrayList<Item>();
 			//on créer le magasin
 			this.magasin.add(new Ticket(1,10000,"Un portail basique de la roue de la RNG, donnant des serviteurs communs ou supérieurs.","Portail de créature commun",gam));
@@ -383,19 +386,20 @@ public class Game extends Observable implements Serializable {
 			//
 			
 			this.verifyEndSeason();
+			this.beginSeason();
 		}
 	}
-	
+
 	public void updateVisuals() {
 		this.setChanged();
 		this.notifyObservers();
 	}
-	
+
 	public void eraseCard() {
 		this.setChanged();
 		this.notifyObservers(3);
 	}
-	
+
 	public void updateTime() {
 		this.time = 0;
 		int ener = (int)(this.joueur.max_energy * 0.05);
@@ -412,7 +416,7 @@ public class Game extends Observable implements Serializable {
 				}
 			}
 		}
-		
+
 		//on vérifie que la saison n'est pas terminée
 		long time_s = System.currentTimeMillis()/1000;
 		//System.out.println("time season : "+this.endseason+"\nactual time : "+time_s);
@@ -420,11 +424,11 @@ public class Game extends Observable implements Serializable {
 			this.endSeason();
 		}
 		//
-		
+
 		this.setChanged();
 		this.notifyObservers();
 	}
-	
+
 	public void verifyEndSeason() {
 		//on vérifie que la saison n'est pas terminée
 		long time_s = System.currentTimeMillis()/1000;
@@ -433,8 +437,8 @@ public class Game extends Observable implements Serializable {
 		}
 		//
 	}
-	
-	
+
+
 	public Carte generateCardNormal() throws IOException {
 		Carte c = null;
 		double chance = Math.random()*1000;
@@ -460,7 +464,7 @@ public class Game extends Observable implements Serializable {
 		c = new Carte("cards/"+rarity+"/char_"+id+".txt",rarity);
 		return c;
 	}
-	
+
 	public Carte generateCardRare() throws IOException {
 		Carte c = null;
 		double chance = Math.random()*1000;
@@ -483,7 +487,7 @@ public class Game extends Observable implements Serializable {
 		c = new Carte("cards/"+rarity+"/char_"+id+".txt",rarity);
 		return c;
 	}
-	
+
 	public Carte generateCardEpic() throws IOException {
 		Carte c = null;
 		double chance = Math.random()*1000;
@@ -506,7 +510,7 @@ public class Game extends Observable implements Serializable {
 		c = new Carte("cards/"+rarity+"/char_"+id+".txt",rarity);
 		return c;
 	}
-	
+
 	public Carte generateCardLegendary() throws IOException {
 		Carte c = null;
 		double chance = Math.random()*1000;
@@ -526,7 +530,7 @@ public class Game extends Observable implements Serializable {
 		c = new Carte("cards/"+rarity+"/char_"+id+".txt",rarity);
 		return c;
 	}
-	
+
 	public void rollRoulette() throws InterruptedException {
 		String[] liste = {"Gx3","Gx5","Gx10","Gx20","Expx3","Port","R Port !","Obj"};
 		double rnd1 = Math.random()*8; 
@@ -547,13 +551,13 @@ public class Game extends Observable implements Serializable {
 				r3 = r1;
 			}
 		}
-		
+
 		this.roul1 = liste[r1];
 		this.roul2 = liste[r2];
 		this.roul3 = liste[r3];
-		
+
 		this.joueur.energy -= (2 + (this.joueur.level/2));
-		
+
 		//on s'occupe du résultat
 		int reward_level = this.joueur.level;
 		long xp = 2 + (this.joueur.level / 2) * 1L;
@@ -606,7 +610,7 @@ public class Game extends Observable implements Serializable {
 		this.setChanged();
 		this.notifyObservers(2);
 	}
-	
+
 	public Grimoire getGrimoire(int rarity, int mob_id) {
 		Grimoire grim = null;
 		for(int i=0;i<this.inventaire.size();i++) {
@@ -619,7 +623,7 @@ public class Game extends Observable implements Serializable {
 		}
 		return grim;
 	}
-	
+
 	public void eraseUsedItems() {
 		int indice = 0;
 		while(indice < this.inventaire.size()) {
@@ -635,7 +639,7 @@ public class Game extends Observable implements Serializable {
 		//this.setChanged();
 		//this.notifyObservers(2);
 	}
-	
+
 	public void sacrificeMob() {
 		//on gere le give d'exp
 		double xpay = 100.0;
@@ -701,7 +705,7 @@ public class Game extends Observable implements Serializable {
 		this.setChanged();
 		this.notifyObservers();
 	}
-	
+
 	public int searchDust(int nb) {
 		int sacrifiable = 0;
 		if(nb == 1) {
@@ -718,7 +722,7 @@ public class Game extends Observable implements Serializable {
 		}
 		return sacrifiable;
 	}
-	
+
 	public void deleteDust(int type, int cost) {
 		if(type == 1) {
 			this.joueur.fire_dust -= cost;
@@ -733,7 +737,7 @@ public class Game extends Observable implements Serializable {
 			this.joueur.water_dust -= cost;
 		}
 	}
-	
+
 	public void getCaptured() {
 		int cap = 0;
 		for(int i=0;i<this.captured.size();i++) {
@@ -743,7 +747,7 @@ public class Game extends Observable implements Serializable {
 		}
 		this.mobs_captured = cap;
 	}
-	
+
 	public void ajouterObjet(Item i) {
 		boolean trouve = false;
 		int idt = 0;
@@ -806,7 +810,7 @@ public class Game extends Observable implements Serializable {
 			this.inventaire.get(idt).quantity++;
 		}
 	}
-	
+
 	public void triParRarete() {
 		boolean favorite_deplaced = false;
 		int rartab = 9;
@@ -883,7 +887,7 @@ public class Game extends Observable implements Serializable {
 			this.joueur.collection.add(copie.get(kk));
 		}
 	}
-	
+
 	public boolean canEquipRune(Rune r, int ind) {
 		boolean can = false;
 		if(this.joueur.collection.get(this.current_card_runed).prestige > 0) {
@@ -916,7 +920,7 @@ public class Game extends Observable implements Serializable {
 		}
 		return can;
 	}
-	
+
 	public void fightThePower() {
 		this.round_count++;
 		this.joueur.energy -= this.boss.cost_atk;
@@ -941,7 +945,7 @@ public class Game extends Observable implements Serializable {
 		}
 		//
 	}
-	
+
 	public void finishTheFight() {
 		double mult = 1.0 + (((joueur.level - (joueur.level%10)) / 10)*0.25);
 		double mult_diff = (((boss.lvl-1)*0.45));
@@ -981,12 +985,15 @@ public class Game extends Observable implements Serializable {
 		if(boss.lvl == this.max_battle_level) {
 			this.max_battle_level++;
 			this.checkBossSucess();
-			saison_score += (int)((double)boss.pv_max/100);
+			saison_score = 0;
+			this.season_score += (int)((double)boss.pv_max/100);
 		}
 		else {
 			saison_score += (int)((double)boss.pv_max/2000);
 		}
-		
+		System.out.println("saison "+saison_score);
+		//saison_score += 200000;
+
 		if(energy_used < to_full_reward) {
 			double reduced = ((double)energy_used / (double)to_full_reward) * ((double)energy_used / (double)to_full_reward);
 			mtn = (long)(mtn * reduced);
@@ -1011,15 +1018,25 @@ public class Game extends Observable implements Serializable {
 				jop1.showMessageDialog(null, "Vous avez obtenu le haut-fait ["+this.succes.get(33).nom+"].", "Haut Fait Débloqué !", JOptionPane.INFORMATION_MESSAGE);
 			}
 		}
-		
+
+		if(boss.id == 5 && boss.lvl >= 25) {
+			if(this.succes.get(53).completed == false) {
+				this.succes.get(53).completed = true;
+				JOptionPane jop1;
+				jop1 = new JOptionPane();
+				jop1.showMessageDialog(null, "Vous avez obtenu le haut-fait ["+this.succes.get(53).nom+"].", "Haut Fait Débloqué !", JOptionPane.INFORMATION_MESSAGE);
+			}
+		}
+
 		boss = null;
 		if(this.current_season != -1) {
+			this.season_score += saison_score;
 			this.season_rewards.checkRewards(this);
 		}
 		this.round_count = 0;
 		this.eraseCard();
 	}
-	
+
 	public void attackBoss(int indice) {
 		//il faut d'abords initialiser les stats
 		int effective_def = (this.boss.defense/2);
@@ -1033,8 +1050,10 @@ public class Game extends Observable implements Serializable {
 		}
 		int dmg_player = (int) ( ((double)this.joueur.collection.get(this.indice_fighters[indice]).atk_fight * effect)-effective_def);
 		double chance_critical = (double)this.joueur.collection.get(this.indice_fighters[indice]).agi_fight / (double)(this.joueur.collection.get(this.indice_fighters[indice]).agi_fight + 12000);
+		boolean critical = false;
 		if(Math.random() <= chance_critical) {
 			dmg_player = dmg_player * 2;
+			critical = true;
 		}
 		//on doit aussi gérer le type
 		double change = 1.0;
@@ -1063,15 +1082,37 @@ public class Game extends Observable implements Serializable {
 				change = 2;
 			}
 		}
-		
+
 		if(this.indice_fighters[indice] == this.current_favorite_id) {
 			dmg_player = (int)((double)dmg_player * 1.1);
 		}
-		
+
+		//passif secret du boss 2
+		if(this.boss.id == 2) {
+			if(critical == true) {
+				int retail = (int)((double)this.joueur.collection.get(this.indice_fighters[indice]).atk_fight*0.4*change);
+				for(int i=0;i<this.indice_fighters.length;i++) {
+					if(this.indice_fighters[i] != -1) {
+						if(this.joueur.collection.get(this.indice_fighters[i]).dead != true) {
+							if(this.joueur.collection.get(this.indice_fighters[i]).current_hp_fight-retail < 0) {
+								this.joueur.collection.get(this.indice_fighters[i]).current_hp_fight = 0;
+								this.joueur.collection.get(this.indice_fighters[i]).dead = true;
+							}
+							else {
+								this.joueur.collection.get(this.indice_fighters[i]).current_hp_fight -= retail;
+
+							}
+						}
+					}
+				}
+			}
+		}
+		//
+
 		//System.out.println("fighter "+indice+" : "+dmg_player);
 		//
-		dmg_player = (int) (dmg_player * change);
-		
+		int dmg_mad = this.joueur.collection.get(this.indice_fighters[indice]).atk_fight;
+
 		if(dmg_player >= 20000) {
 			if(this.succes.get(32).completed == false) {
 				this.succes.get(32).completed = true;
@@ -1080,90 +1121,167 @@ public class Game extends Observable implements Serializable {
 				jop1.showMessageDialog(null, "Vous avez obtenu le haut-fait ["+this.succes.get(32).nom+"].", "Haut Fait Débloqué !", JOptionPane.INFORMATION_MESSAGE);
 			}
 		}
-		
-		if(this.boss.pv - dmg_player <= 0) {
-			this.boss.pv = 0;
+
+		//passif secret du boss 4
+		boolean mad = false;
+		double rnd = Math.random();
+		if(rnd < 0.1) {
+			mad = true;
 		}
+		if(mad == true && this.boss.id == 4) {
+			change = 1.0;
+			type_p = this.joueur.collection.get(this.indice_fighters[indice]).type_id;
+			if(type_p == 1) {
+				if(this.joueur.collection.get(this.indice_fighters[2]).type_id == 4) {
+					change = 0.5;
+				}
+				else if(this.joueur.collection.get(this.indice_fighters[2]).type_id == 2) {
+					change = 2;
+				}
+			}
+			else if(type_p == 4) {
+				if(this.joueur.collection.get(this.indice_fighters[2]).type_id == 3) {
+					change = 0.5;
+				}
+				else if(this.joueur.collection.get(this.indice_fighters[2]).type_id == 1) {
+					change = 2;
+				}
+			}
+			else {
+				if(this.joueur.collection.get(this.indice_fighters[2]).type_id == (type_p-1)) {
+					change = 0.5;
+				}
+				else if(this.joueur.collection.get(this.indice_fighters[2]).type_id == (type_p+1)) {
+					change = 2;
+				}
+			}
+			dmg_mad = (int)((double)dmg_mad * change);
+			if(this.joueur.collection.get(this.indice_fighters[2]).current_hp_fight - dmg_mad <= 0) {
+				this.joueur.collection.get(this.indice_fighters[2]).current_hp_fight = 0;
+				this.joueur.collection.get(this.indice_fighters[2]).dead = true;
+			}
+			else {
+				this.joueur.collection.get(this.indice_fighters[2]).current_hp_fight -= dmg_mad;
+			}
+		} // fin passif boss 4
 		else {
-			this.boss.pv -= dmg_player;
+			dmg_player = (int) (dmg_player * change);
+			if(this.boss.pv - dmg_player <= 0) {
+				if(this.boss.id == 5 && ((Boss)this.boss).status[indice] == 1) {
+
+				}else {
+					this.boss.pv = 0;
+				}
+			}
+			else {
+				if(this.boss.id == 5 && ((Boss)this.boss).status[indice] == 1) {
+
+				}else {
+					this.boss.pv -= dmg_player;
+					//phase 2 de nocturne
+					if(this.boss.lvl >= 25 && this.boss.id == 5) {
+						if(((double)this.boss.pv / (double)this.boss.pv_max) <= 0.25 && (((Boss)this.boss).status[3] == 0)) {
+							this.boss.defense = (int)((double)this.boss.defense * 2.5);
+							this.boss.image_link = "images/event_boss_5-2.jpg";
+							((Boss)this.boss).status[3] = 1;
+							WavPlayer wp = new WavPlayer(new File("Sounds/boss5_phase2.wav"));
+							wp.open();
+							wp.play();
+						}
+					}
+				}
+				//
+			}
 		}
 	}
-	
+
 	public void healAllies() {
 		Carte c = this.joueur.collection.get(this.indice_fighters[2]);
 		int multheal = 1 + (int)(0.5*(c.vit_fight-(c.vit_fight/100))/100);
 		int heal_value = (int)((c.atk_fight+c.agi_fight)*0.1);
 		int heal_total = heal_value*(1+multheal);
 		double chance_critical = this.joueur.collection.get(this.indice_fighters[2]).agi_fight / (this.joueur.collection.get(this.indice_fighters[2]).agi_fight + 12000);
-		
-		//on gere le passif de jakuzure
-		if(this.boss.id == 2) {
-			heal_total = (int) ((double)heal_total * 0.5);
-		}
-		//
-		
+
 		if(this.indice_fighters[2] == this.current_favorite_id) {
 			heal_total = (int)((double)heal_total * 1.1);
 		}
-		
-		//on heal chaque combattant à tour de rôle
-		for(int i=0;i<this.indice_fighters.length;i++) {
-			if(this.indice_fighters[i] != -1) {
-				if(this.joueur.collection.get(this.indice_fighters[i]).dead != true) {
-					int life_given = heal_total;
-					if(Math.random() <= chance_critical) {
-						life_given = life_given * 2;
-					}
-					//System.out.println("healing to "+i+" : "+life_given);
-					if(this.joueur.collection.get(this.indice_fighters[i]).current_hp_fight+life_given >= this.joueur.collection.get(this.indice_fighters[i]).hp_fight) {
-						this.joueur.collection.get(this.indice_fighters[i]).current_hp_fight = this.joueur.collection.get(this.indice_fighters[i]).hp_fight;
-					}
-					else {
-						this.joueur.collection.get(this.indice_fighters[i]).current_hp_fight += life_given;
+
+		//passif peur boss 5
+		if(this.boss.id == 5 && ((Boss)this.boss).status[2] == 1) {
+
+		}
+		else {
+			//on heal chaque combattant à tour de rôle
+			for(int i=0;i<this.indice_fighters.length;i++) {
+				if(this.indice_fighters[i] != -1) {
+					if(this.joueur.collection.get(this.indice_fighters[i]).dead != true) {
+						int life_given = heal_total;
+						if(Math.random() <= chance_critical) {
+							life_given = life_given * 2;
+						}
+						//System.out.println("healing to "+i+" : "+life_given);
+						if(this.joueur.collection.get(this.indice_fighters[i]).current_hp_fight+life_given >= this.joueur.collection.get(this.indice_fighters[i]).hp_fight) {
+							this.joueur.collection.get(this.indice_fighters[i]).current_hp_fight = this.joueur.collection.get(this.indice_fighters[i]).hp_fight;
+						}
+						else {
+							this.joueur.collection.get(this.indice_fighters[i]).current_hp_fight += life_given;
+						}
 					}
 				}
 			}
 		}
-	}
-	
-	public void beginSeason() {
-		long l = System.currentTimeMillis()/1000;
-		if(l < 1485817200) {
-			this.current_season = 1;
-			this.season_score = 0;
-			this.season_rewards = new SeasonRewards(this.current_season);
-			//on gère le temps
-			this.endseason = 1485817200;
+
+		//passif boss 5
+		for(int i=0;i<3;i++) {
+			((Boss)this.boss).status[i] = 0;
 		}
 	}
-	
+
+	public void beginSeason() {
+		long l = System.currentTimeMillis()/1000;
+		if(l < 1500328800) {
+			if(this.current_season != 2) {
+				this.current_season = 2;
+				this.season_score = 0;
+				this.boss = null;
+				this.max_battle_level = 1;
+				this.season_rewards = new SeasonRewards(this.current_season);
+				//on gère le temps
+				this.endseason = 1500328800;
+			}
+		}
+		else {
+			this.current_season = -1;
+		}
+	}
+
 	public void endSeason() {
-		if(this.current_season != -1) {
+		if(this.current_season == 2) {
 			this.current_season = -1;
 			JOptionPane jop1;
 			jop1 = new JOptionPane();
 			//on vérifie si on a bien la conquête de saison
 			boolean conquest = true;
-			if(this.max_battle_level < 16) {
+			if(this.max_battle_level < 21) {
 				conquest = false;
 			}
-			if(this.season_score < 150000) {
+			if(this.season_score < 300000) {
 				conquest = false;
 			}
 			//on boucle pour voir si un des légendaires de saison est en SM
 			boolean found = false;
 			for(int i=0;i<this.joueur.collection.size();i++) {
-				if((this.joueur.collection.get(i).id == 41 || this.joueur.collection.get(i).id == 42 || this.joueur.collection.get(i).id == 43) && this.joueur.collection.get(i).rarity_id == 9) {
+				if((this.joueur.collection.get(i).id == 62 || this.joueur.collection.get(i).id == 63 || this.joueur.collection.get(i).id == 64 || this.joueur.collection.get(i).id == 65) && this.joueur.collection.get(i).rarity_id == 9) {
 					found = true;
 				}
 			}
-			if(conquest == true) {
+			if(conquest == true && found == true) {
 				String s ="";
 				if(this.succes.get(14).completed == false) {
 					this.succes.get(14).completed = true;
 					s = " Vous débloquez de plus le haut-fait ["+this.succes.get(14).nom+"]";
 				}
-				EventTicket et = new EventTicket(20, 1000000, "Contient en exemplaire unique un serviteur de saison", "Coffret de conquérant ultime de l'académie Honnoji", this,4);
+				EventTicket et = new EventTicket(20, 1000000, "Contient en exemplaire unique un serviteur de saison", "Coeur de l'Eternel cauchemar", this,9);
 				this.ajouterObjet(et);
 				jop1.showMessageDialog(null, "La saison est terminée, vous ne pouvez plus obtenir de récompenses saisonnière, mais vous pouvez continuer les combats ! Votre acharnement vous a permi d'obtenir la conquête de saison, vous donnant ainsi un serviteur Mythique exclusif !"+s, "Fin de saison", JOptionPane.INFORMATION_MESSAGE);
 			}
@@ -1174,7 +1292,7 @@ public class Game extends Observable implements Serializable {
 			this.notifyObservers();
 		}
 	}
-	
+
 	public void dezDeMasse(int i) {
 		double xpay = 100.0;
 		int diff = this.joueur.collection.get(this.current_card_id).rarity_id - this.joueur.collection.get(i).rarity_id;
@@ -1183,7 +1301,7 @@ public class Game extends Observable implements Serializable {
 		}
 		xpay = xpay / 100;
 		this.joueur.collection.get(this.current_card_id).giveExp((long)(1L*xpay * this.joueur.collection.get(this.current_card_id).max_exp));
-		
+
 		//dust
 		int dust = 0;
 		if((this.joueur.collection.get(i).rarity_id == 9) && (this.joueur.collection.get(i).level == this.joueur.collection.get(i).max_level)) {

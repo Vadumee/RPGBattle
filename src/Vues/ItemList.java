@@ -12,6 +12,7 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 
 import Game.Game;
+import Game.Maths;
 
 public class ItemList extends JList implements Observer {
 
@@ -24,7 +25,7 @@ public class ItemList extends JList implements Observer {
 		this.model = d;
 		for(int i=0;i<game.inventaire.size();i++) {
 			String s = "";
-			s+=game.inventaire.get(i).nom+" (x"+game.inventaire.get(i).quantity+")";
+			s+=game.inventaire.get(i).nom+" (x"+Maths.format(game.inventaire.get(i).quantity)+")";
 			this.model.add(i,s);
 		}
 		
@@ -91,7 +92,7 @@ public class ItemList extends JList implements Observer {
 			int indice = 0;
 			for(int i=0;i<game.inventaire.size();i++) {
 				String s = "";
-				s+=game.inventaire.get(i).nom+" (x"+game.inventaire.get(i).quantity+")";
+				s+=game.inventaire.get(i).nom+" (x"+Maths.format(game.inventaire.get(i).quantity)+")";
 				this.model.add(i,s);
 			}
 		}

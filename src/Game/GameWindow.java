@@ -121,8 +121,8 @@ public class GameWindow {
 		Game g = new Game();
 		Controler control = new Controler(g);
 		//test
-		g.joueur.gold = 999999999999L;
-		//g.joueur.giveExp(199999999999L);
+		//g.joueur.gold = 999999999999L;
+		//g.joueur.giveExp(1999999999L);
 		//
 		
 		//On détecte s'il y a l'autoload ou non
@@ -243,7 +243,6 @@ public class GameWindow {
 		lblEnergyRoulette.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		lblEnergyRoulette.setBounds(135, 13, 227, 25);
 		g.addObserver(lblEnergyRoulette);
-		
 		
 		VueRoulette lblRoulette1 = new VueRoulette("X",g,1);
 		lblRoulette1.setFont(new Font("Tahoma", Font.PLAIN, 26));

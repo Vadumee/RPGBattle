@@ -1,22 +1,18 @@
-- [LATER] Serviteur légendaire : RNGesus : Stats aléatoires
-- Suivi de haut-fait [TO-DO MAYBE]
-- [OK] Contrôle des serviteurs avec la touche entrée
-- [OK] La destruction d'un serviteur renvoie les runes dans l'inventaire
-- [OK] Diminuer le nombre de grimoires.
-- Pouvoir choisir la carte qui est choisie avec l'option selection auto
-- [OK] Nerf un peu l'exp donné par les boss
-- Succès la prophétie : Avoir 5 fois le même serviteur dans un paquet.
-- Ajouter quelques serviteurs :
-	-> Bombe
-	-> Toxée
-	-> Jean-Pierre Coffe
-	-> Dango
-	-> Simon
-	-> Moïse ?
-	-> Tai-Lung ?
-	-> Luffy ?
-	-> Arbiter
-	-> Animal trop mignon ?
-	-> MLG Cat
-	-> [LATER] John Cena
-	-> Murloc
+Pre patch 1.0.4 :
+
+- 8-10 nouveaux serviteurs
+- tuto mis à jour pour la saison 2
+- correction bug non regen hors ligne
+
+Patch Saison 2 - 1.1.0 :
+
+- Nouveaux boss
+- Nouveaux items
+- 5 nouveaux serviteurs de saison
+- 10-12 nouveaux serviteurs
+- Nerf exp donné par boss
+- Exp et pts de saison soumis à la réduction par overlevel
+- Les caches de mob de saisons ne pourront être ouvertes que lorsque le passif secret sera dévoilé.
+- Commence 10 jours après la fin de la saison 1
+- Rescaling des gemmes
+- [optionnel] des petits tips et astuces tous les x temps sur la page de profil

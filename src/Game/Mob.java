@@ -91,10 +91,10 @@ public class Mob implements Serializable {
 			}
 			
 			double effect = 1.0;
-			if(diff_energy > 0) {
-				effect += (diff_energy/10) * 0.1;
+			if(diff_energy < 0) {
+				effect += (-diff_energy/10) * 0.1;
 			}
-			else if(diff_energy < 0) {
+			else if(diff_energy > 0) {
 				effective_def = (int)((double)effective_def * (double)(1+(0.1*diff_energy)));
 			}
 			int damage_to_player = (int) (((double)this.atk*effect) - effective_def);

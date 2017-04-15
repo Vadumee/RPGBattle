@@ -7,6 +7,7 @@ import java.util.Observer;
 import javax.swing.JLabel;
 
 import Game.Game;
+import Game.Maths;
 
 public class VueStatPersonnage extends JLabel implements Observer{
 
@@ -22,7 +23,7 @@ public class VueStatPersonnage extends JLabel implements Observer{
 	@Override
 	public void update(Observable arg0, Object arg1) {
 		if(indice_stat == 1) {
-			this.setText(this.game.joueur.level+" ("+this.game.joueur.exp+" / "+this.game.joueur.exp_max+")");
+			this.setText(Maths.format(this.game.joueur.level)+" ("+Maths.format(this.game.joueur.exp)+" / "+Maths.format(this.game.joueur.exp_max)+")");
 		}
 		else if(indice_stat == 2) {
 			int echantillon = new File("cards/"+1+"/").list().length;
@@ -35,25 +36,25 @@ public class VueStatPersonnage extends JLabel implements Observer{
 			this.setText(this.game.mobs_captured+" / "+echantillon);
 		}
 		else if(indice_stat == 3) {
-			this.setText(this.game.joueur.gold+"");
+			this.setText(Maths.format(this.game.joueur.gold)+"");
 		}
 		else if(indice_stat == 4) {
-			this.setText(this.game.joueur.energy+" / "+this.game.joueur.max_energy);
+			this.setText(Maths.format(this.game.joueur.energy)+" / "+Maths.format(this.game.joueur.max_energy));
 		}
 		else if(indice_stat == 5) {
-			this.setText("Coût : "+(2+(this.game.joueur.level/2)));
+			this.setText("Coût : "+Maths.format((2+(this.game.joueur.level/2))));
 		}
 		else if(indice_stat == 6) {
-			this.setText("Possières des flammes : "+game.joueur.fire_dust);
+			this.setText("Possières des flammes : "+Maths.format(game.joueur.fire_dust));
 		}
 		else if(indice_stat == 7) {
-			this.setText("Possières verdoyantes : "+game.joueur.leaf_dust);
+			this.setText("Possières verdoyantes : "+Maths.format(game.joueur.leaf_dust));
 		}
 		else if(indice_stat == 8) {
-			this.setText("Possières de foudre : "+game.joueur.thunder_dust);
+			this.setText("Possières de foudre : "+Maths.format(game.joueur.thunder_dust));
 		}
 		else if(indice_stat == 9) {
-			this.setText("Possières abyssales : "+game.joueur.water_dust);
+			this.setText("Possières abyssales : "+Maths.format(game.joueur.water_dust));
 		}
 	}
 

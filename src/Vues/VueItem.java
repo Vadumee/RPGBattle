@@ -6,6 +6,7 @@ import java.util.Observer;
 import javax.swing.JLabel;
 
 import Game.Game;
+import Game.Maths;
 
 public class VueItem extends JLabel implements Observer {
 	
@@ -48,7 +49,7 @@ public class VueItem extends JLabel implements Observer {
 				}
 			}
 			if(game.current_item_selected != -1) {
-				this.setText("Quantité : "+game.inventaire.get(game.current_item_selected).quantity);
+				this.setText("Quantité : "+Maths.format(game.inventaire.get(game.current_item_selected).quantity));
 			}
 			else {
 				this.setText("Quantité : -");

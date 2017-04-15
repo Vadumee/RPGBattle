@@ -6,6 +6,7 @@ import java.util.Observer;
 import javax.swing.JLabel;
 
 import Game.Game;
+import Game.Maths;
 
 public class SuccessVue extends JLabel implements Observer {
 	
@@ -38,7 +39,7 @@ public class SuccessVue extends JLabel implements Observer {
 					if(cur > obj) {
 						cur = obj;
 					}
-					suivi += " ("+cur+" / "+obj+")";
+					suivi += " ("+Maths.format(cur)+" / "+Maths.format(obj)+")";
 				}
 				else if(game.current_success >= 6 && game.current_success <= 11) {
 					long cur = game.joueur.level;
@@ -46,7 +47,7 @@ public class SuccessVue extends JLabel implements Observer {
 					if(cur > obj) {
 						cur = obj;
 					}
-					suivi += " ("+cur+" / "+obj+")";
+					suivi += " ("+Maths.format(cur)+" / "+Maths.format(obj)+")";
 				}
 				else if(game.current_success >= 16 && game.current_success <= 19) {
 					long cur = game.values.get(1);
@@ -54,7 +55,7 @@ public class SuccessVue extends JLabel implements Observer {
 					if(cur > obj) {
 						cur = obj;
 					}
-					suivi += " ("+cur+" / "+obj+")";
+					suivi += " ("+Maths.format(cur)+" / "+Maths.format(obj)+")";
 				}
 				else if(game.current_success >= 20 && game.current_success <= 23) {
 					long cur = game.values.get(2);
@@ -62,7 +63,7 @@ public class SuccessVue extends JLabel implements Observer {
 					if(cur > obj) {
 						cur = obj;
 					}
-					suivi += " ("+cur+" / "+obj+")";
+					suivi += " ("+Maths.format(cur)+" / "+Maths.format(obj)+")";
 				}
 				else if(game.current_success >= 24 && game.current_success <= 27) {
 					long cur = game.values.get(3);
@@ -70,7 +71,7 @@ public class SuccessVue extends JLabel implements Observer {
 					if(cur > obj) {
 						cur = obj;
 					}
-					suivi += " ("+cur+" / "+obj+")";
+					suivi += " ("+Maths.format(cur)+" / "+Maths.format(obj)+")";
 				}
 				else if(game.current_success >= 28 && game.current_success <= 31) {
 					long cur = game.values.get(4);
@@ -78,7 +79,7 @@ public class SuccessVue extends JLabel implements Observer {
 					if(cur > obj) {
 						cur = obj;
 					}
-					suivi += " ("+cur+" / "+obj+")";
+					suivi += " ("+Maths.format(cur)+" / "+Maths.format(obj)+")";
 				}
 				else if(game.current_success >= 34 && game.current_success <= 37) {
 					long cur = game.max_battle_level-1;
@@ -86,7 +87,7 @@ public class SuccessVue extends JLabel implements Observer {
 					if(cur > obj) {
 						cur = obj;
 					}
-					suivi += " ("+cur+" / "+obj+")";
+					suivi += " ("+Maths.format(cur)+" / "+Maths.format(obj)+")";
 				}
 				else if(game.current_success >= 40 && game.current_success <= 49) {
 					long cur = game.mobs_captured;
@@ -94,7 +95,7 @@ public class SuccessVue extends JLabel implements Observer {
 					if(cur > obj) {
 						cur = obj;
 					}
-					suivi += " ("+cur+" / "+obj+")";
+					suivi += " ("+Maths.format(cur)+" / "+Maths.format(obj)+")";
 				}
 				//
 				this.setText(game.succes.get(game.current_success).descr+suivi);

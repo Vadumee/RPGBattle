@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import Boutons.ButtonBossHit;
+import Game.Boss;
 import Game.ControlerFight;
 import Game.Game;
 import Game.WavPlayer;
@@ -48,6 +49,11 @@ public class BossFrame extends JFrame {
 		WavPlayer wp = new WavPlayer(new File(g.boss.sound_link));
 		wp.open();
 		wp.play();
+		for(int i=0;i<g.indice_fighters.length;i++) {
+			if(g.joueur.collection.get(g.indice_fighters[i]).dead == false) {
+				((Boss)g.boss).status[4] = 0;
+			}
+		}
 		ControlerFight cf = new ControlerFight(g,wp);
 		setVisible(true);
 		setTitle("Combat !");

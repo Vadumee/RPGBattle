@@ -7,6 +7,7 @@ import java.util.Observer;
 import javax.swing.JLabel;
 
 import Game.Game;
+import Game.Maths;
 
 public class VueBattleEnergy extends JLabel implements Observer {
 	
@@ -19,7 +20,7 @@ public class VueBattleEnergy extends JLabel implements Observer {
 	
 	@Override
 	public void update(Observable arg0, Object arg1) {
-		this.setText("Energie : "+game.joueur.energy+" / "+game.joueur.max_energy);
+		this.setText("Energie : "+Maths.format(game.joueur.energy)+" / "+Maths.format(game.joueur.max_energy));
 	}
 
 

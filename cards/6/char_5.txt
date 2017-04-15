@@ -1,0 +1,14 @@
+Parasite
+créature évolutive
+'Le destin à fait des nous des ennemis, mais cet anneau fera de nous des frèèèères.'
+6
+9
+700
+0.160
+0.229
+0.146
+0.124
+0.188
+0.153
+62
+2

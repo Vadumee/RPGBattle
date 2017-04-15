@@ -19,6 +19,7 @@ public class SeasonRewards implements Serializable {
 		int char_1 = (int)(25000+((season-1)*5000));
 		int char_2 = (int)(50000+((season-1)*10000));
 		int char_3 = (int)(100000+((season-1)*20000));
+		int char_4 = (int)(200000+((season-1)*40000));
 		for(int i=1;i<20;i++) {
 			this.points_needed.add((int)((char_1/20)*i));
 			if(i%3 == 1) {
@@ -35,7 +36,7 @@ public class SeasonRewards implements Serializable {
 			}
 		}
 		this.points_needed.add(char_1);
-		this.descr_recompense.add("Gamagori (L)");
+		this.descr_recompense.add("Parasite (L)");
 		this.id_recompense.add(4);
 		for(int j=1;j<10;j++) {
 			this.points_needed.add((int)(25000+((char_2/20)*j)));
@@ -53,7 +54,7 @@ public class SeasonRewards implements Serializable {
 			}
 		}
 		this.points_needed.add(char_2);
-		this.descr_recompense.add("Nonon (L)");
+		this.descr_recompense.add("Cavalier sans tête (L)");
 		this.id_recompense.add(4);
 		for(int k=1;k<10;k++) {
 			this.points_needed.add((int)(50000+((char_3/20)*k)));
@@ -71,9 +72,27 @@ public class SeasonRewards implements Serializable {
 			}
 		}
 		this.points_needed.add(char_3);
-		this.descr_recompense.add("Sanageyama (SL)");
+		this.descr_recompense.add("Darkrai (SL)");
 		this.id_recompense.add(4);
-		this.points_needed.add(char_3/10);
+		for(int l=1;l<10;l++) {
+			this.points_needed.add((int)(100000+((char_4/20)*l)));
+			if(l%3 == 1) {
+				this.id_recompense.add(1);
+				this.descr_recompense.add("Or");
+			}
+			else if(l%3 == 2) {
+				this.id_recompense.add(2);
+				this.descr_recompense.add("Portails");
+			}
+			else {
+				this.id_recompense.add(3);
+				this.descr_recompense.add("Grimoires");
+			}
+		}
+		this.points_needed.add(char_4);
+		this.descr_recompense.add("Sha de la Peur (SL)");
+		this.id_recompense.add(4);
+		this.points_needed.add(char_4/10);
 		this.id_recompense.add(1);
 		this.descr_recompense.add("Or");
 	}
@@ -192,25 +211,30 @@ public class SeasonRewards implements Serializable {
 				}
 			}
 			else if(this.id_recompense.get(this.indice_recompense) == 4) {
+				System.out.println(this.points_needed);
 				if(this.indice_recompense == 19) {
-					EventTicket et = new EventTicket(20, 1000000, "Contient en exemplaire unique un serviteur de saison", "Coffret de conquérant de l'académie Honnoji", g,1);
+					EventTicket et = new EventTicket(20, 1000000, "Contient en exemplaire unique un serviteur de saison", "Cellule évolutive stabilisée", g,5);
 					g.ajouterObjet(et);
 				}
 				else if(this.indice_recompense == 29) {
-					EventTicket et = new EventTicket(20, 1000000, "Contient en exemplaire unique un serviteur de saison", "Coffret de conquérant de l'académie Honnoji", g,2);
+					EventTicket et = new EventTicket(20, 1000000, "Contient en exemplaire unique un serviteur de saison", "Coeur de la colère", g,6);
 					g.ajouterObjet(et);
 				}
 				else if(this.indice_recompense == 39) {
-					EventTicket et = new EventTicket(20, 1000000, "Contient en exemplaire unique un serviteur de saison", "Coffret de conquérant de l'académie Honnoji", g,3);
+					EventTicket et = new EventTicket(20, 1000000, "Contient en exemplaire unique un serviteur de saison", "Coeur des ténèbres", g,7);
+					g.ajouterObjet(et);
+				}
+				else if(this.indice_recompense == 49) {
+					EventTicket et = new EventTicket(20, 1000000, "Contient en exemplaire unique un serviteur de saison", "Coeur de la peur", g,8);
 					g.ajouterObjet(et);
 				}
 			}
 			
-			if(this.indice_recompense < 40) {
+			if(this.indice_recompense < 50) {
 				this.indice_recompense++;
 			}
 			else {
-				this.points_needed.set(40, this.points_needed.get(40)+(int)(10000+((g.current_season-1)*2000)));
+				this.points_needed.set(50, this.points_needed.get(50)+(int)(10000+((g.current_season-1)*2000)));
 			}
 			
 		}

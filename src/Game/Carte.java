@@ -567,12 +567,12 @@ public class Carte implements Serializable {
 		else {
 			color = "<font color=\"red\">";
 		}
-		s += "<html>HP : "+color+this.current_hp_fight+" / "+this.hp_fight+"</font>";
-		s += "<br>ATK : "+this.atk_fight+" ("+signe2+" "+Math.abs(this.atk_fight-this.atk)+")";
-		s += "<br>DEF : "+this.def_fight+" ("+signe3+" "+Math.abs(this.def_fight-this.def)+")";
-		s += "<br>PROV : "+this.prov_fight+" ("+signe4+" "+Math.abs(this.prov_fight-this.prov)+")";
-		s += "<br>AGI : "+this.agi_fight+" ("+signe5+" "+Math.abs(this.agi_fight-this.agi)+")";
-		s += "<br>VIT : "+this.vit_fight+" ("+signe6+" "+Math.abs(this.vit_fight-this.vit)+")";
+		s += "<html>HP : "+color+Maths.format(this.current_hp_fight)+" / "+Maths.format(this.hp_fight)+"</font>";
+		s += "<br>ATK : "+Maths.format(this.atk_fight)+" ("+signe2+" "+Maths.format(Math.abs(this.atk_fight-this.atk))+")";
+		s += "<br>DEF : "+Maths.format(this.def_fight)+" ("+signe3+" "+Maths.format(Math.abs(this.def_fight-this.def))+")";
+		s += "<br>PROV : "+Maths.format(this.prov_fight)+" ("+signe4+" "+Maths.format(Math.abs(this.prov_fight-this.prov))+")";
+		s += "<br>AGI : "+Maths.format(this.agi_fight)+" ("+signe5+" "+Maths.format(Math.abs(this.agi_fight-this.agi))+")";
+		s += "<br>VIT : "+Maths.format(this.vit_fight)+" ("+signe6+" "+Maths.format(Math.abs(this.vit_fight-this.vit))+")";
 		s += "</html>";
 		return s;
 	}
@@ -622,12 +622,12 @@ public class Carte implements Serializable {
 			signe6 = "+";
 		}
 		s += "<html><br>--- Statistiques ---";
-		s += "<br>HP : "+this.hp_fight+" ("+signe1+" "+Math.abs(this.hp_fight-this.hp)+")";
-		s += "<br>ATK : "+this.atk_fight+" ("+signe2+" "+Math.abs(this.atk_fight-this.atk)+")";
-		s += "<br>DEF : "+this.def_fight+" ("+signe3+" "+Math.abs(this.def_fight-this.def)+")";
-		s += "<br>PROV : "+this.prov_fight+" ("+signe4+" "+Math.abs(this.prov_fight-this.prov)+")";
-		s += "<br>AGI : "+this.agi_fight+" ("+signe5+" "+Math.abs(this.agi_fight-this.agi)+")";
-		s += "<br>VIT : "+this.vit_fight+" ("+signe6+" "+Math.abs(this.vit_fight-this.vit)+")";
+		s += "<br>HP : "+Maths.format(this.hp_fight)+" ("+signe1+" "+Maths.format(Math.abs(this.hp_fight-this.hp))+")";
+		s += "<br>ATK : "+Maths.format(this.atk_fight)+" ("+signe2+" "+Maths.format(Math.abs(this.atk_fight-this.atk))+")";
+		s += "<br>DEF : "+Maths.format(this.def_fight)+" ("+signe3+" "+Maths.format(Math.abs(this.def_fight-this.def))+")";
+		s += "<br>PROV : "+Maths.format(this.prov_fight)+" ("+signe4+" "+Maths.format(Math.abs(this.prov_fight-this.prov))+")";
+		s += "<br>AGI : "+Maths.format(this.agi_fight)+" ("+signe5+" "+Maths.format(Math.abs(this.agi_fight-this.agi))+")";
+		s += "<br>VIT : "+Maths.format(this.vit_fight)+" ("+signe6+" "+Maths.format(Math.abs(this.vit_fight-this.vit))+")";
 		s += "</html>";
 		return s;
 	}
