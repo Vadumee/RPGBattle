@@ -1,3 +1,33 @@
+--- Version 1.2 : L'ascension ---
+-> Corrections/Modifications : 
+- La saison 2 à été étendue pour une durée inderterminée.
+- Ajout de sons sympatiques pour le nouveau système d'amélioration de runes.
+
+-> Ajouts majeurs
+-- Système d'amélioration de runes --
+- Nouvelle ressource : les cristaux arcaniques, qui s'obtiennent en détruisant des runes.
+- Possibilité d'améliorer les runes en utilisant les poussières arcaniques.
+- La chance d'amélioration diminue à chaque niveau d'amélioration.
+- Vous avez 5% d'effectuer une amélioration critique quand vous réussissez, ce qui vous redonne 50% du coup de l'amélioration.
+
+-- Système d'ascension --
+- Nouveau type de niveau : les niveaux d'ascension, qui s'augmentent en vainquant des boss de raids, si le boss de raid est 5
+niveaux en dessous de votre progression maximale, il vous donnera de l'éxpérience réduite.
+- Nouvelle ressource : Les cristaux du vide, qui permettent d'acheter les talents d'ascension, ils s'obtiennent de 3 manières :
+	- Par le niveau de joueur
+	- Par la progression maximale de raid
+	- Par le niveau d'ascension
+L'ascension détruit tout ce que vous avez : serviteurs, runes, argent, éxpérience, progression de raid, poussières élémentaires.
+Cependant, vous gagnez en compensation des cristaux du vide, permettant de débloquer des talents d'ascension permanants,
+séparés en 3 'Tier' de puissance :
+	- Tier 1 : Des bonus fixes dans les stats, ou des amélioration pour la roulette ou l'expérience, ils coûtent 1 cristal
+au départ, et permettent d'améliorer le début de partie.
+	- Tier 2 : Des talents intermédiaires, ocrtoyant de meilleurs améliorations pour les statistiques, ou alors permettant
+de rendre l'amélioration de runes plus facile, ou encore une bien meilleure récompense en or dans les coffres de butin. Ils
+coûtent généralement 10 cristaux.
+	- Tier 3 : Des talents augmentant des statistiques en pourcentages, ou alors permettant de gagner beaucoup plus d'or ou
+d'expérience en grande quantité, ce sont les talents les plus puissants à long terme, mais ils coûtent très cher (50 à 100 cristaux).
+
 --- Version 1.1 : Saison 2 -- La terrible nuit --- 
 -> Corrections/Modifications :
 - Correction d'une erreur qui faisait que plus le boss était haut-niveau comparé à vous, plus vous lui infligez de dégats,

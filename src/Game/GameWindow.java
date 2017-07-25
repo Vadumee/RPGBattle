@@ -158,7 +158,7 @@ public class GameWindow {
 		//
 		
 		frmRpgCardCollector = new JFrame();
-		frmRpgCardCollector.setTitle("RPG Sbire Battle v.1.1 : The Ascension is near.");
+		frmRpgCardCollector.setTitle("RPG Sbire Battle v.1.2 : The Ascension is near.");
 	 //frmRpgCardCollector.getContentPane().add(pane);
 		
 		//-----------PLAYER----------------
