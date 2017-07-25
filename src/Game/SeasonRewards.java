@@ -102,16 +102,16 @@ public class SeasonRewards implements Serializable {
 		while(g.season_score >= this.points_needed.get(this.indice_recompense)) {
 			if(this.id_recompense.get(this.indice_recompense) == 1) {
 				if(this.indice_recompense < 20) {
-					g.joueur.gold += (500000+(g.current_season*100000));
+					g.joueur.gold += ((500000L+(g.current_season*100000L)))*(1+( (double)((GameV2)g).talents[21].lvl*0.5 ));
 				}
 				else if(this.indice_recompense < 30) {
-					g.joueur.gold += (1500000+(g.current_season*500000));
+					g.joueur.gold += ((1500000L+(g.current_season*500000L)))*(1+( (double)((GameV2)g).talents[21].lvl*0.5 ));
 				}
 				else if(this.indice_recompense < 40) {
-					g.joueur.gold += (5000000+(g.current_season*2000000));
+					g.joueur.gold += ((5000000L+(g.current_season*2000000L)))*(1+( (double)((GameV2)g).talents[21].lvl*0.5 ));
 				}
 				else if(this.indice_recompense >= 40) {
-					g.joueur.gold += (10000000+(g.current_season*4000000));
+					g.joueur.gold += ((10000000L+(g.current_season*4000000L)))*(1+( (double)((GameV2)g).talents[21].lvl*0.5 ));
 				}
 			}
 			else if(this.id_recompense.get(this.indice_recompense) == 2) {

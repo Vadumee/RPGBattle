@@ -476,7 +476,7 @@ public class Carte implements Serializable {
 	}
 	
 	public void calculateStatFight() {
-		this.hp_fight = this.hp;
+		/*this.hp_fight = this.hp;
 		if(this.dead == false) {
 			this.current_hp_fight = this.hp;
 		}
@@ -488,16 +488,16 @@ public class Carte implements Serializable {
 		for(int i=0;i<this.runes.length;i++) {
 			if(this.runes[i] != null) {
 				if(this.dead == false) {
-					this.current_hp_fight += this.runes[i].bonus[0];
+					this.current_hp_fight += ((UpgradableRune)this.runes[i]).fight_bonus[0];
 				}
-				this.hp_fight += this.runes[i].bonus[0];
-				this.atk_fight += this.runes[i].bonus[1];
-				this.def_fight += this.runes[i].bonus[2];
-				this.prov_fight += this.runes[i].bonus[3];
-				this.agi_fight += this.runes[i].bonus[4];
-				this.vit_fight += this.runes[i].bonus[5];
+				this.hp_fight += ((UpgradableRune)this.runes[i]).fight_bonus[0];
+				this.atk_fight += ((UpgradableRune)this.runes[i]).fight_bonus[1];
+				this.def_fight += ((UpgradableRune)this.runes[i]).fight_bonus[2];
+				this.prov_fight += ((UpgradableRune)this.runes[i]).fight_bonus[3];
+				this.agi_fight += ((UpgradableRune)this.runes[i]).fight_bonus[4];
+				this.vit_fight += ((UpgradableRune)this.runes[i]).fight_bonus[5];
 			}
-		}
+		}*/
 	}
 	
 	public String toString() {

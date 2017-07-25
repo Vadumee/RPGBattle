@@ -18,6 +18,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+import Boutons.ButtonAscend;
 import Boutons.ButtonBuyItem;
 import Boutons.ButtonCardDestroy;
 import Boutons.ButtonCardExp;
@@ -35,6 +36,7 @@ import Boutons.ButtonLockFigther;
 import Boutons.ButtonMassDestroy;
 import Boutons.ButtonQuit;
 import Boutons.ButtonResetBoss;
+import Boutons.ButtonResetCristal;
 import Boutons.ButtonResetFighter;
 import Boutons.ButtonRoulette;
 import Boutons.ButtonSave;
@@ -43,16 +45,19 @@ import Boutons.ButtonSellRune;
 import Boutons.ButtonTriRarity;
 import Boutons.ButtonTutorial;
 import Boutons.ButtonUnequipRune;
+import Boutons.ButtonUpgradeRune;
 import Game.Game;
 import Vues.BossFrame;
+import Vues.PanelPower;
 import Vues.TutoSeasonFrame;
 import Vues.TutorialFrame;
 
 public class Controler implements ActionListener{
 
-	public Game game;
+	public GameV2 game;
+	public WavPlayer wp;
 
-	public Controler(Game g) {
+	public Controler(GameV2 g) {
 		this.game = g;
 	}
 
@@ -174,6 +179,7 @@ public class Controler implements ActionListener{
 							i++;
 						}
 					}
+					((GameV2)game).calculateStatFight(game.joueur.collection.get(game.current_card_id));
 					//on vérifie les succès consécration et rite initiatique
 					if(game.succes.get(51).completed == false && (game.joueur.collection.get(game.current_card_id).id_rarity == 1) && (game.joueur.collection.get(game.current_card_id).level == 50)) {
 						game.succes.get(51).completed = true;
@@ -203,6 +209,8 @@ public class Controler implements ActionListener{
 					if(option == JOptionPane.OK_OPTION){
 						game.joueur.gold -= (montant * mult * 1L);
 						game.joueur.collection.get(game.current_card_id).giveExp(montant);
+						((GameV2)game).calculatePlayerMaxEnergy();
+						((GameV2)game).calculateStatFight(game.joueur.collection.get(game.current_card_id));
 						//on vérifie les succès consécration et rite initiatique
 						if(game.succes.get(51).completed == false && (game.joueur.collection.get(game.current_card_id).id_rarity == 1) && (game.joueur.collection.get(game.current_card_id).level == 50)) {
 							game.succes.get(51).completed = true;
@@ -240,6 +248,7 @@ public class Controler implements ActionListener{
 						if(option == JOptionPane.OK_OPTION){
 							game.joueur.gold -= cost;
 							game.joueur.collection.get(game.current_card_id).increaseRarity();
+							((GameV2)game).calculateStatFight(game.joueur.collection.get(game.current_card_id));
 							//on gere le gain d'exp a l'augmentation de rarete
 							if(game.joueur.collection.get(game.current_card_id).rarity_id >= 8) {
 								game.joueur.giveExp(1000+(game.joueur.level*70L));
@@ -253,6 +262,7 @@ public class Controler implements ActionListener{
 							else if(game.joueur.collection.get(game.current_card_id).rarity_id >= 2) {
 								game.joueur.giveExp(25);
 							}
+							((GameV2)game).calculatePlayerMaxEnergy();
 							//
 							game.checkLevelSuccess();
 						}
@@ -309,6 +319,7 @@ public class Controler implements ActionListener{
 						int option = jop1.showConfirmDialog(null, "La créature va revenir au niveau de rareté minimale, voulez-vous continuer ?", "Confirmation", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);		
 						if(option == JOptionPane.OK_OPTION){
 							game.joueur.collection.get(game.current_card_id).prestige();
+							((GameV2)game).calculateStatFight(game.joueur.collection.get(game.current_card_id));
 							if(game.succes.get(15).completed == false) {
 								game.succes.get(15).completed = true;
 								JOptionPane jop2;
@@ -441,7 +452,12 @@ public class Controler implements ActionListener{
 				try {
 					FileInputStream fin = new FileInputStream(file);
 					ObjectInputStream ois = new ObjectInputStream(fin);
-					game.loadData((Game) ois.readObject()); 
+					Game jeu = (Game) ois.readObject();
+					if(!(jeu instanceof GameV2)) {
+						jeu = new GameV2(jeu);
+						((GameV2)jeu).convertRunes();
+					}
+					((GameV2)game).loadData(jeu); 
 				} catch (IOException e1) {
 					System.out.println("ioexception");
 					e1.printStackTrace();
@@ -491,7 +507,7 @@ public class Controler implements ActionListener{
 					if(game.joueur.collection.get(game.current_card_runed).runes[ind-1] != null) {
 						game.inventaire_runes.add(game.joueur.collection.get(game.current_card_runed).runes[ind-1]);
 						game.joueur.collection.get(game.current_card_runed).runes[ind-1] = null;
-						game.joueur.collection.get(game.current_card_runed).calculateStatFight();
+						((GameV2)game).calculateStatFight(game.joueur.collection.get(game.current_card_runed));
 					}
 				}
 			}
@@ -499,14 +515,84 @@ public class Controler implements ActionListener{
 		}
 		else if(e.getSource() instanceof ButtonSellRune) {
 			if(game.current_rune_selected != -1) {
-				long refund = game.inventaire_runes.get(game.current_rune_selected).cost / 2L;
-				game.joueur.gold += refund;
-				game.values.set(0, game.values.get(0) + (refund));
-				game.checkGoldSuccess();
+				//DONNE MAINTENANT DES POUSSIERES ARCANIQUES
+				long cristals = 0;
+				if(game.inventaire_runes.get(game.current_rune_selected).rarete == 1) {
+					cristals = 1;
+				}
+				else if(game.inventaire_runes.get(game.current_rune_selected).rarete == 2) {
+					cristals = 2;
+				}
+				else if(game.inventaire_runes.get(game.current_rune_selected).rarete == 3) {
+					cristals = 3;
+				}
+				else if(game.inventaire_runes.get(game.current_rune_selected).rarete == 4) {
+					cristals = 4;
+				}
+				else {
+					cristals = 10 + (game.inventaire_runes.get(game.current_rune_selected).prestige*4);
+				}
+				cristals = (long)(cristals * (1 + ( (double)((GameV2)game).talents[14].lvl*0.25)));
+				((GameV2)game).arcane_cristals += cristals;
 				game.inventaire_runes.remove(game.current_rune_selected);
 				game.current_rune_selected = -1;
 			}
 			game.eraseCard();
+		}
+		else if(e.getSource() instanceof ButtonUpgradeRune) {
+			JOptionPane jop1;
+			jop1 = new JOptionPane();
+			double rand = Math.random();
+			if(game.current_rune_selected != -1) {
+				if( ((GameV2)game).arcane_cristals >= ((UpgradableRune)game.inventaire_runes.get(game.current_rune_selected)).upgrade_cost ) {
+					//on roll la chance de succès
+					if(Math.random() <= ((UpgradableRune)game.inventaire_runes.get(game.current_rune_selected)).chance_upgrade) {
+						if(Math.random() < 0.05) {
+							((GameV2)game).arcane_cristals -= (((UpgradableRune)game.inventaire_runes.get(game.current_rune_selected)).upgrade_cost / 2);
+							if(rand < 0.33) {
+								this.wp = new WavPlayer(new File("Sounds/upgrade-critical1.wav"));
+							}
+							else if(rand >= 0.33 && rand < 0.67) {
+								this.wp = new WavPlayer(new File("Sounds/upgrade-critical2.wav"));
+							}
+							else {
+								this.wp = new WavPlayer(new File("Sounds/upgrade-critical3.wav"));
+							}
+						}
+						else {
+							((GameV2)game).arcane_cristals -= (((UpgradableRune)game.inventaire_runes.get(game.current_rune_selected)).upgrade_cost);
+							if(rand < 0.33) {
+								this.wp = new WavPlayer(new File("Sounds/upgrade-success1.wav"));
+							}
+							else if(rand >= 0.33 && rand < 0.67) {
+								this.wp = new WavPlayer(new File("Sounds/upgrade-success2.wav"));
+							}
+							else {
+								this.wp = new WavPlayer(new File("Sounds/upgrade-success3.wav"));
+							}
+						}
+						((UpgradableRune)game.inventaire_runes.get(game.current_rune_selected)).upgradeRune();
+					}
+					else {
+						((GameV2)game).arcane_cristals -= (((UpgradableRune)game.inventaire_runes.get(game.current_rune_selected)).upgrade_cost);
+						if(rand < 0.33) {
+							this.wp = new WavPlayer(new File("Sounds/upgrade-fail1.wav"));
+						}
+						else if(rand >= 0.33 && rand < 0.67) {
+							this.wp = new WavPlayer(new File("Sounds/upgrade-fail2.wav"));
+						}
+						else {
+							this.wp = new WavPlayer(new File("Sounds/upgrade-fail3.wav"));
+						}
+					}
+					this.wp.open();
+					this.wp.play();
+				}
+				else {
+					jop1.showMessageDialog(null, "Vous n'avez pas assez de cristaux arcaniques pour améliorer cette rune.", "Message triste généré", JOptionPane.INFORMATION_MESSAGE);
+				}
+				game.eraseCard();
+			}
 		}
 		else if(e.getSource() instanceof ButtonEquipRune) {
 			JOptionPane jop1;
@@ -525,7 +611,7 @@ public class Controler implements ActionListener{
 							game.joueur.collection.get(game.current_card_runed).runes[ind-1] = game.inventaire_runes.get(game.current_rune_selected);
 							game.inventaire_runes.set(game.current_rune_selected,rer);
 						}
-						game.joueur.collection.get(game.current_card_runed).calculateStatFight();
+						((GameV2)game).calculateStatFight(game.joueur.collection.get(game.current_card_runed));
 						game.current_rune_selected = -1;
 					}
 				}
@@ -627,6 +713,26 @@ public class Controler implements ActionListener{
 			int id = ((ButtonLockFigther)e.getSource()).id;
 			game.indice_battle = id;
 			game.updateVisuals();
+		}
+		else if(e.getSource() instanceof ButtonAscend) {
+			JOptionPane jop1;
+			jop1 = new JOptionPane();
+			if(game.max_battle_level < 5) {
+				jop1.showMessageDialog(null, "Il faut au moins être au niveau 5 de raid pour effectuer une ascension", "Message triste généré", JOptionPane.INFORMATION_MESSAGE);
+			}
+			else {
+				int option = jop1.showConfirmDialog(null, "L'ascension détruira tout ce que vous avez acquis jusque la : serviteurs, runes, progrès de boss, niveau, or, etc... Cependant vous gardez vos succès et réobtiendrez les serviteurs de saison débloqués.\nUne ascension vous rapporterait "+((GameV2)game).getVoidCristals()+" cristaux du vide, voulez-vous effectuer l'ascension ?", "Confirmation", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);		
+				if(option == JOptionPane.OK_OPTION){
+					((GameV2)game).ascend();
+				}
+			}
+		}
+		else if(e.getSource() instanceof ButtonResetCristal) {
+			((GameV2)game).getCristalsBack();
+			game.updateVisuals();
+		}
+		else if(e.getSource() instanceof PanelPower) {
+			
 		}
 	}
 

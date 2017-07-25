@@ -82,18 +82,22 @@ public class Ticket extends Item {
 			//on génère le son des cartes ouais
 			String sound_name = this.getSound(cartes);
 			//on gère le gain d'exp lors de la découverte de cartes rares et +
+			long gain = 0;
 			if(this.id == 1 && cartes.get(0).rarity_id == 2) {
-				game.joueur.giveExp(25);
+				gain = 25L;
 			}
 			else if(this.id <= 3 && cartes.get(0).rarity_id == 3) {
-				game.joueur.giveExp(200+(game.joueur.level*8L));
+				gain = 200L+(game.joueur.level*8L);
 			}
 			else if(this.id <= 3 && cartes.get(0).max_rarity_id == 7) {
-				game.joueur.giveExp(500+(game.joueur.level*20L));
+				gain = 500L+(game.joueur.level*20L);
 			}
 			else if(this.id <= 4 && cartes.get(0).max_rarity_id == 9) {
-				game.joueur.giveExp(1000+(game.joueur.level*70L));
+				gain = 1000L+(game.joueur.level*70L);
 			}
+			gain = (long)(gain*(1 + ((double)((GameV2)game).talents[20].lvl*0.5)));
+			game.joueur.giveExp(gain);
+			((GameV2)game).calculatePlayerMaxEnergy();
 			this.game.joueur.collection.add(cartes.get(0));
 			this.game.captured.set(cartes.get(0).id-1, 1);
 			this.game.getCaptured();
@@ -117,6 +121,7 @@ public class Ticket extends Item {
 			}
 			this.quantity -= 1;
 			this.game.eraseUsedItems();
+			((GameV2)game).calculateStatFight(game.joueur.collection.get(game.joueur.collection.size()-1));
 		}
 
 	}

@@ -23,6 +23,7 @@ import javax.swing.Box;
 import javax.swing.DefaultListModel;
 import javax.swing.SwingConstants;
 
+import Boutons.ButtonAscend;
 import Boutons.ButtonBuyItem;
 import Boutons.ButtonCardDestroy;
 import Boutons.ButtonCardExp;
@@ -40,6 +41,7 @@ import Boutons.ButtonLockFigther;
 import Boutons.ButtonMassDestroy;
 import Boutons.ButtonQuit;
 import Boutons.ButtonResetBoss;
+import Boutons.ButtonResetCristal;
 import Boutons.ButtonResetFighter;
 import Boutons.ButtonRoulette;
 import Boutons.ButtonSave;
@@ -48,22 +50,29 @@ import Boutons.ButtonSellRune;
 import Boutons.ButtonTriRarity;
 import Boutons.ButtonTutorial;
 import Boutons.ButtonUnequipRune;
+import Boutons.ButtonUpgradeRune;
 import Vues.CardGemList;
 import Vues.CardList;
+import Vues.ExpBar;
 import Vues.ItemList;
 import Vues.MagasinList;
 import Vues.PanelBossPreview;
 import Vues.PanelCard;
 import Vues.PanelFavorite;
+import Vues.PanelForge;
+import Vues.PanelPower;
 import Vues.PanelRoulette;
 import Vues.PanelRune;
+import Vues.PowerListener;
 import Vues.RuneList;
 import Vues.SuccessList;
 import Vues.SuccessVue;
+import Vues.VueAscension;
 import Vues.VueBattleEnergy;
 import Vues.VueBossPreview;
 import Vues.VueCarteBossPreview;
 import Vues.VueCarteRune;
+import Vues.VueForge;
 import Vues.VueItem;
 import Vues.VueRoulette;
 import Vues.VueRune;
@@ -118,11 +127,16 @@ public class GameWindow {
 	 * @throws InterruptedException 
 	 */
 	private void initialize() throws IOException, InterruptedException {
-		Game g = new Game();
-		Controler control = new Controler(g);
+		Game g = new GameV2();
+		Controler control = new Controler((GameV2)g);
 		//test
-		//g.joueur.gold = 999999999999L;
+		g.joueur.gold = 999999999999L;
 		//g.joueur.giveExp(1999999999L);
+		Rune r = new UpgradableRune(5,1,5,5,(200000)+(50000*5));
+		g.inventaire_runes.add(r);
+		((GameV2)g).arcane_cristals = 90000000L;
+		((GameV2)g).void_cristals = 100000;
+		//((GameV2)g).fight_exp = 275;
 		//
 		
 		//On détecte s'il y a l'autoload ou non
@@ -134,7 +148,7 @@ public class GameWindow {
 			try {
 				FileInputStream fin = new FileInputStream(new File(path));
 				ObjectInputStream ois = new ObjectInputStream(fin);
-				g.loadData((Game) ois.readObject());
+				g.loadData((GameV2) ois.readObject());
 			} catch (ClassNotFoundException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -144,7 +158,7 @@ public class GameWindow {
 		//
 		
 		frmRpgCardCollector = new JFrame();
-		frmRpgCardCollector.setTitle("RPG Sbire Battle v.1.0.3.2 : The light is fading... can you hear the screams of terror ?");
+		frmRpgCardCollector.setTitle("RPG Sbire Battle v.1.1 : The Ascension is near.");
 	 //frmRpgCardCollector.getContentPane().add(pane);
 		
 		//-----------PLAYER----------------
@@ -637,6 +651,392 @@ public class GameWindow {
 		lblStatCardRune.setBounds(12, 472, 305, 170);
 		panel_gems.add(lblStatCardRune);
 		g.addObserver(lblStatCardRune);
+		
+		JPanel panel_upgrade = new JPanel();
+		panel_upgrade.setBackground(new Color(222, 184, 135));
+		tabbedPane.addTab("Runeforge", null, panel_upgrade, null);
+		panel_upgrade.setLayout(null);
+		
+		RuneList runeList = new RuneList(g, new DefaultListModel(), panel_upgrade);
+		runeList.setBounds(12, 67, 344, 575);
+		//panel_upgrade.add(runeList);
+		g.addObserver(runeList);
+		
+		JScrollPane scrollPaneRuneUpgrade = new JScrollPane();
+		scrollPaneRuneUpgrade.setBounds(12, 67, 344, 575);
+		scrollPaneRuneUpgrade.setViewportView(runeList);
+		panel_upgrade.add(scrollPaneRuneUpgrade);
+		
+		VueForge lbl_arcane_cristal = new VueForge("",g,1);
+		lbl_arcane_cristal.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lbl_arcane_cristal.setBounds(12, 13, 976, 29);
+		panel_upgrade.add(lbl_arcane_cristal);
+		g.addObserver(lbl_arcane_cristal);
+		
+		ButtonUpgradeRune btnUpgradeRune = new ButtonUpgradeRune("Am\u00E9liorer Rune !");
+		btnUpgradeRune.setBounds(395, 487, 640, 39);
+		panel_upgrade.add(btnUpgradeRune);
+		btnUpgradeRune.addActionListener(control);
+		
+		VueForge lbl_rune_name = new VueForge("",g,2);
+		lbl_rune_name.setHorizontalAlignment(SwingConstants.CENTER);
+		lbl_rune_name.setBounds(565, 77, 300, 25);
+		//lbl_rune_name.setBounds(0, 0, 300, 25);
+		panel_upgrade.add(lbl_rune_name);
+		g.addObserver(lbl_rune_name);
+		
+		VueForge lbl_rune_cost = new VueForge("",g,3);
+		lbl_rune_cost.setHorizontalAlignment(SwingConstants.CENTER);
+		lbl_rune_cost.setBounds(490, 268, 450, 30);
+		panel_upgrade.add(lbl_rune_cost);
+		g.addObserver(lbl_rune_cost);
+		
+		VueForge lbl_rune_before = new VueForge("",g,4);
+		lbl_rune_before.setHorizontalAlignment(SwingConstants.CENTER);
+		lbl_rune_before.setBounds(445, 300, 200, 130);
+		panel_upgrade.add(lbl_rune_before);
+		g.addObserver(lbl_rune_before);
+		
+		VueForge lbl_rune_after = new VueForge("",g,5);
+		lbl_rune_after.setHorizontalAlignment(SwingConstants.CENTER);
+		lbl_rune_after.setBounds(785, 300, 200, 130);
+		panel_upgrade.add(lbl_rune_after);
+		g.addObserver(lbl_rune_after);
+		
+		PanelForge panel_upgraded = new PanelForge(g,lbl_rune_name,lbl_rune_cost,lbl_rune_before,lbl_rune_after);
+		panel_upgraded.setBounds(395, 67, 640, 400);
+		panel_upgrade.add(panel_upgraded);
+		/*JLabel pd = new JLabel(new ImageIcon("Images/forge_fond.png"));
+		pd.setBounds(395, 67, 640, 400);
+		panel_upgrade.add(pd);*/
+		
+		JPanel panel_ascension = new JPanel();
+		panel_ascension.setBackground(new Color(240, 230, 140));
+		tabbedPane.addTab("-> Ascension <-", null, panel_ascension, null);
+		panel_ascension.setLayout(null);
+		
+		VueAscension lbl_ascend_level = new VueAscension("Niveau d'ascension : 0 - Exp : 0 / 500",g,1,0);
+		lbl_ascend_level.setFont(new Font("Tahoma", Font.BOLD, 13));
+		lbl_ascend_level.setHorizontalAlignment(SwingConstants.CENTER);
+		lbl_ascend_level.setBounds(178, 13, 695, 16);
+		panel_ascension.add(lbl_ascend_level);
+		g.addObserver(lbl_ascend_level);
+		
+		ExpBar exp_bar = new ExpBar(g);
+		exp_bar.setBounds(33, 34, 1000, 25);
+		panel_ascension.add(exp_bar);
+		g.addObserver(exp_bar);
+		
+		VueAscension lbl_void_cristals = new VueAscension("Cristaux du vide : -",g,2,0);
+		lbl_void_cristals.setFont(new Font("Tahoma", Font.BOLD, 13));
+		lbl_void_cristals.setBounds(33, 72, 400, 25);
+		panel_ascension.add(lbl_void_cristals);
+		g.addObserver(lbl_void_cristals);
+		
+		VueAscension lbl_void_used = new VueAscension("Cristaux d\u00E9pens\u00E9s : -",g,3,0);
+		lbl_void_used.setFont(new Font("Tahoma", Font.BOLD, 13));
+		lbl_void_used.setHorizontalAlignment(SwingConstants.RIGHT);
+		lbl_void_used.setBounds(631, 72, 400, 25);
+		panel_ascension.add(lbl_void_used);
+		g.addObserver(lbl_void_used);
+		
+		Component horizontalStrut_1 = Box.createHorizontalStrut(20);
+		horizontalStrut_1.setBounds(33, 103, 1000, 8);
+		panel_ascension.add(horizontalStrut_1);
+		
+		PanelPower talent_1_1 = new PanelPower(g,1);
+		talent_1_1.setBounds(33, 124, 60, 60);
+		panel_ascension.add(talent_1_1);
+		talent_1_1.addMouseListener(new PowerListener(g,talent_1_1));
+		g.addObserver(talent_1_1);
+		
+		PanelPower talent_1_2 = new PanelPower(g,2);
+		talent_1_2.setBounds(166, 124, 60, 60);
+		panel_ascension.add(talent_1_2);
+		talent_1_2.addMouseListener(new PowerListener(g,talent_1_2));
+		g.addObserver(talent_1_2);
+		
+		PanelPower talent_1_3 = new PanelPower(g,3);
+		talent_1_3.setBounds(302, 124, 60, 60);
+		panel_ascension.add(talent_1_3);
+		talent_1_3.addMouseListener(new PowerListener(g,talent_1_3));
+		g.addObserver(talent_1_3);
+		
+		PanelPower talent_1_4 = new PanelPower(g,4);
+		talent_1_4.setBounds(438, 124, 60, 60);
+		panel_ascension.add(talent_1_4);
+		talent_1_4.addMouseListener(new PowerListener(g,talent_1_4));
+		g.addObserver(talent_1_4);
+		
+		PanelPower talent_1_5 = new PanelPower(g,5);
+		talent_1_5.setBounds(568, 124, 60, 60);
+		panel_ascension.add(talent_1_5);
+		talent_1_5.addMouseListener(new PowerListener(g,talent_1_5));
+		g.addObserver(talent_1_5);
+		
+		PanelPower talent_1_6 = new PanelPower(g,6);
+		talent_1_6.setBounds(699, 124, 60, 60);
+		panel_ascension.add(talent_1_6);
+		talent_1_6.addMouseListener(new PowerListener(g,talent_1_6));
+		g.addObserver(talent_1_6);
+		
+		PanelPower talent_1_7 = new PanelPower(g,7);
+		talent_1_7.setBounds(830, 124, 60, 60);
+		panel_ascension.add(talent_1_7);
+		talent_1_7.addMouseListener(new PowerListener(g,talent_1_7));
+		g.addObserver(talent_1_7);
+		
+		PanelPower talent_1_8 = new PanelPower(g,8);
+		talent_1_8.setBounds(960, 124, 60, 60);
+		panel_ascension.add(talent_1_8);
+		talent_1_8.addMouseListener(new PowerListener(g,talent_1_8));
+		g.addObserver(talent_1_8);
+		
+		Component horizontalStrut_2 = Box.createHorizontalStrut(20);
+		horizontalStrut_2.setBounds(33, 233, 1000, 8);
+		panel_ascension.add(horizontalStrut_2);
+		
+		PanelPower talent_2_1 = new PanelPower(g,9);
+		talent_2_1.setBounds(33, 254, 60, 60);
+		panel_ascension.add(talent_2_1);
+		talent_2_1.addMouseListener(new PowerListener(g,talent_2_1));
+		g.addObserver(talent_2_1);
+		
+		PanelPower talent_2_2 = new PanelPower(g,10);
+		talent_2_2.setBounds(166, 254, 60, 60);
+		panel_ascension.add(talent_2_2);
+		talent_2_2.addMouseListener(new PowerListener(g,talent_2_2));
+		g.addObserver(talent_2_2);
+		
+		PanelPower talent_2_3 = new PanelPower(g,11);
+		talent_2_3.setBounds(302, 254, 60, 60);
+		panel_ascension.add(talent_2_3);
+		talent_2_3.addMouseListener(new PowerListener(g,talent_2_3));
+		g.addObserver(talent_2_3);
+		
+		PanelPower talent_2_4 = new PanelPower(g,12);
+		talent_2_4.setBounds(438, 254, 60, 60);
+		panel_ascension.add(talent_2_4);
+		talent_2_4.addMouseListener(new PowerListener(g,talent_2_4));
+		g.addObserver(talent_2_4);
+		
+		PanelPower talent_2_5 = new PanelPower(g,13);
+		talent_2_5.setBounds(568, 254, 60, 60);
+		panel_ascension.add(talent_2_5);
+		talent_2_5.addMouseListener(new PowerListener(g,talent_2_5));
+		g.addObserver(talent_2_5);
+		
+		PanelPower talent_2_6 = new PanelPower(g,14);
+		talent_2_6.setBounds(699, 254, 60, 60);
+		panel_ascension.add(talent_2_6);
+		talent_2_6.addMouseListener(new PowerListener(g,talent_2_6));
+		g.addObserver(talent_2_6);
+		
+		PanelPower talent_2_7 = new PanelPower(g,15);
+		talent_2_7.setBounds(830, 254, 60, 60);
+		panel_ascension.add(talent_2_7);
+		talent_2_7.addMouseListener(new PowerListener(g,talent_2_7));
+		g.addObserver(talent_2_7);
+		
+		PanelPower talent_2_8 = new PanelPower(g,16);
+		talent_2_8.setBounds(960, 254, 60, 60);
+		panel_ascension.add(talent_2_8);
+		talent_2_8.addMouseListener(new PowerListener(g,talent_2_8));
+		g.addObserver(talent_2_8);
+		
+		Component horizontalStrut_3 = Box.createHorizontalStrut(20);
+		horizontalStrut_3.setBounds(33, 364, 1000, 8);
+		panel_ascension.add(horizontalStrut_3);
+		
+		PanelPower talent_3_1 = new PanelPower(g,17);
+		talent_3_1.setBounds(102, 385, 60, 60);
+		panel_ascension.add(talent_3_1);
+		talent_3_1.addMouseListener(new PowerListener(g,talent_3_1));
+		g.addObserver(talent_3_1);
+		
+		PanelPower talent_3_2 = new PanelPower(g,18);
+		talent_3_2.setBounds(235, 385, 60, 60);
+		panel_ascension.add(talent_3_2);
+		talent_3_2.addMouseListener(new PowerListener(g,talent_3_2));
+		g.addObserver(talent_3_2);
+		
+		PanelPower talent_3_3 = new PanelPower(g,19);
+		talent_3_3.setBounds(371, 385, 60, 60);
+		panel_ascension.add(talent_3_3);
+		talent_3_3.addMouseListener(new PowerListener(g,talent_3_3));
+		g.addObserver(talent_3_3);
+		
+		PanelPower talent_3_4 = new PanelPower(g,20);
+		talent_3_4.setBounds(507, 385, 60, 60);
+		panel_ascension.add(talent_3_4);
+		talent_3_4.addMouseListener(new PowerListener(g,talent_3_4));
+		g.addObserver(talent_3_4);
+		
+		PanelPower talent_3_5 = new PanelPower(g,21);
+		talent_3_5.setBounds(637, 385, 60, 60);
+		panel_ascension.add(talent_3_5);
+		talent_3_5.addMouseListener(new PowerListener(g,talent_3_5));
+		g.addObserver(talent_3_5);
+		
+		PanelPower talent_3_6 = new PanelPower(g,22);
+		talent_3_6.setBounds(768, 385, 60, 60);
+		panel_ascension.add(talent_3_6);
+		talent_3_6.addMouseListener(new PowerListener(g,talent_3_6));
+		g.addObserver(talent_3_6);
+		
+		PanelPower talent_3_7 = new PanelPower(g,23);
+		talent_3_7.setBounds(899, 385, 60, 60);
+		panel_ascension.add(talent_3_7);
+		talent_3_7.addMouseListener(new PowerListener(g,talent_3_7));
+		g.addObserver(talent_3_7);
+		
+		ButtonAscend btnAscend = new ButtonAscend("Ascension !");
+		btnAscend.setBounds(166, 587, 196, 31);
+		panel_ascension.add(btnAscend);
+		btnAscend.addActionListener(control);
+		
+		ButtonResetCristal btnResetPoints = new ButtonResetCristal("R\u00E9cuperer cristaux");
+		btnResetPoints.setBounds(694, 587, 196, 31);
+		panel_ascension.add(btnResetPoints);
+		btnResetPoints.addActionListener(control);
+		
+		VueAscension lbl_talent_1_1 = new VueAscension("",g,4,1);
+		lbl_talent_1_1.setHorizontalAlignment(SwingConstants.CENTER);
+		lbl_talent_1_1.setBounds(24, 197, 81, 16);
+		panel_ascension.add(lbl_talent_1_1);
+		g.addObserver(lbl_talent_1_1);
+		
+		VueAscension lbl_talent_1_2 = new VueAscension("",g,4,2);
+		lbl_talent_1_2.setHorizontalAlignment(SwingConstants.CENTER);
+		lbl_talent_1_2.setBounds(155, 197, 81, 16);
+		panel_ascension.add(lbl_talent_1_2);
+		g.addObserver(lbl_talent_1_2);
+		
+		VueAscension lbl_talent_1_3 = new VueAscension("",g,4,3);
+		lbl_talent_1_3.setHorizontalAlignment(SwingConstants.CENTER);
+		lbl_talent_1_3.setBounds(294, 197, 81, 16);
+		panel_ascension.add(lbl_talent_1_3);
+		g.addObserver(lbl_talent_1_3);
+		
+		VueAscension lbl_talent_1_4 = new VueAscension("",g,4,4);
+		lbl_talent_1_4.setHorizontalAlignment(SwingConstants.CENTER);
+		lbl_talent_1_4.setBounds(429, 197, 81, 16);
+		panel_ascension.add(lbl_talent_1_4);
+		g.addObserver(lbl_talent_1_4);
+		
+		VueAscension lbl_talent_1_5 = new VueAscension("",g,4,5);
+		lbl_talent_1_5.setHorizontalAlignment(SwingConstants.CENTER);
+		lbl_talent_1_5.setBounds(557, 197, 81, 16);
+		panel_ascension.add(lbl_talent_1_5);
+		g.addObserver(lbl_talent_1_5);
+		
+		VueAscension lbl_talent_1_6 = new VueAscension("",g,4,6);
+		lbl_talent_1_6.setHorizontalAlignment(SwingConstants.CENTER);
+		lbl_talent_1_6.setBounds(690, 197, 81, 16);
+		panel_ascension.add(lbl_talent_1_6);
+		g.addObserver(lbl_talent_1_6);
+		
+		VueAscension lbl_talent_1_7 = new VueAscension("",g,4,7);
+		lbl_talent_1_7.setHorizontalAlignment(SwingConstants.CENTER);
+		lbl_talent_1_7.setBounds(821, 197, 81, 16);
+		panel_ascension.add(lbl_talent_1_7);
+		g.addObserver(lbl_talent_1_7);
+		
+		VueAscension lbl_talent_1_8 = new VueAscension("",g,4,8);
+		lbl_talent_1_8.setHorizontalAlignment(SwingConstants.CENTER);
+		lbl_talent_1_8.setBounds(952, 197, 81, 16);
+		panel_ascension.add(lbl_talent_1_8);
+		g.addObserver(lbl_talent_1_8);
+		
+		VueAscension lbl_talent_2_1 = new VueAscension("",g,4,9);
+		lbl_talent_2_1.setHorizontalAlignment(SwingConstants.CENTER);
+		lbl_talent_2_1.setBounds(24, 327, 81, 16);
+		panel_ascension.add(lbl_talent_2_1);
+		g.addObserver(lbl_talent_2_1);
+		
+		VueAscension lbl_talent_2_2 = new VueAscension("",g,4,10);
+		lbl_talent_2_2.setHorizontalAlignment(SwingConstants.CENTER);
+		lbl_talent_2_2.setBounds(155, 327, 81, 16);
+		panel_ascension.add(lbl_talent_2_2);
+		g.addObserver(lbl_talent_2_2);
+		
+		VueAscension lbl_talent_2_3 = new VueAscension("",g,4,11);
+		lbl_talent_2_3.setHorizontalAlignment(SwingConstants.CENTER);
+		lbl_talent_2_3.setBounds(294, 327, 81, 16);
+		panel_ascension.add(lbl_talent_2_3);
+		g.addObserver(lbl_talent_2_3);
+		
+		VueAscension lbl_talent_2_4 = new VueAscension("",g,4,12);
+		lbl_talent_2_4.setHorizontalAlignment(SwingConstants.CENTER);
+		lbl_talent_2_4.setBounds(429, 327, 81, 16);
+		panel_ascension.add(lbl_talent_2_4);
+		g.addObserver(lbl_talent_2_4);
+		
+		VueAscension lbl_talent_2_5 = new VueAscension("",g,4,13);
+		lbl_talent_2_5.setHorizontalAlignment(SwingConstants.CENTER);
+		lbl_talent_2_5.setBounds(557, 327, 81, 16);
+		panel_ascension.add(lbl_talent_2_5);
+		g.addObserver(lbl_talent_2_5);
+		
+		VueAscension lbl_talent_2_6 = new VueAscension("",g,4,14);
+		lbl_talent_2_6.setHorizontalAlignment(SwingConstants.CENTER);
+		lbl_talent_2_6.setBounds(690, 327, 81, 16);
+		panel_ascension.add(lbl_talent_2_6);
+		g.addObserver(lbl_talent_2_6);
+		
+		VueAscension lbl_talent_2_7 = new VueAscension("",g,4,15);
+		lbl_talent_2_7.setHorizontalAlignment(SwingConstants.CENTER);
+		lbl_talent_2_7.setBounds(821, 327, 81, 16);
+		panel_ascension.add(lbl_talent_2_7);
+		g.addObserver(lbl_talent_2_7);
+		
+		VueAscension lbl_talent_2_8 = new VueAscension("",g,4,16);
+		lbl_talent_2_8.setHorizontalAlignment(SwingConstants.CENTER);
+		lbl_talent_2_8.setBounds(952, 327, 81, 16);
+		panel_ascension.add(lbl_talent_2_8);
+		g.addObserver(lbl_talent_2_8);
+		
+		VueAscension lbl_talent_3_1 = new VueAscension("",g,4,17);
+		lbl_talent_3_1.setHorizontalAlignment(SwingConstants.CENTER);
+		lbl_talent_3_1.setBounds(93, 458, 81, 16);
+		panel_ascension.add(lbl_talent_3_1);
+		g.addObserver(lbl_talent_3_1);
+		
+		VueAscension lbl_talent_3_2 = new VueAscension("",g,4,18);
+		lbl_talent_3_2.setHorizontalAlignment(SwingConstants.CENTER);
+		lbl_talent_3_2.setBounds(224, 458, 81, 16);
+		panel_ascension.add(lbl_talent_3_2);
+		g.addObserver(lbl_talent_3_2);
+		
+		VueAscension lbl_talent_3_3 = new VueAscension("",g,4,19);
+		lbl_talent_3_3.setHorizontalAlignment(SwingConstants.CENTER);
+		lbl_talent_3_3.setBounds(363, 458, 81, 16);
+		panel_ascension.add(lbl_talent_3_3);
+		g.addObserver(lbl_talent_3_3);
+		
+		VueAscension lbl_talent_3_4 = new VueAscension("",g,4,20);
+		lbl_talent_3_4.setHorizontalAlignment(SwingConstants.CENTER);
+		lbl_talent_3_4.setBounds(498, 458, 81, 16);
+		panel_ascension.add(lbl_talent_3_4);
+		g.addObserver(lbl_talent_3_4);
+		
+		VueAscension lbl_talent_3_5 = new VueAscension("",g,4,21);
+		lbl_talent_3_5.setHorizontalAlignment(SwingConstants.CENTER);
+		lbl_talent_3_5.setBounds(626, 458, 81, 16);
+		panel_ascension.add(lbl_talent_3_5);
+		g.addObserver(lbl_talent_3_5);
+		
+		VueAscension lbl_talent_3_6 = new VueAscension("",g,4,22);
+		lbl_talent_3_6.setHorizontalAlignment(SwingConstants.CENTER);
+		lbl_talent_3_6.setBounds(759, 458, 81, 16);
+		panel_ascension.add(lbl_talent_3_6);
+		g.addObserver(lbl_talent_3_6);
+		
+		VueAscension lbl_talent_3_7 = new VueAscension("",g,4,23);
+		lbl_talent_3_7.setHorizontalAlignment(SwingConstants.CENTER);
+		lbl_talent_3_7.setBounds(890, 458, 81, 16);
+		panel_ascension.add(lbl_talent_3_7);
+		g.addObserver(lbl_talent_3_7);
 		
 		////////////////////////////
 		/////// PANEL EVENT ////////

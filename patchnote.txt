@@ -1,3 +1,41 @@
+--- Version 1.1 : Saison 2 -- La terrible nuit --- 
+-> Corrections/Modifications :
+- Correction d'une erreur qui faisait que plus le boss était haut-niveau comparé à vous, plus vous lui infligez de dégats,
+et inversement, ce qui devait être à la base l'inverse.
+- Le serviteur mythique de saison ne vous est plus donné à chaque chargement de la partie si vous êtes éligible.
+- Ajout d'un formatage pour les nombres, qui s'affichent en séparant bien les milliers entre eux.
+- Il faut maintenant 3 serviteurs pour pouvoir affronter un boss, plutôt qu'un auparavant.
+- Ajout d'un haut-fait.
+Changements apportés aux saisons :
+
+- Chaque saison possedera maintenant 5 serviteurs à débloquer au lieu de 4.
+- Chaque boss aura son thème de combat, au lieu d'un thème en commun pour les 3 premiers.
+- Les boss possèdent maintenant un passif caché, ce passif sera révélé progressivement au fur et à mesure de la progression
+de la saison (un passif révélé toutes les 2 semaines environ).
+- Le dernier boss possède un mode héroïque à partir du niveau 25, le rendant beaucoup plus dur à tuer.
+- Les portails donnant accès aux serviteurs de saisons ne pourront être ouverts que lorsque le passif secret de ce dernier
+sera découvert. Cela ne concerne pas le serviteur mythique, qui se débloque lorsque la saison se termine.
+- Les serviteurs de saisons seront plus forts que précédemment, surtout le serviteur mythique, en effet, suite à des retours, 
+il à été question que le serviteur mythique de la saison 1 était relativement mauvais comparé à certains serviteurs, bien plus
+polyvalants.
+-> Les requis pour obtenir le serviteur mythique ont donc été revus à la hausse :
+	- 150.000 -> 300.000 pts de saison nécessaires.
+	- Lvl 20 -> Lvl 25 de boss nécessaire.
+	+ Avoir un serviteur de saison à la rareté Super Mythique.
+- Ajout de 5 nouveaux serviteurs !
+
+--- Version 1.0.3.2 : Pre-Saison 2 --- (30/01/2017)
+- Le tuto de saison à été modifié pour remplacer l'intro de saison à la saison 2.
+- Au lieu de gagner 2% de stats par ilvl (4% par boss), les runes en gagnent plus rapidement à partir du 21 boss :
+	-> Les stats augmentent 1.2% supplémentaire par tranche de 5 lvl de boss au dessus de 20.
+	-> L'augmentation de stats ne s'appliquent que pour les stats gagnées au-dela du lvl 20.
+- Correction du bug qui faisait que les serviteurs ne se regéneraient qu'une seule fois en chargant une partie, au lieu
+du nombre d'intervalle de 1m30s.
+- L'expériance donnée par les boss à été réduite, passant de 300 + (450*lvlboss) à 300 + (240*lvlboss)
+- L'expériance et les pts de saison donnés par les boss est maintenant aussi soumise à la réduction exponentielle
+dû à la facilité.
+- Ajout de 7 nouveaux serviteurs.
+
 --- Version 1.0.3.1 : Noraj du Nerfaj ---
 - Ajout d'un système de diminution des récompenses en fonction de la facilité du boss tué, si le boss
 nécessite moins de 4x l'énergie max du joueur à tuer, les récompenses seront réduites de manière exponen-

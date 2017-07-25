@@ -69,7 +69,7 @@ public class ControlerFight implements ActionListener {
 			wp.close();
 			//faire la mort du boss
 			if(game.boss.pv <= 0) {
-				game.finishTheFight();
+				((GameV2)game).finishTheFight();
 			}
 			//
 			((BossFrame) SwingUtilities.getRoot((JButton)e.getSource())).dispose();

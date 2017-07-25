@@ -291,7 +291,7 @@ public class Game extends Observable implements Serializable {
 		long diff = time_load - gam.time_last_save;
 		if(diff > 0) {
 			this.joueur = gam.joueur;
-			this.endseason = 1500328800; 
+			this.endseason = 2500328800L; 
 			this.inventaire = gam.inventaire;
 			this.magasin = gam.magasin;
 			this.inventaire_runes = gam.inventaire_runes;
@@ -532,83 +532,7 @@ public class Game extends Observable implements Serializable {
 	}
 
 	public void rollRoulette() throws InterruptedException {
-		String[] liste = {"Gx3","Gx5","Gx10","Gx20","Expx3","Port","R Port !","Obj"};
-		double rnd1 = Math.random()*8; 
-		int r1 = (int)(rnd1 - (rnd1%1));
-		double rnd2 = Math.random()*8; 
-		int r2 = (int)(rnd2 - (rnd2%1));
-		double r = Math.random()*100;
-		if(r2 != r1) {
-			if(r <= 40) {
-				r2 = r1;
-			}
-		}
-		double rnd3 = Math.random()*8; 
-		int r3 = (int)(rnd1 - (rnd3%1));
-		r = Math.random()*100;
-		if(r3 != r1) {
-			if(r <= 20) {
-				r3 = r1;
-			}
-		}
-
-		this.roul1 = liste[r1];
-		this.roul2 = liste[r2];
-		this.roul3 = liste[r3];
-
-		this.joueur.energy -= (2 + (this.joueur.level/2));
-
-		//on s'occupe du résultat
-		int reward_level = this.joueur.level;
-		long xp = 2 + (this.joueur.level / 2) * 1L;
-		int cap = ((this.joueur.level - (this.joueur.level%10))/10)+1;
-		long gd = 200 + (((this.joueur.level-1) * 80L)*cap);
-		if((this.roul1 == "R Port !") && (this.roul2 == "R Port !") && (this.roul3 == "R Port !")) {
-			this.ajouterObjet(this.magasin.get(1));
-			this.joueur.giveExp(xp);
-		}
-		else if((this.roul1 == "Port") && (this.roul2 == "Port") && (this.roul3 == "Port")) {
-			this.ajouterObjet(this.magasin.get(0));
-			this.joueur.giveExp(xp);
-		}
-		else if((this.roul1 == "Gx20") && (this.roul2 == "Gx20") && (this.roul3 == "Gx20")) {
-			this.joueur.gold += (gd * 20L);
-			this.values.set(0, this.values.get(0) + (gd * 20L));
-			this.joueur.giveExp(xp);
-		}
-		else if((this.roul1 == "Gx10") && (this.roul2 == "Gx10") && (this.roul3 == "Gx10")) {
-			this.joueur.gold += (gd * 10L);
-			this.values.set(0, this.values.get(0) + (gd * 10L));
-			this.joueur.giveExp(xp);
-		}
-		else if((this.roul1 == "Gx5") && (this.roul2 == "Gx5") && (this.roul3 == "Gx5")) {
-			this.joueur.gold += (gd * 5L);
-			this.values.set(0, this.values.get(0) + (gd * 5L));
-			this.joueur.giveExp(xp);
-		}
-		else if((this.roul1 == "Gx3") && (this.roul2 == "Gx3") && (this.roul3 == "Gx3")) {
-			this.joueur.gold += (gd * 3L);
-			this.values.set(0, this.values.get(0) + (gd * 3L));
-			this.joueur.giveExp(xp);
-		}
-		else if((this.roul1 == "Expx3") && (this.roul2 == "Expx3") && (this.roul3 == "Expx3")) {
-			this.joueur.giveExp(xp * 3L);
-		}
-		else if((this.roul1 == "Obj") && (this.roul2 == "Obj") && (this.roul3 == "Obj")) {
-			this.joueur.giveExp(xp);
-			this.ajouterObjet(new ItemGenerator(17,1,"Un coffre contenant un objet mystère !","Coffre de butin brutal",this));
-		}
-		else {
-			this.joueur.gold += (gd);
-			this.values.set(0, this.values.get(0) + (gd));
-			this.joueur.giveExp(xp);
-		}
-		//on regarde si on a le hf de niveau
-		this.checkLevelSuccess();
-		//
-		this.checkGoldSuccess();
-		this.setChanged();
-		this.notifyObservers(2);
+		//dans GameV2
 	}
 
 	public Grimoire getGrimoire(int rarity, int mob_id) {
@@ -641,69 +565,7 @@ public class Game extends Observable implements Serializable {
 	}
 
 	public void sacrificeMob() {
-		//on gere le give d'exp
-		double xpay = 100.0;
-		int i = 0;
-		while(i<this.joueur.collection.size()) {
-			if(i != this.current_card_id) {
-				if(this.joueur.collection.get(i).id == this.joueur.collection.get(this.current_card_id).id) {
-					int diff = this.joueur.collection.get(i).rarity_id - this.joueur.collection.get(this.current_card_id).rarity_id;
-					for(int j=0;j<diff;j++) {
-						xpay = xpay / 2;
-					}
-					xpay = xpay / 100;
-					this.joueur.collection.get(i).giveExp((long)(1L*xpay * this.joueur.collection.get(i).max_exp));
-					//on vérifie les succès consécration et rite initiatique
-					if(this.succes.get(51).completed == false && (this.joueur.collection.get(i).id_rarity == 1) && (this.joueur.collection.get(i).level == 50)) {
-						this.succes.get(51).completed = true;
-						JOptionPane jop3;
-						jop3 = new JOptionPane();
-						jop3.showMessageDialog(null, "Vous avez obtenu le haut-fait ["+this.succes.get(51).nom+"].", "Haut Fait Débloqué !", JOptionPane.INFORMATION_MESSAGE);
-					}
-					else if(this.succes.get(52).completed == false && (this.joueur.collection.get(i).id_rarity < 4) && (this.joueur.collection.get(i).level == 130)) {
-						this.succes.get(52).completed = true;
-						JOptionPane jop3;
-						jop3 = new JOptionPane();
-						jop3.showMessageDialog(null, "Vous avez obtenu le haut-fait ["+this.succes.get(52).nom+"].", "Haut Fait Débloqué !", JOptionPane.INFORMATION_MESSAGE);
-					}
-					//
-					i = this.joueur.collection.size();
-				}
-			}
-			i++;
-		}
-		//dust
-		int dust = 0;
-		if((this.joueur.collection.get(this.current_card_id).rarity_id == 9) && (joueur.collection.get(current_card_id).level == joueur.collection.get(current_card_id).max_level)) {
-			dust = 1000;
-		}
-		else if((this.joueur.collection.get(this.current_card_id).rarity_id == 8) && (joueur.collection.get(current_card_id).level == joueur.collection.get(current_card_id).max_level)) {
-			dust = 500;
-		}
-		else if((this.joueur.collection.get(this.current_card_id).rarity_id == 7) && (joueur.collection.get(current_card_id).level == joueur.collection.get(current_card_id).max_level)) {
-			dust = 250;
-		}
-		else if((this.joueur.collection.get(this.current_card_id).rarity_id == 6) && (joueur.collection.get(current_card_id).level == joueur.collection.get(current_card_id).max_level)) {
-			dust = 100;
-		}
-		else if((this.joueur.collection.get(this.current_card_id).rarity_id == 5) && (joueur.collection.get(current_card_id).level == joueur.collection.get(current_card_id).max_level)) {
-			dust = 40;
-		}
-		if(this.joueur.collection.get(current_card_id).type_id == 1) {
-			this.joueur.fire_dust += dust;
-		}
-		else if(this.joueur.collection.get(current_card_id).type_id == 2) {
-			this.joueur.leaf_dust += dust;
-		}
-		else if(this.joueur.collection.get(current_card_id).type_id == 3) {
-			this.joueur.thunder_dust += dust;
-		}
-		else {
-			this.joueur.water_dust += dust;
-		}
-		this.current_card_runed = -1;
-		this.setChanged();
-		this.notifyObservers();
+		//GameV2
 	}
 
 	public int searchDust(int nb) {
@@ -782,6 +644,9 @@ public class Game extends Observable implements Serializable {
 			}
 		}
 		else if(i instanceof EventTicket) {
+			trouve = false;
+		}
+		else if(i instanceof TemporalTicket) {
 			trouve = false;
 		}
 		else if(i instanceof Potion) {
@@ -947,94 +812,7 @@ public class Game extends Observable implements Serializable {
 	}
 
 	public void finishTheFight() {
-		double mult = 1.0 + (((joueur.level - (joueur.level%10)) / 10)*0.25);
-		double mult_diff = (((boss.lvl-1)*0.45));
-		long xpmtn = (long)( (300L+ (240L* (boss.lvl-1) ) )*(mult) ) ;
-		long mtn =  (long) (1L*( (boss.pv_max * 10) * (mult + mult_diff) ));
-		if(boss.lvl == this.max_battle_level) {
-			mtn = mtn*2;
-			xpmtn = xpmtn*2;
-		}
-		//on gère le gain de poussières
-		long powder = 0;
-		if(boss.lvl >= 15) {
-			long base = 20;
-			powder = 20;
-			for(int p=15;p<boss.lvl;p++) {
-				base += 5;
-				powder += base;
-			}
-			//on donne selon le type
-			if(boss.type_id == 1) {
-				this.joueur.fire_dust += powder;
-			}
-			else if(boss.type_id == 2) {
-				this.joueur.leaf_dust += powder;
-			}
-			else if(boss.type_id == 3) {
-				this.joueur.thunder_dust += powder;
-			}
-			else if(boss.type_id == 4) {
-				this.joueur.water_dust += powder;
-			}
-		}
-		//on gère l'empêchement d'or trop abusif
-		long to_full_reward = this.joueur.max_energy * 4;
-		long energy_used = this.round_count * this.boss.cost_atk;
-		int saison_score = 0;
-		if(boss.lvl == this.max_battle_level) {
-			this.max_battle_level++;
-			this.checkBossSucess();
-			saison_score = 0;
-			this.season_score += (int)((double)boss.pv_max/100);
-		}
-		else {
-			saison_score += (int)((double)boss.pv_max/2000);
-		}
-		System.out.println("saison "+saison_score);
-		//saison_score += 200000;
-
-		if(energy_used < to_full_reward) {
-			double reduced = ((double)energy_used / (double)to_full_reward) * ((double)energy_used / (double)to_full_reward);
-			mtn = (long)(mtn * reduced);
-			xpmtn = (long)(xpmtn * reduced);
-			saison_score = (int)((double)saison_score*reduced);
-		}
-		//
-		this.joueur.giveExp(xpmtn);
-		this.joueur.gold += mtn;
-		this.values.set(0, this.values.get(0) + (mtn));
-		this.checkGoldSuccess();
-		this.checkLevelSuccess();
-		for(int i=0;i<4;i++) {
-			double alea = Math.random()*4;
-			int alea1 = 1+(int)(alea - (alea%1));
-			Rune g = new Rune(5,alea1,boss.lvl-1,boss.id,(200000)+(50000*boss.lvl));
-			this.inventaire_runes.add(g);
-			if(this.succes.get(33).completed == false) {
-				this.succes.get(33).completed = true;
-				JOptionPane jop1;
-				jop1 = new JOptionPane();
-				jop1.showMessageDialog(null, "Vous avez obtenu le haut-fait ["+this.succes.get(33).nom+"].", "Haut Fait Débloqué !", JOptionPane.INFORMATION_MESSAGE);
-			}
-		}
-
-		if(boss.id == 5 && boss.lvl >= 25) {
-			if(this.succes.get(53).completed == false) {
-				this.succes.get(53).completed = true;
-				JOptionPane jop1;
-				jop1 = new JOptionPane();
-				jop1.showMessageDialog(null, "Vous avez obtenu le haut-fait ["+this.succes.get(53).nom+"].", "Haut Fait Débloqué !", JOptionPane.INFORMATION_MESSAGE);
-			}
-		}
-
-		boss = null;
-		if(this.current_season != -1) {
-			this.season_score += saison_score;
-			this.season_rewards.checkRewards(this);
-		}
-		this.round_count = 0;
-		this.eraseCard();
+		//GameV2
 	}
 
 	public void attackBoss(int indice) {
@@ -1239,7 +1017,7 @@ public class Game extends Observable implements Serializable {
 
 	public void beginSeason() {
 		long l = System.currentTimeMillis()/1000;
-		if(l < 1500328800) {
+		if(l < 2500328800L) {
 			if(this.current_season != 2) {
 				this.current_season = 2;
 				this.season_score = 0;
@@ -1247,7 +1025,7 @@ public class Game extends Observable implements Serializable {
 				this.max_battle_level = 1;
 				this.season_rewards = new SeasonRewards(this.current_season);
 				//on gère le temps
-				this.endseason = 1500328800;
+				this.endseason = 2500328800L;
 			}
 		}
 		else {
@@ -1294,42 +1072,6 @@ public class Game extends Observable implements Serializable {
 	}
 
 	public void dezDeMasse(int i) {
-		double xpay = 100.0;
-		int diff = this.joueur.collection.get(this.current_card_id).rarity_id - this.joueur.collection.get(i).rarity_id;
-		for(int j=0;j<diff;j++) {
-			xpay = xpay / 2;
-		}
-		xpay = xpay / 100;
-		this.joueur.collection.get(this.current_card_id).giveExp((long)(1L*xpay * this.joueur.collection.get(this.current_card_id).max_exp));
-
-		//dust
-		int dust = 0;
-		if((this.joueur.collection.get(i).rarity_id == 9) && (this.joueur.collection.get(i).level == this.joueur.collection.get(i).max_level)) {
-			dust = 1000;
-		}
-		else if((this.joueur.collection.get(i).rarity_id == 8) && (this.joueur.collection.get(i).level == this.joueur.collection.get(i).max_level)) {
-			dust = 500;
-		}
-		else if((this.joueur.collection.get(i).rarity_id == 7) && (this.joueur.collection.get(i).level == this.joueur.collection.get(i).max_level)) {
-			dust = 250;
-		}
-		else if((this.joueur.collection.get(i).rarity_id == 6) && (this.joueur.collection.get(i).level == this.joueur.collection.get(i).max_level)) {
-			dust = 100;
-		}
-		else if((this.joueur.collection.get(i).rarity_id == 5) && (this.joueur.collection.get(i).level == this.joueur.collection.get(i).max_level)) {
-			dust = 40;
-		}
-		if(this.joueur.collection.get(i).type_id == 1) {
-			this.joueur.fire_dust += dust;
-		}
-		else if(this.joueur.collection.get(i).type_id == 2) {
-			this.joueur.leaf_dust += dust;
-		}
-		else if(this.joueur.collection.get(i).type_id == 3) {
-			this.joueur.thunder_dust += dust;
-		}
-		else {
-			this.joueur.water_dust += dust;
-		}
+		//GameV2
 	}
 }

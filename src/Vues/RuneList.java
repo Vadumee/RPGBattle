@@ -24,29 +24,7 @@ public class RuneList extends JList implements Observer {
 		this.jpp = jp;
 		this.model = d;
 		for(int i=0;i<game.inventaire_runes.size();i++) {
-			String s = "";
-			int r = game.inventaire_runes.get(i).rarete;
-			if(r == 5) {
-				s += "<html><font color=\"purple\">";
-			}
-			else if(r == 4) {
-				s += "<html><font color=\"purple\">";
-			}
-			else if(r == 3) {
-				s += "<html><font color=\"blue\">";
-			}
-			else if(r == 2) {
-				s += "<html><font color=\"green\">";
-			}
-			else {
-				s += "<html><font color=\"black\">";
-			}
-			s+=game.inventaire_runes.get(i).nom;
-			if(game.inventaire_runes.get(i).prestige > 0 ){
-				s+= " (ilvl "+(game.inventaire_runes.get(i).prestige*2)+")";
-			}
-			s+="</font></html>";
-			this.model.add(i,s);
+			this.model.add(i,game.inventaire_runes.get(i).getNom());
 		}
 		
 		MouseListener mouseListener = new MouseAdapter() {
@@ -81,29 +59,7 @@ public class RuneList extends JList implements Observer {
 			this.model.removeAllElements();
 			int indice = 0;
 			for(int i=0;i<game.inventaire_runes.size();i++) {
-				String s = "";
-				int r = game.inventaire_runes.get(i).rarete;
-				if(r == 5) {
-					s += "<html><font color=\"purple\">";
-				}
-				else if(r == 4) {
-					s += "<html><font color=\"purple\">";
-				}
-				else if(r == 3) {
-					s += "<html><font color=\"blue\">";
-				}
-				else if(r == 2) {
-					s += "<html><font color=\"green\">";
-				}
-				else {
-					s += "<html><font color=\"black\">";
-				}
-				s+=game.inventaire_runes.get(i).nom;
-				if(game.inventaire_runes.get(i).prestige > 0 ){
-					s+= " (ilvl "+(game.inventaire_runes.get(i).prestige*2)+")";
-				}
-				s+="</font></html>";
-				this.model.add(i,s);
+				this.model.add(i,game.inventaire_runes.get(i).getNom());
 			}
 		}
 	}

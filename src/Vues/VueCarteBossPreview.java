@@ -6,6 +6,7 @@ import java.util.Observer;
 import javax.swing.JLabel;
 
 import Game.Game;
+import Game.GameV2;
 
 public class VueCarteBossPreview extends JLabel implements Observer {
 	
@@ -32,7 +33,7 @@ public class VueCarteBossPreview extends JLabel implements Observer {
 		}
 		else if(indice == 2) {
 			if(game.indice_fighters[this.indice_fighter-1] != -1) {
-				this.setText(game.joueur.collection.get(game.indice_fighters[this.indice_fighter-1]).getStatsFight());
+				this.setText((((GameV2)game).getStatsFight(game.joueur.collection.get(game.indice_fighters[this.indice_fighter-1]))));
 			}
 			else {
 				this.setText("");

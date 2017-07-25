@@ -7,6 +7,7 @@ import java.util.Observer;
 import javax.swing.JLabel;
 
 import Game.Game;
+import Game.GameV2;
 import Game.Maths;
 
 public class VueStatCard extends JLabel implements Observer{
@@ -64,7 +65,7 @@ public class VueStatCard extends JLabel implements Observer{
 				this.setText("Stats");
 			}
 			else {
-				this.setText(game.joueur.collection.get(game.current_card_id).getStats());
+				this.setText( ((GameV2)game).getStats(game.joueur.collection.get(game.current_card_id)));
 				//this.setText("<html><br>--- Statistiques ---"+"<br>HP : "+game.joueur.collection.get(game.current_card_id).hp+""+"<br>ATK : "+game.joueur.collection.get(game.current_card_id).atk+""+"<br>DEF : "+game.joueur.collection.get(game.current_card_id).def+""+"<br>PROV : "+game.joueur.collection.get(game.current_card_id).prov+""+"<br>AGI : "+game.joueur.collection.get(game.current_card_id).agi+""+"<br>VIT : "+game.joueur.collection.get(game.current_card_id).vit+"</html>");
 			}
 		}

@@ -35,7 +35,10 @@ public class EventTicket extends Item {
 			}
 			//on génère le son des cartes ouais
 			String sound_name = "Sounds/L-"+c.id+".wav";
-			game.joueur.giveExp(1000+(game.joueur.level*70L));
+			long gain = 1000+(game.joueur.level*70L);
+			gain = (long)(gain * (1 + ((double)((GameV2)game).talents[20].lvl*0.5)));
+			game.joueur.giveExp(gain);
+			((GameV2)game).calculatePlayerMaxEnergy();
 			this.game.joueur.collection.add(c);
 			this.game.captured.set(c.id-1, 1);
 			this.game.getCaptured();
@@ -51,6 +54,7 @@ public class EventTicket extends Item {
 			}
 			this.quantity -= 1;
 			this.game.eraseUsedItems();
+			((GameV2)game).calculateStatFight(game.joueur.collection.get(game.joueur.collection.size()-1));
 		}
 		else {
 			JOptionPane jop1;

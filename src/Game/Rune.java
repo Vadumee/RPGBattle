@@ -580,7 +580,7 @@ public class Rune implements Serializable {
 				if(bonus[i] > 0) {
 					s+= "<font color=\"green\">+ "+Maths.format(bonus[i]);
 				}
-				else {
+				else if(bonus[i] < 0){
 					s+= "<font color=\"red\">- "+Maths.format(Math.abs(bonus[i]));
 				}
 				if(i == 0) {

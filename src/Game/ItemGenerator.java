@@ -33,6 +33,8 @@ public class ItemGenerator extends Item{
 			else {
 				mnt = 13500 + ((4500L*lvl)*cap);
 			}
+			mnt = (long)(mnt * (1 + ( (double)((GameV2)game).talents[15].lvl*0.25)));
+			mnt = (long)(mnt * (1 + ( (double)((GameV2)game).talents[21].lvl*0.5)));
 			if(mnt > game.succes.get(13).montant) {
 				if(game.succes.get(13).completed == false) {
 					game.succes.get(13).completed = true;
